@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
+import { Header } from "./components/header";
+import { MobileNav } from "./components/mobileNav";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+//titulos
+export const poppins = Poppins({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"], // escolha os que você quer
+  variable: "--font-poppins",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+//textos
+export const inter = Inter({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -25,9 +31,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={` ${poppins.variable} ${inter.variable} not-last:antialiased flex flex-col min-h-screen`}
       >
-        {children}
+        <Header />
+        <div className="p-2 flex-1 max-w-7xl mx-auto w-full pb-30">
+          {children}
+        </div>
+        <div className="fixed bottom-0 left-0 w-full">
+          <MobileNav />
+        </div>
       </body>
     </html>
   );
