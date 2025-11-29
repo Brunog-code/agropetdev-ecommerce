@@ -44,9 +44,9 @@ export function MobileNav() {
         </SheetTrigger>
       </CartDrawer>
 
-      <div>
+      <Link href="/favoritos">
         <Heart className="w-6 h-6 hover:text-red-500 hover:fill-red-500 transition cursor-pointer" />
-      </div>
+      </Link>
 
       <Link href='/login'>
         <User className="w-6 h-6 cursor-pointer hover:text-orange-500" />

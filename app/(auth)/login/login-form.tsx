@@ -17,6 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { authClient } from "@/lib/auth-client";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Email inválido" }),
@@ -40,17 +41,35 @@ export function LoginForm() {
   });
 
   async function onSubmit(formData: LoginFormValues) {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log("entrou");
-    console.log(formData)
+    await authClient.signIn.email(
+      {
+        email: formData.email,
+        password: formData.password,
+        callbackURL: "/",
+      },
+      {
+        onRequest: (ctx) => {
+          //enquanto esta processando (pode ativar loading, qualquer coisa)
+        },
+        onSuccess: (ctx) => {
+          //quando acabar
+          console.log("Logado");
+          router.replace("/");
+        },
+        onError: (ctx) => {
+          //caso ocorra algum erro(falhe requsicao, nao conseguiu conectar com db)
+          console.log("erro ao logar");
+          console.log(ctx.error.code);
+        },
+      }
+    );
   }
-
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 bg-white p-4 rounded-lg w-full md:w-1/2 border-1 border-green-600"
+        className="space-y-6 bg-white p-4 rounded-lg w-full md:w-1/2 lg:w-1/3 border-1 border-green-600"
       >
         <FormField
           control={form.control}

@@ -17,7 +17,7 @@ export function Header() {
           <PromocoesCarousel />
         </div>
 
-        <Link href="#" className="hidden gap-2 sm:flex">
+        <Link href="/favoritos" className="hidden gap-2 sm:flex">
           <Heart className="w-6 h-6 hover:text-red-500 hover:fill-red-500 transition" />
           Favoritos
         </Link>

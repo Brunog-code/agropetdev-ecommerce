@@ -135,7 +135,7 @@ export function RegisterForm() {
           //cadastrar endereço
           await saveAddress(dataAddAddress);
 
-          router.replace("/");
+          router.replace("/login");
           toast.success("Cadastro realizado");
         },
         onError: (ctx) => {
