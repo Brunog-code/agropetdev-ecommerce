@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "./components/header";
-import { MobileNav } from "./components/mobileNav";
+import { Toaster } from "react-hot-toast";
+import LayoutWrapper from "@/app/components/wrapLayout";
 
 //titulos
 export const poppins = Poppins({
@@ -32,14 +32,14 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={` ${poppins.variable} ${inter.variable} not-last:antialiased flex flex-col min-h-screen`}
+        suppressHydrationWarning={true}
       >
-        <Header />
-        <div className="p-2 flex-1 max-w-7xl mx-auto w-full pb-30">
-          {children}
-        </div>
-        <div className="fixed bottom-0 left-0 w-full">
-          <MobileNav />
-        </div>
+        <LayoutWrapper>
+          <div className="p-2 flex-1 max-w-7xl mx-auto w-full pb-30">
+            {children}
+            <Toaster position="top-right" reverseOrder={false} />
+          </div>
+        </LayoutWrapper>
       </body>
     </html>
   );

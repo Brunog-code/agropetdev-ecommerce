@@ -48,9 +48,9 @@ export function MobileNav() {
         <Heart className="w-6 h-6 hover:text-red-500 hover:fill-red-500 transition cursor-pointer" />
       </div>
 
-      <div>
+      <Link href='/login'>
         <User className="w-6 h-6 cursor-pointer hover:text-orange-500" />
-      </div>
+      </Link>
     </section>
   );
 }
