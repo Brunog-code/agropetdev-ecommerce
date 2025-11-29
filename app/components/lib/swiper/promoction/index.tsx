@@ -14,8 +14,8 @@ export function PromocoesCarousel() {
             .swiper-button-prev, .swiper-button-next {
             color: #fff; 
             border-radius: 50%; 
-            width: 40px; /* Tamanho das setas */
-            height: 40px;
+            width: 38px; /* Tamanho das setas */
+            height: 38px;
           }
 
           .swiper-button-prev:hover, .swiper-button-next:hover {
