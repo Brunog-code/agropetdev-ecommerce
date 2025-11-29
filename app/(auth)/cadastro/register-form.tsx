@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { authClient } from "@/lib/auth-client";
+import { saveAddress } from "./actions";
 
 //schema zod
 const registerSchema = z
@@ -119,12 +120,20 @@ export function RegisterForm() {
           //enquanto esta processando (pode ativar loading, qualquer coisa)
         },
 
-        onSuccess: (ctx) => {
+        onSuccess: async (ctx) => {
           //quando acabar
-          console.log(ctx);
+          const dataAddAddress = {
+            id: ctx.data.user.id,
+            street: formData.street,
+            number: formData.number,
+            district: formData.district,
+            city: formData.city,
+            state: formData.state,
+            zip: formData.zip,
+          };
 
           //cadastrar endereço
-          //procurar user cadastrado, e adicionar o endereço
+          await saveAddress(dataAddAddress);
 
           router.replace("/");
           toast.success("Cadastro realizado");

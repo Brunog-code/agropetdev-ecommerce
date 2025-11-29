@@ -14,18 +14,32 @@ datasource db {
 }
 
 model User {
-  id            String    @id
+  id            String   @id
   name          String
   email         String
-  emailVerified Boolean   @default(false)
+  emailVerified Boolean  @default(false)
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  sessions      Session[]
-  accounts      Account[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  address  Address?
+  sessions Session[]
+  accounts Account[]
 
   @@unique([email])
   @@map("user")
+}
+
+model Address {
+  id       String @id @default(uuid())
+  userId   String @unique
+  user     User   @relation(fields: [userId], references: [id])
+  street   String
+  number   String
+  district String
+  city     String
+  state    String
+  zip      String
 }
 
 model Session {
