@@ -11,45 +11,91 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/auth-client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export function Header() {
   const [session, setSession] = useState<boolean | null>();
   const [userName, setUserName] = useState<string>("");
   const [loading, setLoading] = useState(true);
 
+  const router = useRouter();
+
   useEffect(() => {
-    const getUserSession = async () => {
+    async function getUserSession() {
       try {
         const { data } = await await authClient.getSession();
         if (!data?.session) {
           setSession(false);
-          console.log("NAOOO user");
         } else {
           setSession(true);
           setUserName(data.user.name);
-          console.log("tem user");
         }
       } catch (error) {
         console.error(error);
       } finally {
         setLoading(false);
       }
-    };
+    }
     getUserSession();
   }, []);
+
+  async function logOut() {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          setUserName("");
+          setSession(false);
+          router.replace("/");
+          toast.success("Sessão encerrada. Volte sempre que quiser!");
+        },
+      },
+    });
+  }
 
   return (
     <header className="w-full bg-[#3A7D44]">
       {/* parte superior */}
-      <div className="w-full bg-orange-400/90 h-8 flex justify-center md:justify-around items-center text-white">
-        <div className="w-full md:max-w-1/3 flex justify-center">
+      <div className="w-full bg-orange-400/90 h-11 flex justify-center md:justify-around items-center text-white">
+        <div className="w-full md:max-w-1/2 flex justify-center">
           <PromocoesCarousel />
         </div>
-
-        <Link href="/favoritos" className="hidden gap-2 md:flex">
-          <Heart className="w-6 h-6 hover:text-red-500 hover:fill-red-500 transition" />
-          Favoritos
-        </Link>
+        {loading ? (
+          <p></p>
+        ) : !session ? (
+          <Link
+            href="/login"
+            className={cn(
+              "hidden md:flex items-center justify-center gap-1 cursor-pointer",
+              buttonVariants({ variant: "secondary" })
+            )}
+          >
+            <User className="w-6 h-6 hover:fill-white transition cursor-pointer" />
+            <span>Login</span>
+          </Link>
+        ) : (
+          <div className="gap-2 hidden md:flex ">
+            <button
+              className={cn(
+                "flex items-center justify-center gap-1 cursor-pointer",
+                buttonVariants({ variant: "secondary" })
+              )}
+            >
+              <User className="w-6 h-6 hover:fill-white transition cursor-pointer" />
+              <span>Area cliente</span>
+            </button>
+            <button
+              onClick={logOut}
+              className={cn(
+                "flex items-center justify-center gap-1 cursor-pointer",
+                buttonVariants({ variant: "secondary" })
+              )}
+            >
+              <User className="w-6 h-6 hover:fill-white transition cursor-pointer" />
+              <span>Logout</span>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* parte inferior */}
@@ -74,29 +120,10 @@ export function Header() {
               </SheetTrigger>
             </CartDrawer>
 
-            {loading ? (
-              <span>Skeleton</span>
-            ) : !session ? (
-              <Link
-                href="/login"
-                className={cn(
-                  "flex items-center justify-center gap-1 cursor-pointer",
-                  buttonVariants({ variant: "secondary" })
-                )}
-              >
-                <User className="w-6 h-6 hover:fill-white transition cursor-pointer" />
-                <span>Login</span>
-              </Link>
-            ) : (
-              <span
-                className={cn(
-                  "flex items-center justify-center gap-1 cursor-pointer",
-                  buttonVariants({ variant: "secondary" })
-                )}
-              >
-                Area do cliente
-              </span>
-            )}
+            <Link href="/favoritos" className="hidden gap-1 md:flex">
+              <Heart className="w-6 h-6 hover:text-red-500 hover:fill-red-500 transition" />
+              Favoritos
+            </Link>
           </div>
         </div>
       </div>
