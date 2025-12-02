@@ -117,9 +117,10 @@ model Category {
 }
 
 model Subcategory {
-  id   String @id @default(uuid())
+  id   String  @id @default(uuid())
   name String
-  slug String @unique
+  slug String  @unique
+  img  String?
 
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id])

@@ -37,11 +37,11 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <LayoutWrapper>
-          <div className="p-2 flex-1 max-w-7xl mx-auto w-full pb-30">
+          <main className="p-2 flex-1 max-w-7xl mx-auto w-full pb-30">
             <TopProgress />
             {children}
             <Toaster position="top-right" reverseOrder={false} />
-          </div>
+          </main>
         </LayoutWrapper>
       </body>
     </html>

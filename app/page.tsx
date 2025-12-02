@@ -24,6 +24,10 @@ export default function Home() {
           <ProductCard />
         </div>
       </section>
+
+      <section>
+        carrousel parceiros
+      </section>
     </main>
   );
 }

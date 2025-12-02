@@ -1,20 +1,47 @@
 //category, products
 import "dotenv/config";
-import {prisma} from '../../lib/db'
+import { prisma } from "../../lib/db";
 
 const categoriesData = [
   {
     name: "Cachorros",
     slug: "cachorros",
     subcategories: [
-      { name: "Rações", slug: "racoes-para-caes" },
-      { name: "Brinquedos", slug: "brinquedos-para-caes" },
-      { name: "Rações úmidas", slug: "racoes-umidas-para-caes" },
-      { name: "Antipulgas", slug: "antipulgas-para-caes" },
-      { name: "Tapetes higiênicos", slug: "tapetes-higienicos-para-caes" },
-      { name: "Coleiras & Guias", slug: "coleiras-e-guias-para-caes" },
-      { name: "Higiene & Shampoos", slug: "higiene-e-shampoo-para-caes" },
-      { name: "Casinhas & Camas", slug: "casinhas-e-camas-para-caes" },
+      {
+        name: "Rações",
+        slug: "racoes-para-caes",
+        img: "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/subcategorias-img/cachorros/dog-racao.webp",
+      },
+      {
+        name: "Brinquedos",
+        slug: "brinquedos-para-caes",
+        img: "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/subcategorias-img/cachorros/dog-brinquedo.webp",
+      },
+      {
+        name: "Rações úmidas",
+        slug: "racoes-umidas-para-caes",
+        img: "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/subcategorias-img/cachorros/dog-racao-umida.webp",
+      },
+      {
+        name: "Antipulgas",
+        slug: "antipulgas-para-caes",
+        img: "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/subcategorias-img/cachorros/dog-antipulga.webp",
+      },
+      {
+        name: "Coleiras & Guias",
+        slug: "coleiras-e-guias-para-caes",
+        img: "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/subcategorias-img/cachorros/dog-coleira.webp",
+      },
+      {
+        name: "Higiene & Shampoos",
+        slug: "higiene-e-shampoo-para-caes",
+        img: "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/subcategorias-img/cachorros/dog-shampoo.webp",
+      },
+      {
+        name: "Casinhas & Camas",
+        slug: "casinhas-e-camas-para-caes",
+        img: "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/subcategorias-img/cachorros/dag-casinha.webp",
+      },
     ],
   },
 
@@ -22,13 +49,41 @@ const categoriesData = [
     name: "Gatos",
     slug: "gatos",
     subcategories: [
-      { name: "Caixas de areia", slug: "caixas-de-areia-para-gatos" },
-      { name: "Gramas digestivas", slug: "gramas-digestivas-para-gatos" },
-      { name: "Rações", slug: "racoes-para-gatos" },
-      { name: "Rações úmidas", slug: "racoes-umidas-para-gatos" },
-      { name: "Brinquedos", slug: "brinquedos-para-gatos" },
-      { name: "Arranhadores", slug: "arranhadores-para-gatos" },
-      { name: "Fontes de água", slug: "fontes-de-agua-para-gatos" },
+      {
+        name: "Caixas de areia",
+        slug: "caixas-de-areia-para-gatos",
+        img: "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/subcategorias-img/gatos/cat-caixa.webp",
+      },
+      {
+        name: "Gramas digestivas",
+        slug: "gramas-digestivas-para-gatos",
+        img: "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/subcategorias-img/gatos/cat-grama.webp",
+      },
+      {
+        name: "Rações",
+        slug: "racoes-para-gatos",
+        img: "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/subcategorias-img/gatos/cat-racao.webp",
+      },
+      {
+        name: "Rações úmidas",
+        slug: "racoes-umidas-para-gatos",
+        img: "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/subcategorias-img/gatos/cat-racao-umida.webp",
+      },
+      {
+        name: "Brinquedos",
+        slug: "brinquedos-para-gatos",
+        img: "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/subcategorias-img/gatos/cat-brinquedo.webp",
+      },
+      {
+        name: "Arranhadores",
+        slug: "arranhadores-para-gatos",
+        img: "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/subcategorias-img/gatos/cat-arranhador.webp",
+      },
+      {
+        name: "Fontes de água",
+        slug: "fontes-de-agua-para-gatos",
+        img: "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/subcategorias-img/gatos/cat-fonte.webp",
+      },
     ],
   },
 
@@ -69,7 +124,7 @@ const categoriesData = [
 ];
 
 async function mainSeeds() {
-  console.log(" === Iniciando seeds... ===");
+  console.log(" === Iniciando seeds Categorias... ===");
 
   for (const category of categoriesData) {
     await prisma.category.upsert({
@@ -86,7 +141,7 @@ async function mainSeeds() {
     console.log(`${category.name} criada com sucesso!`);
   }
 
-  console.log("=== Seeds finalizados com sucesso! ===");
+  console.log("=== Seeds Categorias finalizados com sucesso! ===");
 }
 
 mainSeeds().finally(() => prisma.$disconnect());

@@ -3,19 +3,22 @@ import gatoTitulo from "@/app/assets/gato-titulo.png";
 import cachorroTitulo from "@/app/assets/cachorro-titulo.png";
 import Link from "next/link";
 
-import racaoCachorro from "@/app/assets/icons-cards/dog/dog-racao.jpg";
-import racaoUmidaCachorro from "@/app/assets/icons-cards/dog/dog-racao-umida.png";
-import brinquedoCachorro from "@/app/assets/icons-cards/dog/dog-brinquedo.jpg";
-import antipulgaCachorro from "@/app/assets/icons-cards/dog/dog-antipulga.jpg";
-import tapeteCachorro from "@/app/assets/icons-cards/dog/dog-tapete.jpg";
+import { getCategoriesAndSubResume } from "./actions";
 
-import racaoGato from "@/app/assets/icons-cards/cat/cat-racao.png";
-import racaoUmidaGato from "@/app/assets/icons-cards/cat/cat-racao-umida.jpg";
-import brinquedoGato from "@/app/assets/icons-cards/cat/cat-brinquedo.jpg";
-import caixaGato from "@/app/assets/icons-cards/cat/cat-caixa.jpg";
-import gramaGato from "@/app/assets/icons-cards/cat/cat-grama.jpg";
+export async function FiltersCategory() {
+  //buscar no db (principais categorias e suas subscategorias)
+  const categories = await getCategoriesAndSubResume();
 
-export function FiltersCategory() {
+  const categoryDog = categories.filter((cat) => cat.name === "Cachorros");
+  const subcategoriesDog = categoryDog[0].subcategories;
+
+  const categoryCat = categories.filter((cat) => cat.name === "Gatos");
+  const subcategoriesCat = categoryCat[0].subcategories;
+
+  if (!categories) {
+    return <p>FALLBACK ARRUMAR DEPOIS</p>;
+  }
+
   return (
     <section className="mt-6 w-full">
       {/* container cachorro e gato */}
@@ -30,7 +33,7 @@ export function FiltersCategory() {
             <div className="flex flex-col items-center gap-2">
               <div className="text-4xl text-white font-bold">Cachorros</div>
               <Link
-                href={`/${"cachorros"}`}
+                href={`/${categories[0].slug}`}
                 className="text-gray-100 underline"
               >
                 Ver todos
@@ -39,154 +42,64 @@ export function FiltersCategory() {
           </div>
 
           <div className="bg-white rounded-lg grid grid-cols-3 md:grid-cols-5 py-4 space-y-2">
-            <Link href="#">
-              <div className="flex flex-col justify-center items-center hover:scale-105 transition-all duration-200">
-                <div className="rounded-full w-24 h-24 overflow-hidden  border-2 border-sky-500">
-                  <Image
-                    src={racaoCachorro}
-                    alt="imagem cachorro"
-                    className="w-full h-full object-cover"
-                  />
+            {subcategoriesDog.map((cat) => (
+              <Link href={`/${categories[0].slug}/${cat.slug}`} key={cat.id}>
+                <div className="flex flex-col justify-center items-center hover:scale-105 transition-all duration-200">
+                  <div className="rounded-full w-24 h-24 overflow-hidden  border-2 border-sky-500">
+                    <Image
+                      src={cat.img!}
+                      alt={cat.name}
+                      className="w-full h-full object-cover"
+                      width={96}
+                      height={96}
+                    />
+                  </div>
+                  <span className="font-semibold text-green-600">
+                    {cat.name}
+                  </span>
                 </div>
-                <span className="font-semibold text-green-600">Rações</span>
-              </div>
-            </Link>
-            <Link href="#">
-              <div className="flex flex-col justify-center items-center hover:scale-105 transition-all duration-200">
-                <div className="rounded-full w-24 h-24 overflow-hidden   border-2 border-sky-500">
-                  <Image
-                    src={brinquedoCachorro}
-                    alt="imagem gato"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="font-semibold text-green-600">Brinquedos</span>
-              </div>
-            </Link>
-            <Link href="#">
-              <div className="flex flex-col justify-center items-center hover:scale-105 transition-all duration-200">
-                <div className="rounded-full w-24 h-24 overflow-hidden   border-2 border-sky-500">
-                  <Image
-                    src={racaoUmidaCachorro}
-                    alt="imagem ave"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="font-semibold text-green-600">
-                  Rações úmidas
-                </span>
-              </div>
-            </Link>
-            <Link href="#">
-              <div className="flex flex-col justify-center items-center hover:scale-105 transition-all duration-200">
-                <div className="rounded-full w-24 h-24 overflow-hidden   border-2 border-sky-500">
-                  <Image
-                    src={antipulgaCachorro}
-                    alt="imagem ave"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="font-semibold text-green-600">Antipulgas</span>
-              </div>
-            </Link>
-            <Link href="#">
-              <div className="flex flex-col justify-center items-center hover:scale-105 transition-all duration-200">
-                <div className="rounded-full w-24 h-24 overflow-hidden   border-2 border-sky-500">
-                  <Image
-                    src={tapeteCachorro}
-                    alt="imagem ave"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="font-semibold text-green-600">
-                  Tapetes Higiênicos
-                </span>
-              </div>
-            </Link>
+              </Link>
+            ))}
           </div>
         </div>
 
         {/* gato */}
         <div className="flex flex-col gap-1 w-full">
+          {/* titulo gato */}
           <div className="bg-gradient-to-r  shadow-lg   from-fuchsia-400 via-fuchsia-600 to-fuchsia-400 rounded-lg flex items-center justify-evenly w-full md:w-1/2">
             <div className="w-1/2">
               <Image src={gatoTitulo} alt="imagem gato" className="" />
             </div>
             <div className="flex flex-col items-center gap-2">
               <div className="text-4xl text-white font-bold">Gatos</div>
-              <Link href={`/${"gatos"}`} className=" text-gray-100 underline">
+              <Link
+                href={`/${categories[1].slug}`}
+                className=" text-gray-100 underline"
+              >
                 Ver todos
               </Link>
             </div>
           </div>
 
           <div className="bg-white rounded-lg grid grid-cols-3 md:grid-cols-5 py-4  space-y-2">
-            <Link href="#">
-              <div className="flex flex-col justify-center items-center hover:scale-105 transition-all duration-200">
-                <div className="rounded-full w-24 h-24 overflow-hidden border-2 border-purple-500">
-                  <Image
-                    src={caixaGato}
-                    alt="imagem cachorro"
-                    className="w-full h-full object-cover"
-                  />
+            {subcategoriesCat.map((cat) => (
+              <Link href={`/${categories[1].slug}/${cat.slug}`} key={cat.id}>
+                <div className="flex flex-col justify-center items-center hover:scale-105 transition-all duration-200">
+                  <div className="rounded-full w-24 h-24 overflow-hidden  border-2 border-sky-500">
+                    <Image
+                      src={cat.img!}
+                      alt={cat.name}
+                      className="w-full h-full object-cover"
+                      width={96}
+                      height={96}
+                    />
+                  </div>
+                  <span className="font-semibold text-green-600">
+                    {cat.name}
+                  </span>
                 </div>
-                <span className="font-semibold text-green-600">
-                  Caixas de areia
-                </span>
-              </div>
-            </Link>
-            <Link href="#">
-              <div className="flex flex-col justify-center items-center hover:scale-105 transition-all duration-200">
-                <div className="rounded-full w-24 h-24 overflow-hidden  border-2 border-purple-500">
-                  <Image
-                    src={gramaGato}
-                    alt="imagem gato"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="font-semibold text-green-600">
-                  Gramas Digestivas
-                </span>
-              </div>
-            </Link>
-            <Link href={`/${"gatos"}/${"racoes"}`}>
-              <div className="flex flex-col justify-center items-center hover:scale-105 transition-all duration-200">
-                <div className="rounded-full w-24 h-24 overflow-hidden  border-2 border-purple-500">
-                  <Image
-                    src={racaoGato}
-                    alt="imagem ave"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="font-semibold text-green-600">Rações</span>
-              </div>
-            </Link>
-            <Link href="#">
-              <div className="flex flex-col justify-center items-center hover:scale-105 transition-all duration-200">
-                <div className="rounded-full w-24 h-24 overflow-hidden  border-2 border-purple-500">
-                  <Image
-                    src={racaoUmidaGato}
-                    alt="imagem ave"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="font-semibold text-green-600">
-                  Rações úmidas
-                </span>
-              </div>
-            </Link>
-            <Link href="#">
-              <div className="flex flex-col justify-center items-center hover:scale-105 transition-all duration-200">
-                <div className="rounded-full w-24 h-24 overflow-hidden  border-2 border-purple-500">
-                  <Image
-                    src={brinquedoGato}
-                    alt="imagem ave"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="font-semibold text-green-600">Brinquedos</span>
-              </div>
-            </Link>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
