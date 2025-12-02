@@ -32,14 +32,15 @@ model User {
 
 model Address {
   id       String @id @default(uuid())
-  userId   String @unique
-  user     User   @relation(fields: [userId], references: [id])
   street   String
   number   String
   district String
   city     String
   state    String
   zip      String
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model Session {
@@ -88,4 +89,82 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Product {
+  id          String  @id @default(uuid())
+  name        String
+  description String
+  price       Decimal @db.Decimal(10, 2)
+  stock       Int
+  image       String
+  slug        String  @unique
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  itemsCart  ItemCart[]
+  itemsOrder ItemOrder[]
+}
+
+model Category {
+  id   String @id @default(uuid())
+  name String
+  slug String @unique
+
+  products      Product[]
+  subcategories Subcategory[]
+}
+
+model Subcategory {
+  id   String @id @default(uuid())
+  name String
+  slug String @unique
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+}
+
+model Cart {
+  id String @id @default(uuid())
+
+  itemsCart ItemCart[]
+}
+
+model ItemCart {
+  id       String  @id @default(uuid())
+  quantity Int     @default(1)
+  price    Decimal @db.Decimal(10, 2)
+
+  cartId String
+  cart   Cart   @relation(fields: [cartId], references: [id])
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Order {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  status       String   @default("pending")
+  subtotal     Decimal //soma dos itens
+  shippingCost Decimal //FRETE
+  shippingType String? //Correios, retirada, transportadora
+  shippingEta  String? //prazo estimado
+  total        Decimal //subtotal + frete - descontos
+
+  itemsOrder ItemOrder[]
+}
+
+model ItemOrder {
+  id String @id @default(uuid())
+
+  quantity Int     @default(1)
+  price    Decimal @db.Decimal(10, 2)
+
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id])
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
 }

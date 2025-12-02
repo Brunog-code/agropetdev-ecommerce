@@ -29,7 +29,12 @@ export function FiltersCategory() {
             </div>
             <div className="flex flex-col items-center gap-2">
               <div className="text-4xl text-white font-bold">Cachorros</div>
-              <span className="text-gray-100 underline">Ver todos</span>
+              <Link
+                href={`/${"cachorros"}`}
+                className="text-gray-100 underline"
+              >
+                Ver todos
+              </Link>
             </div>
           </div>
 
@@ -109,7 +114,9 @@ export function FiltersCategory() {
             </div>
             <div className="flex flex-col items-center gap-2">
               <div className="text-4xl text-white font-bold">Gatos</div>
-              <span className=" text-gray-100 underline">Ver todos</span>
+              <Link href={`/${"gatos"}`} className=" text-gray-100 underline">
+                Ver todos
+              </Link>
             </div>
           </div>
 
@@ -142,7 +149,7 @@ export function FiltersCategory() {
                 </span>
               </div>
             </Link>
-            <Link href="#">
+            <Link href={`/${"gatos"}/${"racoes"}`}>
               <div className="flex flex-col justify-center items-center hover:scale-105 transition-all duration-200">
                 <div className="rounded-full w-24 h-24 overflow-hidden  border-2 border-purple-500">
                   <Image
@@ -181,7 +188,6 @@ export function FiltersCategory() {
               </div>
             </Link>
           </div>
-
         </div>
       </div>
     </section>

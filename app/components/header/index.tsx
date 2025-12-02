@@ -87,12 +87,12 @@ export function Header() {
             <button
               onClick={logOut}
               className={cn(
-                "flex items-center justify-center gap-1 cursor-pointer",
+                "flex items-center justify-center gap-1 cursor-pointer ",
                 buttonVariants({ variant: "secondary" })
               )}
             >
-              <User className="w-6 h-6 hover:fill-white transition cursor-pointer" />
-              <span>Logout</span>
+              <User className="w-6 h-6 hover:fill-white transition cursor-pointer text-red-500" />
+              <span className="text-red-500">Sair</span>
             </button>
           </div>
         )}
