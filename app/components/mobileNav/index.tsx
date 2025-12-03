@@ -12,7 +12,7 @@ export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <section className="text-white relative items-center flex md:hidden justify-between w-full bg-[#3A7D44] rounded-t-xl p-4 shadow-2xl">
+    <section className="text-white z-30 relative items-center flex md:hidden justify-around w-full bg-[#3A7D44] rounded-t-xl p-4 shadow-2xl">
       <FilterDrawer onOpenChange={setIsOpen} open={isOpen}>
         <SheetTrigger>
           <div>

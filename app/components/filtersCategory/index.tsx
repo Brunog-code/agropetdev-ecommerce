@@ -85,7 +85,7 @@ export async function FiltersCategory() {
             {subcategoriesCat.map((cat) => (
               <Link href={`/${categories[1].slug}/${cat.slug}`} key={cat.id}>
                 <div className="flex flex-col justify-center items-center hover:scale-105 transition-all duration-200">
-                  <div className="rounded-full w-24 h-24 overflow-hidden  border-2 border-sky-500">
+                  <div className="rounded-full w-24 h-24 overflow-hidden  border-2 border-fuchsia-500">
                     <Image
                       src={cat.img!}
                       alt={cat.name}

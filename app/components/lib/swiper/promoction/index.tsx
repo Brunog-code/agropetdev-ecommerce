@@ -6,7 +6,7 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-export function PromocoesCarousel() {
+export function PromotionsCarousel() {
   return (
     <section className="w-full">
       <style>

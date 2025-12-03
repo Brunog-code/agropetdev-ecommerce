@@ -1,16 +1,15 @@
 "use client";
 import Image from "next/image";
-import imgTteste from "@/app/assets/icons-cards/dog/dog-racao-umida.png";
 import { Heart } from "lucide-react";
 
 export const FavoritesCard = () => {
   return (
     <div className="w-full md:w-[70%] lg:w-1/2 mx-auto bg-white flex rounded-lg border border-green-400 space-x-2 p-2">
-      <Image
-        src={imgTteste}
+      {/* <Image
+        src={}
         alt="racao"
         className="max-w-30 object-contain  p-2"
-      />
+      /> */}
       <div className="flex flex-col gap-4">
         <p className="font-bold">Ração Umida</p>
         <p>

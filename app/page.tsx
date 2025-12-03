@@ -1,10 +1,11 @@
 import { BannerSwiper } from "./components/lib/swiper/banner";
 import { FiltersCategory } from "./components/filtersCategory";
 import { ProductCard } from "./components/productCard";
+import { PartnersSwiper } from "./components/lib/swiper/partners";
 
 export default function Home() {
   return (
-    <main className="w-full">
+    <main className="w-full flex flex-col gap-10">
       <section className="mb-6">
         <BannerSwiper />
       </section>
@@ -25,8 +26,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section>
-        carrousel parceiros
+      <section className="flex flex-col gap-6">
+        <h1 className="font-bold text-green-800  text-2xl">Nossos parceiros</h1>
+        <PartnersSwiper/>
       </section>
     </main>
   );

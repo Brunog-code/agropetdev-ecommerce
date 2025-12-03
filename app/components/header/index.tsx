@@ -6,7 +6,7 @@ import Link from "next/link";
 import { User, ShoppingCart, Heart } from "lucide-react";
 import { CartDrawer } from "../ui/drawer-cart";
 import { SheetTrigger } from "@/components/ui/sheet";
-import { PromocoesCarousel } from "../lib/swiper/promoction";
+import { PromotionsCarousel } from "../lib/swiper/promoction";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/auth-client";
@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 export function Header() {
-  const [session, setSession] = useState<boolean | null>();
+  const [session, setSession] = useState<boolean | null>(null);
   const [userName, setUserName] = useState<string>("");
   const [loading, setLoading] = useState(true);
 
@@ -58,7 +58,7 @@ export function Header() {
       {/* parte superior */}
       <div className="w-full bg-orange-400/90 h-11 flex justify-center md:justify-around items-center text-white">
         <div className="w-full md:max-w-1/2 flex justify-center">
-          <PromocoesCarousel />
+          <PromotionsCarousel />
         </div>
         {loading ? (
           <p></p>
@@ -66,8 +66,8 @@ export function Header() {
           <Link
             href="/login"
             className={cn(
-              "hidden md:flex items-center justify-center gap-1 cursor-pointer",
-              buttonVariants({ variant: "secondary" })
+              buttonVariants({ variant: "secondary" }),
+              "hidden md:flex items-center justify-center gap-1 cursor-pointer"
             )}
           >
             <User className="w-6 h-6 hover:fill-white transition cursor-pointer" />
@@ -77,8 +77,8 @@ export function Header() {
           <div className="gap-2 hidden md:flex ">
             <button
               className={cn(
-                "flex items-center justify-center gap-1 cursor-pointer",
-                buttonVariants({ variant: "secondary" })
+                buttonVariants({ variant: "secondary" }),
+                "flex items-center justify-center gap-1 cursor-pointer"
               )}
             >
               <User className="w-6 h-6 hover:fill-white transition cursor-pointer" />

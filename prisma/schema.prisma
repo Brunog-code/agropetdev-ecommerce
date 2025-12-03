@@ -100,8 +100,8 @@ model Product {
   image       String
   slug        String  @unique
 
-  categoryId String
-  category   Category @relation(fields: [categoryId], references: [id])
+  subcategoryId String
+  subcategory   Subcategory @relation(fields: [subcategoryId], references: [id])
 
   itemsCart  ItemCart[]
   itemsOrder ItemOrder[]
@@ -112,7 +112,6 @@ model Category {
   name String
   slug String @unique
 
-  products      Product[]
   subcategories Subcategory[]
 }
 
@@ -124,6 +123,8 @@ model Subcategory {
 
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id])
+
+  products Product[]
 }
 
 model Cart {
