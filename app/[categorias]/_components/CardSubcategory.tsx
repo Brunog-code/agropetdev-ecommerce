@@ -23,6 +23,12 @@ export const CardSubcategory = ({
         className={`rounded-full w-24 h-24 overflow-hidden  border-2 ${
           resolveParams == "cachorros"
             ? "border-sky-500"
+            : resolveParams == "aves"
+            ? "border-yellow-500"
+            : resolveParams == "piscina"
+            ? "border-cyan-500"
+            : resolveParams == "jardim"
+            ? "border-rose-700"
             : "border-fuchsia-500"
         } hover:scale-105 transition-all duration-200`}
       >

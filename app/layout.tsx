@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-import LayoutWrapper from "@/app/components/wrapLayout";
+import LayoutWrapper from "./(home)/_components/wrapLayout";
 import "./style/nprogress.css";
-import TopProgress from "./components/lib/nprogress";
+import TopProgress from "./(home)/_components/lib/nprogress";
 
 //titulos
 export const poppins = Poppins({

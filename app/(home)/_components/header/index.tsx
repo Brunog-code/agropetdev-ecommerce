@@ -14,13 +14,37 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
+interface ICategorieData {
+  id: string;
+  name: string;
+  slug: string;
+}
+
 export function Header() {
   const [session, setSession] = useState<boolean | null>(null);
   const [userName, setUserName] = useState<string>("");
   const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState<ICategorieData[]>([]);
 
   const router = useRouter();
 
+  //busca categorias para nav
+  useEffect(() => {
+    async function getCategories() {
+      try {
+        const response = await fetch("/api/categories");
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    }
+
+    getCategories();
+  }, []);
+
+  //busca se tem user logado
   useEffect(() => {
     async function getUserSession() {
       try {
@@ -116,7 +140,12 @@ export function Header() {
           <div className="hidden md:flex gap-6 text-white">
             <CartDrawer>
               <SheetTrigger>
-                <ShoppingCart className="w-6 h-6 cursor-pointer hover:fill-white transition" />
+                <div className="relative">
+                  <ShoppingCart className="w-6 h-6 cursor-pointer hover:fill-white transition" />
+                  <small className="rounded-full w-6 h-6 bg-red-500 absolute -top-4 -right-4 text-white flex items-center justify-center">
+                    2
+                  </small>
+                </div>
               </SheetTrigger>
             </CartDrawer>
 
@@ -126,6 +155,19 @@ export function Header() {
             </Link>
           </div>
         </div>
+      </div>
+      <div className="w-full p-2 text-white">
+        <ul className="hidden md:flex justify-evenly items-center">
+          {categories?.map((cat) => (
+            <Link
+              key={cat.id}
+              href={`/${cat.slug}`}
+              className="font-bold hover:text-orange-500 py-1 text-lg"
+            >
+              <li>{cat.name}</li>
+            </Link>
+          ))}
+        </ul>
       </div>
     </header>
   );

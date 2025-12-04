@@ -1,0 +1,148 @@
+"use client";
+
+import Link from "next/link";
+import { User, ShoppingCart, Heart, Home } from "lucide-react";
+import { Divide as Hamburger } from "hamburger-react";
+import { useEffect, useState } from "react";
+import { CartDrawer } from "../ui/drawer-cart";
+import { FilterDrawer } from "../ui/drawer-filters";
+import { SheetTrigger } from "@/components/ui/sheet";
+import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
+interface ICategorieData {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+export function MobileNav() {
+  const [session, setSession] = useState<boolean | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [categories, setCategories] = useState<ICategorieData[]>([]);
+  const [showDiv, setShowDiv] = useState(false);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    async function getCategories() {
+      try {
+        const response = await fetch("/api/categories");
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    }
+
+    getCategories();
+  }, []);
+
+  useEffect(() => {
+    async function getUserSession() {
+      try {
+        const { data } = await await authClient.getSession();
+        if (!data?.session) {
+          setSession(false);
+        } else {
+          setSession(true);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getUserSession();
+  }, []);
+
+  async function logOut() {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          setSession(false);
+          router.replace("/");
+          toast.success("Sessão encerrada. Volte sempre que quiser!");
+        },
+      },
+    });
+    setShowDiv(false);
+  }
+
+  return (
+    <section className="text-white z-30 relative items-center flex md:hidden justify-around w-full bg-[#3A7D44] rounded-t-xl p-4 shadow-2xl">
+      <FilterDrawer
+        onOpenChange={setIsOpen}
+        open={isOpen}
+        categoriesData={categories}
+      >
+        <SheetTrigger>
+          <div>
+            <Hamburger
+              toggled={isOpen}
+              toggle={setIsOpen}
+              color={isOpen ? "#f28c28" : "#fff"}
+            />
+          </div>
+        </SheetTrigger>
+      </FilterDrawer>
+
+      <Link href="/">
+        <Home className="w-6 h-6 cursor-pointer hover:text-orange-500" />
+      </Link>
+      {/* div fantasma */}
+      <div className="opacity-0">
+        <ShoppingCart className="w-6 h-6" />
+      </div>
+
+      <CartDrawer>
+        <SheetTrigger>
+          <div
+            className="absolute left-1/2 -translate-x-1/3 -top-2 bg-orange-500 rounded-full p-4 cursor-pointer z-2 hover:opacity-93 hover:scale-102
+         transition-all duration-200"
+          >
+            <div>
+              <ShoppingCart className="w-8 h-8" />
+              <small className="rounded-full w-6 h-6 bg-red-500 absolute top-1 right-2 text-white flex items-center justify-center">
+                2
+              </small>
+            </div>
+          </div>
+        </SheetTrigger>
+      </CartDrawer>
+
+      <Link href="/favoritos">
+        <Heart className="w-6 h-6 hover:text-red-500 hover:fill-red-500 transition cursor-pointer" />
+      </Link>
+
+      <div className="relative">
+        {showDiv && (
+          <div className="absolute bg-white rounded-lg -top-17 -left-17 p-4">
+            {!session ? (
+              <span className=" bg-orange-500 p-2 rounded-lg text-white shadow-lg">
+                <Link href="/login">Login</Link>
+              </span>
+            ) : (
+              <div className="absolute bg-white rounded-lg -top-17 -left-14 p-4 flex flex-col gap-2 w-[150px]">
+                <span className=" bg-orange-500 p-2 rounded-lg text-white shadow-lg">
+                  <Link href="#">Area cliente</Link>
+                </span>
+                <span
+                  className=" bg-orange-500 p-2 rounded-lg text-white shadow-lg cursor-pointer"
+                  onClick={logOut}
+                >
+                  Sair
+                </span>
+              </div>
+            )}
+          </div>
+        )}
+
+        <User
+          className="w-6 h-6 cursor-pointer hover:text-orange-500"
+          onClick={() => setShowDiv(!showDiv)}
+        />
+      </div>
+    </section>
+  );
+}
