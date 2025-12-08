@@ -3,7 +3,7 @@ import gatoTitulo from "@/app/assets/gato-titulo.png";
 import cachorroTitulo from "@/app/assets/cachorro-titulo.png";
 import Link from "next/link";
 
-import { getCategoriesAndSubResume } from "./actions";
+import { getCategoriesAndSubResume } from "./actions/getCategoriesAndSubResume";
 
 export async function FiltersCategory() {
   //buscar no db (principais categorias e suas subscategorias)

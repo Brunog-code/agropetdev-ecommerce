@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/db";
 
-export async function getCategoriesAndSubTotal(slug: string) {
+export async function getCategoriesAndSubcategories(slug: string) {
   try {
     const categoriesProductsData = await prisma.category.findMany({
       where: {

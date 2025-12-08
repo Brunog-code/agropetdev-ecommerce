@@ -51,17 +51,17 @@ const categoriesData: CategoryData[] = [
                 price: 189.9,
                 stock: 25,
                 image:
-                  "https://images.pexels.com/photos/4587995/pexels-photo-4587995.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Racoes/cachorros-Racao%20Premium%20Adulto%2015kg.jpg",
               },
               {
-                name: "Ração Filhotes Growth 3kg",
-                slug: "racao-filhotes-growth-3kg",
+                name: "Ração Filhotes 3kg",
+                slug: "racao-filhotes-3kg",
                 description:
                   "Ração balanceada para filhotes em crescimento, com alto teor de proteína e DHA para o desenvolvimento cerebral.",
                 price: 79.9,
                 stock: 40,
                 image:
-                  "https://images.pexels.com/photos/4587998/pexels-photo-4587998.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Racoes/cachorros-%20Racao%20Filhotes%20Growth%203kg.jpg",
               },
               {
                 name: "Ração Light Sênior 10kg",
@@ -71,7 +71,7 @@ const categoriesData: CategoryData[] = [
                 price: 159.9,
                 stock: 20,
                 image:
-                  "https://images.pexels.com/photos/4588001/pexels-photo-4588001.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Racoes/cachorros-Racao%20Light%20Senior%2010kg.jpg",
               },
             ],
           },
@@ -90,7 +90,7 @@ const categoriesData: CategoryData[] = [
                 price: 24.9,
                 stock: 50,
                 image:
-                  "https://images.pexels.com/photos/5731927/pexels-photo-5731927.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Brinquedos/cachorros-Bola%20Fetch%20Premium%20Media.jpg",
               },
               {
                 name: "Corda Mordedor Resistente",
@@ -100,7 +100,7 @@ const categoriesData: CategoryData[] = [
                 price: 19.9,
                 stock: 35,
                 image:
-                  "https://images.pexels.com/photos/4588012/pexels-photo-4588012.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Brinquedos/cachorros-Corda%20Mordedor%20Resistente.jpg",
               },
               {
                 name: "Disco Frisbee Flexível",
@@ -110,7 +110,7 @@ const categoriesData: CategoryData[] = [
                 price: 17.9,
                 stock: 40,
                 image:
-                  "https://images.pexels.com/photos/4588421/pexels-photo-4588421.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Brinquedos/cachorros-Disco%20Frisbee%20Flexivel.jpg",
               },
             ],
           },
@@ -129,7 +129,7 @@ const categoriesData: CategoryData[] = [
                 price: 5.99,
                 stock: 120,
                 image:
-                  "https://images.pexels.com/photos/4588005/pexels-photo-4588005.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Racoes%20umidas/cachorros-Sache%20Carne%20ao%20Molho%20100g.jpg",
               },
               {
                 name: "Sachê Frango com Legumes 100g",
@@ -139,7 +139,7 @@ const categoriesData: CategoryData[] = [
                 price: 5.49,
                 stock: 100,
                 image:
-                  "https://images.pexels.com/photos/4588006/pexels-photo-4588006.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Racoes%20umidas/cachorros-Sache%20Frango%20com%20Legumes%20100g.jpg",
               },
               {
                 name: "Patê Premium Carne 280g",
@@ -149,7 +149,7 @@ const categoriesData: CategoryData[] = [
                 price: 12.9,
                 stock: 70,
                 image:
-                  "https://images.pexels.com/photos/4588008/pexels-photo-4588008.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Racoes%20umidas/cahorros-Pate%20Premium%20Carne%20280g.jpg",
               },
             ],
           },
@@ -168,7 +168,7 @@ const categoriesData: CategoryData[] = [
                 price: 99.9,
                 stock: 30,
                 image:
-                  "https://images.pexels.com/photos/6231714/pexels-photo-6231714.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Antipulgas/cachorros-Coleira%20Antipulgas%208%20Meses.jpg",
               },
               {
                 name: "Spray Spot-on Mensal",
@@ -178,7 +178,7 @@ const categoriesData: CategoryData[] = [
                 price: 69.9,
                 stock: 45,
                 image:
-                  "https://images.pexels.com/photos/6231726/pexels-photo-6231726.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Antipulgas/cachorros-Spray%20Spot-on%20Mensal.jpg",
               },
               {
                 name: "Pipeta Antipulgas Grande Porte",
@@ -188,7 +188,7 @@ const categoriesData: CategoryData[] = [
                 price: 79.9,
                 stock: 40,
                 image:
-                  "https://images.pexels.com/photos/6231725/pexels-photo-6231725.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Antipulgas/cachorros-Pipeta%20Antipulgas%20Grande%20Porte.jpg",
               },
             ],
           },
@@ -207,7 +207,7 @@ const categoriesData: CategoryData[] = [
                 price: 22.9,
                 stock: 60,
                 image:
-                  "https://images.pexels.com/photos/7210751/pexels-photo-7210751.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Coleiras%20&%20Guias/cachorros-Coleira%20ajust%20Nylon.jpg",
               },
               {
                 name: "Guia Retrátil 5m",
@@ -217,7 +217,7 @@ const categoriesData: CategoryData[] = [
                 price: 49.9,
                 stock: 40,
                 image:
-                  "https://images.pexels.com/photos/7210753/pexels-photo-7210753.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Coleiras%20&%20Guias/cachorros-Guia%20retratil%205m.jpg",
               },
               {
                 name: "Peitoral Anti-Puxão",
@@ -227,7 +227,7 @@ const categoriesData: CategoryData[] = [
                 price: 79.9,
                 stock: 25,
                 image:
-                  "https://images.pexels.com/photos/7210735/pexels-photo-7210735.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Coleiras%20&%20Guias/cachorros-eitoral%20Anti-Puxao.jpg",
               },
             ],
           },
@@ -246,7 +246,7 @@ const categoriesData: CategoryData[] = [
                 price: 24.9,
                 stock: 40,
                 image:
-                  "https://images.pexels.com/photos/7310228/pexels-photo-7310228.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Higiene%20&%20Shampoos/cachorros-Shampoo%20Neutro%20500ml.jpg",
               },
               {
                 name: "Condicionador Hidratante 250ml",
@@ -256,7 +256,7 @@ const categoriesData: CategoryData[] = [
                 price: 29.9,
                 stock: 35,
                 image:
-                  "https://images.pexels.com/photos/7310155/pexels-photo-7310155.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Higiene%20&%20Shampoos/cachorros-Condicionador%20Hidratante%20250ml.jpg",
               },
               {
                 name: "Lenços Umedecidos Pet 100 un",
@@ -266,7 +266,7 @@ const categoriesData: CategoryData[] = [
                 price: 14.9,
                 stock: 80,
                 image:
-                  "https://images.pexels.com/photos/7310137/pexels-photo-7310137.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Higiene%20&%20Shampoos/cachorros-Lencos%20Umedecidos%20Pet%20100%20un.jpg",
               },
             ],
           },
@@ -285,7 +285,7 @@ const categoriesData: CategoryData[] = [
                 price: 129.9,
                 stock: 15,
                 image:
-                  "https://images.pexels.com/photos/5731906/pexels-photo-5731906.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Casinhas%20&%20Camas/cachorros-Cama%20Pet%20Confortavel%20M.jpg",
               },
               {
                 name: "Casinha Plástica Tam M",
@@ -295,7 +295,7 @@ const categoriesData: CategoryData[] = [
                 price: 229.9,
                 stock: 10,
                 image:
-                  "https://images.pexels.com/photos/3933962/pexels-photo-3933962.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Casinhas%20&%20Camas/cachorros-Casinha%20plastica%20Tam%20M.jpg",
               },
               {
                 name: "Colchonete Pet Impermeável",
@@ -305,7 +305,7 @@ const categoriesData: CategoryData[] = [
                 price: 99.9,
                 stock: 20,
                 image:
-                  "https://images.pexels.com/photos/7210755/pexels-photo-7210755.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/cachorros/Casinhas%20&%20Camas/cachorros-Colchonete%20Pet%20Impermeavel.jpg",
               },
             ],
           },
@@ -333,7 +333,7 @@ const categoriesData: CategoryData[] = [
                 price: 129.9,
                 stock: 20,
                 image:
-                  "https://images.pexels.com/photos/1404819/pexels-photo-1404819.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Caixas%20de%20areia/gatos-Caixa%20de%20Areia%20Fechada%20com%20Filtro.jpg",
               },
               {
                 name: "Caixa de Areia Básica Grande",
@@ -343,7 +343,7 @@ const categoriesData: CategoryData[] = [
                 price: 49.9,
                 stock: 30,
                 image:
-                  "https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Caixas%20de%20areia/gatos-Caixa%20de%20Areia%20Basica%20Grande.jpg",
               },
               {
                 name: "Caixa de Areia com Bordas Altas",
@@ -353,7 +353,7 @@ const categoriesData: CategoryData[] = [
                 price: 69.9,
                 stock: 25,
                 image:
-                  "https://images.pexels.com/photos/574093/pexels-photo-574093.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Caixas%20de%20areia/gatos-Caixa%20de%20Areia%20com%20Bordas%20Altas.webp",
               },
             ],
           },
@@ -372,7 +372,7 @@ const categoriesData: CategoryData[] = [
                 price: 22.9,
                 stock: 40,
                 image:
-                  "https://images.pexels.com/photos/2071873/pexels-photo-2071873.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Gramas%20digestivas/gatos-Kit%20Grama%20para%20Gatos%20Natural.jpg",
               },
               {
                 name: "Grama Digestiva Desidratada 100g",
@@ -382,7 +382,7 @@ const categoriesData: CategoryData[] = [
                 price: 14.9,
                 stock: 50,
                 image:
-                  "https://images.pexels.com/photos/2071871/pexels-photo-2071871.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Gramas%20digestivas/gatos-Grama%20Digestiva%20Desidratada%20100g.jpg",
               },
               {
                 name: "Grama Orgânica Crescimento Rápido",
@@ -392,7 +392,7 @@ const categoriesData: CategoryData[] = [
                 price: 18.9,
                 stock: 35,
                 image:
-                  "https://images.pexels.com/photos/2071869/pexels-photo-2071869.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Gramas%20digestivas/gatos-Grama%20organica%20Crescimento%20Rapido.jpg",
               },
             ],
           },
@@ -411,7 +411,7 @@ const categoriesData: CategoryData[] = [
                 price: 159.9,
                 stock: 25,
                 image:
-                  "https://images.pexels.com/photos/6231715/pexels-photo-6231715.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Racoes/gatos-Racao%20Premium%20Gatos%20Adultos%2010kg.jpg",
               },
               {
                 name: "Ração Filhotes Indoor 3kg",
@@ -421,7 +421,7 @@ const categoriesData: CategoryData[] = [
                 price: 74.9,
                 stock: 40,
                 image:
-                  "https://images.pexels.com/photos/6231717/pexels-photo-6231717.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Racoes/gatos-Racao%20Filhotes%20Indoor%203kg.jpg",
               },
               {
                 name: "Ração Light Castrados 1.5kg",
@@ -431,7 +431,7 @@ const categoriesData: CategoryData[] = [
                 price: 49.9,
                 stock: 50,
                 image:
-                  "https://images.pexels.com/photos/6231720/pexels-photo-6231720.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Racoes/gatos-Racao%20Light%20Castrados%2015kg.jpg",
               },
             ],
           },
@@ -450,7 +450,7 @@ const categoriesData: CategoryData[] = [
                 price: 4.99,
                 stock: 120,
                 image:
-                  "https://images.pexels.com/photos/4588005/pexels-photo-4588005.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Racoes%20umidas/gatos-Sache%20Gatos%20Adultos%20Carne%2085g.jpg",
               },
               {
                 name: "Sachê Filhotes Frango 85g",
@@ -460,7 +460,7 @@ const categoriesData: CategoryData[] = [
                 price: 4.49,
                 stock: 100,
                 image:
-                  "https://images.pexels.com/photos/4588006/pexels-photo-4588006.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Racoes%20umidas/gatos-Sache%20Filhotes%20Frango%2085g.jpg",
               },
               {
                 name: "Patê Premium Peixe 170g",
@@ -470,7 +470,7 @@ const categoriesData: CategoryData[] = [
                 price: 9.9,
                 stock: 60,
                 image:
-                  "https://images.pexels.com/photos/4588008/pexels-photo-4588008.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Racoes%20umidas/gatos-pate%20Premium%20Peixe%20170g.jpg",
               },
             ],
           },
@@ -489,7 +489,7 @@ const categoriesData: CategoryData[] = [
                 price: 19.9,
                 stock: 40,
                 image:
-                  "https://images.pexels.com/photos/127028/pexels-photo-127028.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Brinquedos/gatos-Varinha%20com%20Pena%20Interativa.jpg",
               },
               {
                 name: "Bolinhas Coloridas Kit 3un",
@@ -499,7 +499,7 @@ const categoriesData: CategoryData[] = [
                 price: 12.9,
                 stock: 50,
                 image:
-                  "https://images.pexels.com/photos/7210701/pexels-photo-7210701.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Brinquedos/gatos-Bolinhas%20Coloridas%20Kit%203un.jpg",
               },
               {
                 name: "Pelúcia Catnip Ratinho",
@@ -509,7 +509,7 @@ const categoriesData: CategoryData[] = [
                 price: 15.9,
                 stock: 45,
                 image:
-                  "https://images.pexels.com/photos/1766631/pexels-photo-1766631.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Brinquedos/gatos-pelucia%20Catnip%20Ratinho.jpg",
               },
             ],
           },
@@ -528,7 +528,7 @@ const categoriesData: CategoryData[] = [
                 price: 219.9,
                 stock: 10,
                 image:
-                  "https://images.pexels.com/photos/7075817/pexels-photo-7075817.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Arranhadores/gatos-Arranhador%20Torre%203%20Andares.jpg",
               },
               {
                 name: "Arranhador Simples de Sisal",
@@ -538,7 +538,7 @@ const categoriesData: CategoryData[] = [
                 price: 79.9,
                 stock: 25,
                 image:
-                  "https://images.pexels.com/photos/5731903/pexels-photo-5731903.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Arranhadores/gatos-Arranhador%20Simples%20de%20Sisal.jpg",
               },
               {
                 name: "Arranhador com Base e Brinquedo",
@@ -548,7 +548,7 @@ const categoriesData: CategoryData[] = [
                 price: 99.9,
                 stock: 18,
                 image:
-                  "https://images.pexels.com/photos/3861256/pexels-photo-3861256.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Arranhadores/gatos-Arranhador%20com%20Base%20e%20Brinquedo.jpg",
               },
             ],
           },
@@ -567,7 +567,7 @@ const categoriesData: CategoryData[] = [
                 price: 139.9,
                 stock: 20,
                 image:
-                  "https://images.pexels.com/photos/4588049/pexels-photo-4588049.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Fontes%20de%20agua/gatos-Fonte%20eletrica%20Silenciosa%202L.jpg",
               },
               {
                 name: "Fonte Plástica 1.5L",
@@ -577,7 +577,7 @@ const categoriesData: CategoryData[] = [
                 price: 79.9,
                 stock: 35,
                 image:
-                  "https://images.pexels.com/photos/4588050/pexels-photo-4588050.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Fontes%20de%20agua/gatos-Fonte%20Plastica%2015L.jpg",
               },
               {
                 name: "Fonte Inox Premium 2.5L",
@@ -587,7 +587,7 @@ const categoriesData: CategoryData[] = [
                 price: 199.9,
                 stock: 15,
                 image:
-                  "https://images.pexels.com/photos/4588043/pexels-photo-4588043.jpeg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/gatos/Fontes%20de%20agua/gatos-Fonte%20Inox%20Premium%2025L.jpg",
               },
             ],
           },
@@ -615,7 +615,7 @@ const categoriesData: CategoryData[] = [
                   "Alimento completo extrusado para papagaios, feito com ingredientes naturais.",
                 stock: 50,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/788540/racao_nutropica_papagaio_selecao_natural_1kg_2055_1_b2da0e87f3dbb58aa64cfb39bec57ee3.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/racoes%20para%20aves/aves-Racao%20Nutropica%20Papagaio%20Selecao%20Natural%201kg.jpg",
               },
               {
                 name: "Ração Alcon Club Curió 500g",
@@ -625,7 +625,7 @@ const categoriesData: CategoryData[] = [
                   "Ração premium para curiós, rica em vitaminas essenciais para manutenção da saúde.",
                 stock: 60,
                 image:
-                  "https://static3.tcdn.com.br/img/img_prod/708512/racao_alcon_club_curio_500g_2287_1_20201211100812.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/racoes%20para%20aves/aves-Racao%20Alcon%20Club%20Curio%20500g.jpg",
               },
               {
                 name: "Ração Zootekna Mix Calopsita 500g",
@@ -635,7 +635,7 @@ const categoriesData: CategoryData[] = [
                   "Mistura balanceada de sementes selecionadas para calopsitas.",
                 stock: 80,
                 image:
-                  "https://static3.tcdn.com.br/img/img_prod/698889/mix_calopsita_zootekna_500g_1687_1_20201204152243.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/racoes%20para%20aves/aves-Racao%20Zootekna%20Mix%20Calopsita%20500g.jpg",
               },
             ],
           },
@@ -654,7 +654,7 @@ const categoriesData: CategoryData[] = [
                   "Gaiola espaçosa e resistente, ideal para calopsitas e outras aves médias.",
                 stock: 20,
                 image:
-                  "https://www.bichosnaria.com.br/media/catalog/product/cache/1/image/700x/040ec09b1e35df139433887a97daa66f/g/a/gaiola_calopsita_n4.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/Gaiolas/aves-Gaiola%20N%204%20para%20Calopsita.jpg",
               },
               {
                 name: "Gaiola Redonda Luxo para Canário",
@@ -664,7 +664,7 @@ const categoriesData: CategoryData[] = [
                   "Gaiola decorativa redonda ideal para canários, periquitos e pequenos pássaros.",
                 stock: 30,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/675651/gaiola_redonda_luxo_para_canario_2503_1_7fc91dc98e65ce42928de0b9230e6505.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/Gaiolas/aves-gaiola-redonda-luxo-para-canario.jpg",
               },
               {
                 name: "Gaiola Tucano Premium",
@@ -674,7 +674,7 @@ const categoriesData: CategoryData[] = [
                   "Gaiola premium com bandeja removível, poleiros e comedouros inclusos.",
                 stock: 15,
                 image:
-                  "https://static3.tcdn.com.br/img/img_prod/726504/gaiola_tucano_preta_premium_8197_1_20191206154108.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/Gaiolas/aves-Gaiola%20Tucano%20Premium.jpg",
               },
             ],
           },
@@ -693,7 +693,7 @@ const categoriesData: CategoryData[] = [
                   "Bebedouro automático compatível com diversas gaiolas.",
                 stock: 120,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/788540/bebedouro_automatico_para_aves_200ml_2054_1_2d75d27be27fa9982f9b2585fa1313d7.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/Bebedouros%20&%20Comedouros/aves-Bebedouro%20Automatico%20para%20Aves%20200ml.jpg",
               },
               {
                 name: "Comedouro Coletor de Sementes",
@@ -703,7 +703,7 @@ const categoriesData: CategoryData[] = [
                   "Comedouro que evita desperdício e sujeira, ideal para pássaros pequenos.",
                 stock: 90,
                 image:
-                  "https://www.petvale.com.br/media/catalog/product/cache/1/image/700x/040ec09b1e35df139433887a97daa66f/c/o/comedouro_aves_anti-desperdicio.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/Bebedouros%20&%20Comedouros/aves-Comedouro%20Coletor%20de%20Sementes.jpg",
               },
               {
                 name: "Bebedouro Fonte Mini para Passáros",
@@ -713,7 +713,7 @@ const categoriesData: CategoryData[] = [
                   "Bebedouro estilo fonte que incentiva a hidratação das aves.",
                 stock: 70,
                 image:
-                  "https://m.media-amazon.com/images/I/51iISiYDUFL._AC_.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/Bebedouros%20&%20Comedouros/aves-Bebedouro%20Fonte%20Mini%20para%20Passaros.jpg",
               },
             ],
           },
@@ -732,7 +732,7 @@ const categoriesData: CategoryData[] = [
                   "Escada de madeira natural ideal para calopsitas e periquitos.",
                 stock: 100,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/708512/escada_para_aves_6_degraus_1907_1_20201211100810.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/Brinquedos%20para%20aves/aves-Brinquedo%20Escada%20de%206%20Degraus.jpg",
               },
               {
                 name: "Brinquedo Mordedor Colorido",
@@ -742,7 +742,7 @@ const categoriesData: CategoryData[] = [
                   "Brinquedo interativo com cordas coloridas e madeira para roer.",
                 stock: 85,
                 image:
-                  "https://m.media-amazon.com/images/I/61qTUSpKyDL._AC_.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/Brinquedos%20para%20aves/aves-Brinquedo%20Mordedor%20Colorido.jpg",
               },
               {
                 name: "Balanço para Calopsita em Madeira",
@@ -752,7 +752,7 @@ const categoriesData: CategoryData[] = [
                   "Balanço confortável e resistente feito em madeira natural.",
                 stock: 75,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/788540/balanco_para_aves_madeira_20122_1_78a2a97c7e1e5a1cfffbe6713923f117.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/Brinquedos%20para%20aves/aves-Balanco%20para%20Calopsita%20em%20Madeira.jpg",
               },
             ],
           },
@@ -771,7 +771,7 @@ const categoriesData: CategoryData[] = [
                   "Suplemento vitamínico líquido para aves de pequeno e médio porte.",
                 stock: 60,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/708512/avitrin_vitamina_15ml_1794_1_20201211100807.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/Vitaminas%20&%20Suplementos/aves-Avitrin%20Vitamina%20para%20Aves%2015ml.jpg",
               },
               {
                 name: "Complexo B Vetnil 30ml",
@@ -781,7 +781,7 @@ const categoriesData: CategoryData[] = [
                   "Complexo vitamínico para fortalecer a saúde e evitar estresse.",
                 stock: 40,
                 image:
-                  "https://static3.tcdn.com.br/img/img_prod/788540/complexo_b_vetnil_30ml_2089_1_f7e66902d9d5a0e2c75e927af6d506a5.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/Vitaminas%20&%20Suplementos/aves-Complexo%20B%20Vetnil%2030ml.jpg",
               },
               {
                 name: "Suplemento Oropharma Calci-Lux 150g",
@@ -791,7 +791,7 @@ const categoriesData: CategoryData[] = [
                   "Cálcio de alta qualidade para fortalecer ossos e melhorar reprodução.",
                 stock: 25,
                 image:
-                  "https://cdn.awsli.com.br/600x450/1064/1064203/produto/52287375/4cb03d0f2c.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/aves/Vitaminas%20&%20Suplementos/aves-Suplemento%20Oropharma%20Calci-Lux%20150g.jpg",
               },
             ],
           },
@@ -819,7 +819,7 @@ const categoriesData: CategoryData[] = [
                 price: 34.9,
                 stock: 50,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/262019/cloro_granulado_hth_1kg_262019_1_5f40e3c6cdbb5b06c2e5110b9dd06a06.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/piscina/Cloro%20&%20Tratamento/piscina-Cloro%20Granulado%201kg%20HTH.jpg",
               },
               {
                 name: "Algicida Shock 1L",
@@ -829,7 +829,7 @@ const categoriesData: CategoryData[] = [
                 price: 29.9,
                 stock: 40,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/402345/algicida_shock_1l_402345_1_0c1f5bf3e4acd9b7c5b7157a2f82f8f1.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/piscina/Cloro%20&%20Tratamento/piscina-algicida%20Shock%201L.jpg",
               },
               {
                 name: "Clarificante Líquido 1L",
@@ -839,7 +839,7 @@ const categoriesData: CategoryData[] = [
                 price: 24.9,
                 stock: 45,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/315678/clarificante_liquido_1l_315678_1_b2aa9f2b8ee4c7ac4ea1f5ba1c8b4c27.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/piscina/Cloro%20&%20Tratamento/piscina-Clarificante%20liquido%201L.jpg",
               },
             ],
           },
@@ -858,7 +858,7 @@ const categoriesData: CategoryData[] = [
                 price: 89.9,
                 stock: 30,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/152367/aspirador_manual_piscina_152367_1_9f8c3e2b1d5f4a9c7b6d8a4e3f5cdc3b.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/piscina/Aspiradores/piscina-Aspirador%20Manual%20para%20Piscina.webp",
               },
               {
                 name: "Aspirador Elétrico Automático",
@@ -868,17 +868,17 @@ const categoriesData: CategoryData[] = [
                 price: 499.9,
                 stock: 10,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/478912/aspirador_eletrico_automatico_478912_1_3c2f1d4a5b7e9c8d6f3a2e1b4d9f8c1e.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/piscina/Aspiradores/piscina-Aspirador%20eletrrico%20auto.jpg",
               },
               {
-                name: "Aspirador Pó e Areia – Refil 2L",
+                name: "Aspirador Pó e Areia - Refil 2L",
                 slug: "aspirador-po-areia-refil-2l",
                 description:
                   "Aspirador eficiente para remoção de pó, areia e resíduos leves.",
                 price: 149.9,
                 stock: 25,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/364789/aspirador_refil_2l_364789_1_6b5c2d3e4f1a9c8b7e2d4f6a8c9b3d5a.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/piscina/Aspiradores/piscina-Aspirador%20po%20e%20areia.webp",
               },
             ],
           },
@@ -897,7 +897,7 @@ const categoriesData: CategoryData[] = [
                 price: 349.9,
                 stock: 12,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/289401/bomba_filtro_1_2_hp_289401_1_c7d5e4f3b2a1d8c6e5f4a3b2c1d9f8e7.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/piscina/Filtros%20&%20Bombas/piscina-Bomba%20Filtro%2012%20HP.jpg",
               },
               {
                 name: "Filtro de Areia 300mm",
@@ -907,7 +907,7 @@ const categoriesData: CategoryData[] = [
                 price: 499.9,
                 stock: 8,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/315678/filtro_areia_300mm_315678_1_f5e6d7c8b9a0c1d2e3f4b5a6c7d8e9f0.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/piscina/Filtros%20&%20Bombas/piscina-Filtro%20de%20Areia%20300mm.webp",
               },
               {
                 name: "Kit Manutenção Filtros e Bombas",
@@ -917,7 +917,7 @@ const categoriesData: CategoryData[] = [
                 price: 129.9,
                 stock: 20,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/402345/kit_manutencao_piscina_402345_1_2b4c6d8e9f1a3b5c7d9e0f2a4b6c8d1e.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/piscina/Filtros%20&%20Bombas/piscina-Kit%20manut%20Filtros%20e%20Bombas.webp",
               },
             ],
           },
@@ -945,7 +945,7 @@ const categoriesData: CategoryData[] = [
                 price: 29.9,
                 stock: 50,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/315678/adubo_organico_5kg_315678_1_2a4b6c8d9e1f3a5b7c9d0e2f4a6b8c9d.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/jardim/Adubos%20&%20Fertilizantes/jardim-Adubo%20organico%205kg.webp",
               },
               {
                 name: "Fertilizante NPK 10-10-10 1kg",
@@ -955,7 +955,7 @@ const categoriesData: CategoryData[] = [
                 price: 19.9,
                 stock: 60,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/402345/fertilizante_npk_1kg_402345_1_3c5e7f9a1b2d4e6f8a0c2d4e6b8f1a2c.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/jardim/Adubos%20&%20Fertilizantes/jardim-Fertilizante%20NPK%2010-10-10%201kg.webp",
               },
               {
                 name: "Composto Orgânico 10L",
@@ -965,7 +965,7 @@ const categoriesData: CategoryData[] = [
                 price: 39.9,
                 stock: 40,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/478912/composto_organico_10l_478912_1_1d2c3b4e5f6a7b8c9d0e1f2a3b4c5d6e.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/jardim/Adubos%20&%20Fertilizantes/jardim-Composto%20organico%2010L.jpg",
               },
             ],
           },
@@ -984,7 +984,7 @@ const categoriesData: CategoryData[] = [
                 price: 24.9,
                 stock: 70,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/152367/pa_jardim_152367_1_6b5c2d3e4f1a9c8b7e2d4f6a8c9b3d5a.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/jardim/Ferramentas/jardim-pa%20de%20jardim.png",
               },
               {
                 name: "Tesoura de Poda",
@@ -994,7 +994,7 @@ const categoriesData: CategoryData[] = [
                 price: 34.9,
                 stock: 55,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/364789/tesoura_poda_364789_1_7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/jardim/Ferramentas/jardim-Tesoura%20de%20Poda.jpg",
               },
               {
                 name: "Enxada de Jardim",
@@ -1004,7 +1004,7 @@ const categoriesData: CategoryData[] = [
                 price: 49.9,
                 stock: 35,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/289401/enxada_jardim_289401_1_8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/jardim/Ferramentas/jardim-Enxada%20de%20Jardim.png",
               },
             ],
           },
@@ -1023,7 +1023,7 @@ const categoriesData: CategoryData[] = [
                 price: 29.9,
                 stock: 60,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/402345/regador_10l_402345_1_2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/jardim/Regadores%20&%20Mangueiras/jardim-Regador%20plastico10L.webp",
               },
               {
                 name: "Mangueira Flexível 15m",
@@ -1033,7 +1033,7 @@ const categoriesData: CategoryData[] = [
                 price: 69.9,
                 stock: 40,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/315678/mangueira_15m_315678_1_3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/jardim/Regadores%20&%20Mangueiras/jardim-Mangueira%20flexivel%2015m.jpg",
               },
               {
                 name: "Kit Regador + Mangueira 5m",
@@ -1043,7 +1043,7 @@ const categoriesData: CategoryData[] = [
                 price: 79.9,
                 stock: 30,
                 image:
-                  "https://images.tcdn.com.br/img/img_prod/478912/kit_regador_mangueira_5m_478912_1_4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e.jpg",
+                  "https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prodcts-img/jardim/Regadores%20&%20Mangueiras/jardim-Kit%20Regador%20Mangueira%205m.webp",
               },
             ],
           },

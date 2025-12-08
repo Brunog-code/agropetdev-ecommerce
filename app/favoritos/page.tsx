@@ -1,4 +1,4 @@
-import { FavoritesCard } from "./_components/FavoritesCard";
+import { FavoritesCard } from "./_components/favoritesCard";
 
 export default function Favorites() {
   return (

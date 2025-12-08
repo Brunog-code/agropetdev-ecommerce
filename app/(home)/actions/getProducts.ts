@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/db";
 
-export interface FullProduct {
+export interface IFullProduct {
   product: {
     id: string;
     name: string;
@@ -11,14 +11,15 @@ export interface FullProduct {
     price: number;
     stock: number;
     image: string;
+    subcategoryId?: string;
   };
-  subcategory: {
+  subcategory?: {
     id: string;
     name: string;
     slug: string;
     img: string | null;
   };
-  category: {
+  category?: {
     id: string;
     name: string;
     slug: string;
@@ -42,7 +43,7 @@ export async function getProducts() {
       },
     });
 
-    const finalProducts: FullProduct[] = [];
+    const finalProducts: IFullProduct[] = [];
 
     //embaralhar categortias
     const shuffledCategories = shuffle(productsData);
