@@ -6,6 +6,8 @@ import LayoutWrapper from "./(home)/_components/wrapLayout";
 import "./style/nprogress.css";
 import TopProgress from "./(home)/_components/lib/nprogress";
 
+import { AuthProvider } from "./contexts/AuthContext";
+
 //titulos
 export const poppins = Poppins({
   subsets: ["latin"],
@@ -36,13 +38,15 @@ export default function RootLayout({
         className={` ${poppins.variable} ${inter.variable} not-last:antialiased flex flex-col min-h-screen`}
         suppressHydrationWarning={true}
       >
-        <LayoutWrapper>
-          <main className="p-2 flex-1 max-w-7xl mx-auto w-full pb-30">
-            <TopProgress />
-            {children}
-            <Toaster position="top-right" reverseOrder={false} />
-          </main>
-        </LayoutWrapper>
+        <AuthProvider>
+          <LayoutWrapper>
+            <main className="p-2 flex-1 max-w-7xl mx-auto w-full pb-30">
+              <TopProgress />
+              {children}
+              <Toaster position="top-right" reverseOrder={false} />
+            </main>
+          </LayoutWrapper>
+        </AuthProvider>
       </body>
     </html>
   );

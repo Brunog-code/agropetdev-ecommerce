@@ -9,10 +9,8 @@ import { SheetTrigger } from "@/components/ui/sheet";
 import { PromotionsCarousel } from "../lib/swiper/promoction";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { authClient } from "@/lib/auth-client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { useAuth } from "@/app/contexts/AuuthContext";
 
 interface ICategorieData {
   id: string;
@@ -21,12 +19,10 @@ interface ICategorieData {
 }
 
 export function Header() {
-  const [session, setSession] = useState<boolean | null>(null);
-  const [userName, setUserName] = useState<string>("");
-  const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<ICategorieData[]>([]);
 
-  const router = useRouter();
+  //context
+  const { session, loading, logout } = useAuth();
 
   //busca categorias para nav
   useEffect(() => {
@@ -43,39 +39,6 @@ export function Header() {
 
     getCategories();
   }, []);
-
-  //busca se tem user logado
-  useEffect(() => {
-    async function getUserSession() {
-      try {
-        const { data } = await await authClient.getSession();
-        if (!data?.session) {
-          setSession(false);
-        } else {
-          setSession(true);
-          setUserName(data.user.name);
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    getUserSession();
-  }, []);
-
-  async function logOut() {
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          setUserName("");
-          setSession(false);
-          router.replace("/");
-          toast.success("Sessão encerrada. Volte sempre que quiser!");
-        },
-      },
-    });
-  }
 
   return (
     <header className="w-full bg-[#3A7D44]">
@@ -109,7 +72,7 @@ export function Header() {
               <span>Area cliente</span>
             </button>
             <button
-              onClick={logOut}
+              onClick={logout}
               className={cn(
                 "flex items-center justify-center gap-1 cursor-pointer ",
                 buttonVariants({ variant: "secondary" })
