@@ -69,7 +69,7 @@ export function LoginForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 bg-white p-4 rounded-lg w-full md:w-1/2 lg:w-1/3 border-1 border-green-600"
+        className="space-y-6 bg-white p-4 rounded-lg w-full md:w-1/2 lg:w-1/3 border border-green-600"
       >
         <FormField
           control={form.control}

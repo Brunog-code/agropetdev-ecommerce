@@ -5,13 +5,21 @@ import Image from "next/image";
 
 import { IFullProduct } from "../../actions/getProducts";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { useAuth } from "@/app/contexts/AuthCont";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+
+import { addFavorite } from "./actions/addFavorite";
+import { removeFavorite } from "./actions/removeFavorite";
+import { getUserFavorites } from "./actions/getUserFavorites";
 
 interface IProductCardProps {
   prod: IFullProduct;
 }
 
-interface IProductFavorite {
+export interface IProductFavorite {
   id: string;
   name: string;
   slug: string;
@@ -25,12 +33,63 @@ interface IProductFavorite {
 export const ProductCard = ({ prod }: IProductCardProps) => {
   const [fillHeart, setFillHeart] = useState(false);
 
-  //add aos favoritos
-  function handleAddFavorites(product: IProductFavorite) {
-    console.log(product);
-    setFillHeart(!fillHeart);
+  //router
+  const router = useRouter();
 
-    //adicionar ao localStorage
+  const { session, user } = useAuth();
+
+  //verifica se o product está adicionado aos favoritos
+  const productId = prod.product.id;
+  useEffect(() => {
+    const getFavorite = async () => {
+      if (!session || !user) return;
+
+      const favorites = await getUserFavorites(user!.id);
+
+      const isFavorite = favorites.some((fav) => fav.productId === productId);
+
+      setFillHeart(isFavorite);
+    };
+
+    getFavorite();
+  }, [session, user, productId]);
+
+  //add aos favoritos
+  async function handleAddFavorites(product: IProductFavorite) {
+    if (!session) {
+      //SE NÃO ESTIVER LOGADO
+      //redireciona para uma page informando que precisa estar logado
+      router.push("/login-obrigatorio");
+    } else {
+      //SE ESTIVER LOGADO
+      //se nao estiver salvo, salva no db
+      const dataFavorite = {
+        userId: user!.id,
+        productId: product.id,
+      };
+
+      if (!fillHeart) {
+        const responseAdd = await addFavorite(dataFavorite);
+
+        //se salvou corretamente no db
+        if (responseAdd.success) {
+          toast.success("Item adicionado aos favoritos");
+          setFillHeart(!fillHeart);
+        } else {
+          toast.error("Falha ao adicionar o item");
+        }
+      } else {
+        //se estiver salvo, remove db
+        const responseRemove = await removeFavorite(dataFavorite);
+
+        if (responseRemove.success) {
+          toast.success("Item removido dos favoritos");
+          setFillHeart(!fillHeart);
+        } else {
+          toast.error("Falha ao remover o item");
+        }
+      }
+    }
   }
 
   return (

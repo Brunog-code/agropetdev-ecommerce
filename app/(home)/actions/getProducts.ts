@@ -48,7 +48,7 @@ export async function getProducts() {
     //embaralhar categortias
     const shuffledCategories = shuffle(productsData);
 
-    //pegar apenas 4 categorias
+    //pegar 4 categorias
     const selectedCategories = shuffledCategories.slice(0, 3);
 
     for (const category of selectedCategories) {
@@ -63,7 +63,7 @@ export async function getProducts() {
         const shuffledProducts = shuffle(sub.products);
 
         // pega 3 produtos
-        const selectedProducts = shuffledProducts.slice(0, 3);
+        const selectedProducts = shuffledProducts.slice(0, 2);
 
         for (const product of selectedProducts) {
           finalProducts.push({

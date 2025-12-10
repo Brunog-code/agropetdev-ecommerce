@@ -69,6 +69,15 @@ export function MobileNav() {
     setShowDiv(false);
   }
 
+  function checkFavoritesAccess() {
+    if (!session) {
+      //se nao estiver logado, envia para o aviso
+      router.push("/login-obrigatorio");
+    } else {
+      router.push("/favoritos");
+    }
+  }
+
   return (
     <section className="text-white z-30 relative items-center flex md:hidden justify-around w-full bg-[#3A7D44] rounded-t-xl p-4 shadow-2xl">
       <FilterDrawer
@@ -111,9 +120,9 @@ export function MobileNav() {
         </SheetTrigger>
       </CartDrawer>
 
-      <Link href="/favoritos">
+      <button onClick={checkFavoritesAccess}>
         <Heart className="w-6 h-6 hover:text-red-500 hover:fill-red-500 transition cursor-pointer" />
-      </Link>
+      </button>
 
       <div className="relative">
         {showDiv && (

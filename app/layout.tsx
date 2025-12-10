@@ -6,7 +6,7 @@ import LayoutWrapper from "./(home)/_components/wrapLayout";
 import "./style/nprogress.css";
 import TopProgress from "./(home)/_components/lib/nprogress";
 
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthCont";
 
 //titulos
 export const poppins = Poppins({

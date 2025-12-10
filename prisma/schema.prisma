@@ -22,9 +22,10 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  address  Address?
-  sessions Session[]
-  accounts Account[]
+  address   Address?
+  sessions  Session[]
+  accounts  Account[]
+  favorites Favorite[]
 
   @@unique([email])
   @@map("user")
@@ -105,6 +106,8 @@ model Product {
 
   itemsCart  ItemCart[]
   itemsOrder ItemOrder[]
+
+  itemsFavorites Favorite[]
 }
 
 model Category {
@@ -125,6 +128,20 @@ model Subcategory {
   category   Category @relation(fields: [categoryId], references: [id])
 
   products Product[]
+}
+
+model Favorite {
+  id String @id @default(uuid())
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
 }
 
 model Cart {

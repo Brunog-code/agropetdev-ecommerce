@@ -18,7 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { authClient } from "@/lib/auth-client";
-import { saveAddress } from "./actions";
+import { saveAddress } from "../../actions";
 
 //schema zod
 const registerSchema = z

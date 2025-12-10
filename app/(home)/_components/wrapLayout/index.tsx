@@ -7,7 +7,7 @@ import React from "react";
 import { Footer } from "../footer";
 
 // Rotas onde o Header GLOBAL deve ser escondido
-const AUTH_ROUTES = ["/login", "/cadastro"];
+const AUTH_ROUTES = ["/login", "/cadastro", "/login-obrigatorio"];
 
 export default function LayoutWrapper({
   children,
