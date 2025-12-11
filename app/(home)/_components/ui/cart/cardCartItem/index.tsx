@@ -9,6 +9,7 @@ interface ICardCartItemProps {
 export const CardCartItem = ({ itemCart }: ICardCartItemProps) => {
   //zustand
   const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const updateQty = useCartStore((state) => state.updateQty);
 
   return (
     <div className="w-full flex gap-2 relative">
@@ -22,11 +23,20 @@ export const CardCartItem = ({ itemCart }: ICardCartItemProps) => {
         />
       </div>
 
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-4 w-full">
         <p className="font-semibold text-gray-800">{itemCart.name}</p>
 
-        <div className="flex justify-between items-end gap-4">
-          botoes de aumentar e diminuir
+        <div className="flex justify-around items-end gap-4 w-full">
+          <div className="flex gap-6 border rounded-lg p-1">
+            <button className="text-xl font-semibold text-gray-600 cursor-pointer" onClick={() => updateQty('decrement', itemCart.id)}>
+              -
+            </button>
+            <span className="text-gray-600">{itemCart.quantity}</span>
+            <button className="text-xl font-semibold text-gray-600  cursor-pointer" onClick={() => updateQty('increment', itemCart.id)}>
+              +
+            </button>
+          </div>
+
           <span className="font-semibold">
             {itemCart.price.toLocaleString("pt-BR", {
               style: "currency",

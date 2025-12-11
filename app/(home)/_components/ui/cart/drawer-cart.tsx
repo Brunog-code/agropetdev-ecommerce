@@ -10,11 +10,13 @@ import { useEffect, useState } from "react";
 import { useCartStore } from "@/app/store/cartStore";
 import { CardCartItem } from "./cardCartItem";
 import { Button } from "@/components/ui/button";
+import { FaTrash } from "react-icons/fa";
 
 export function CartDrawer({ children }: { children: React.ReactNode }) {
   //cart
   const itemsCart = useCartStore((state) => state.cart);
   const quantityItemsCart = useCartStore((state) => state.cart.length);
+  const clearCart = useCartStore((state) => state.clearCart);
   const totalCart = useCartStore((state) => state.getTotalCart);
 
   //state
@@ -61,9 +63,20 @@ export function CartDrawer({ children }: { children: React.ReactNode }) {
               <CardCartItem itemCart={item} />
             </div>
           ))}
+          {quantityItemsCart > 0 && (
+            <div className="w-full flex justify-end">
+              <button
+                onClick={clearCart}
+                className="flex gap-1 justify-center items-center bg-red-400 hover:opacity-85 text-white rounded-lg p-2 cursor-pointer"
+              >
+                <FaTrash size={16} color="#fff" />
+                limpar
+              </button>
+            </div>
+          )}
 
           {quantityItemsCart > 0 && (
-            <div className="flex flex-col gap-4 mt-6">
+            <div className="flex flex-col gap-4 mt-8 font-medium">
               <div className="flex flex-col">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
@@ -74,14 +87,6 @@ export function CartDrawer({ children }: { children: React.ReactNode }) {
                       currency: "BRL",
                     })}
                   </span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Descontos</span>
-                  <span>R$ 0,00</span>
-                </div>
-                <div className="flex justify-between font-bold">
-                  <span>Total</span>
-                  <span>454</span>
                 </div>
               </div>
 
