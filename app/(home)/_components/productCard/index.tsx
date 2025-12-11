@@ -14,6 +14,9 @@ import toast from "react-hot-toast";
 import { addFavorite } from "./actions/addFavorite";
 import { removeFavorite } from "./actions/removeFavorite";
 import { getUserFavorites } from "./actions/getUserFavorites";
+import { useCartStore } from "@/app/store/cartStore";
+import { CartDrawer } from "../ui/cart/drawer-cart";
+import { SheetTrigger } from "@/components/ui/sheet";
 
 interface IProductCardProps {
   prod: IFullProduct;
@@ -32,6 +35,9 @@ export interface IProductFavorite {
 
 export const ProductCard = ({ prod }: IProductCardProps) => {
   const [fillHeart, setFillHeart] = useState(false);
+
+  //zustand
+  const addToCart = useCartStore((state) => state.addToCart);
 
   //router
   const router = useRouter();
@@ -92,6 +98,22 @@ export const ProductCard = ({ prod }: IProductCardProps) => {
     }
   }
 
+  function handleAddToCart() {
+    //salva sempre no Zustand (persist salva no localStorage)
+    const productCart = {
+      ...prod.product,
+      quantity: 1,
+    };
+    addToCart(productCart);
+    toast.success("Adicionado ao carrinho!");
+
+    //abrir drawer
+
+    //Usuário logado → alem de salvar no localStorage, chamar API para salvar no DB (sincronizar ambos)
+    if (session) {
+    }
+  }
+
   return (
     <div className="w-full shadow-md flex flex-col justify-between items-center bg-white rounded-lg p-2 border border-green-400">
       <div className="flex flex-col justify-between flex-1">
@@ -125,10 +147,17 @@ export const ProductCard = ({ prod }: IProductCardProps) => {
         </span>
 
         <div className="w-full flex flex-col gap-2">
-          <button className="bg-green-600 text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center">
-            Comprar
-            <ShoppingCart size={20} color="#fff" />
-          </button>
+          <CartDrawer>
+            <SheetTrigger asChild>
+              <button
+                onClick={handleAddToCart}
+                className="bg-green-600 text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center"
+              >
+                Comprar
+                <ShoppingCart size={20} color="#fff" />
+              </button>
+            </SheetTrigger>
+          </CartDrawer>
           <button
             onClick={() => handleAddFavorites(prod.product)}
             className=" text-gray-500 rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-1 p-2 justify-center"

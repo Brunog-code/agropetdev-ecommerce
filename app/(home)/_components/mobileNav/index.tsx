@@ -4,12 +4,13 @@ import Link from "next/link";
 import { User, ShoppingCart, Heart, Home } from "lucide-react";
 import { Divide as Hamburger } from "hamburger-react";
 import { useEffect, useState } from "react";
-import { CartDrawer } from "../ui/drawer-cart";
+import { CartDrawer } from "../ui/cart/drawer-cart";
 import { FilterDrawer } from "../ui/drawer-filters";
 import { SheetTrigger } from "@/components/ui/sheet";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useCartStore } from "@/app/store/cartStore";
 
 interface ICategorieData {
   id: string;
@@ -18,6 +19,10 @@ interface ICategorieData {
 }
 
 export function MobileNav() {
+  //zustand
+  const quantityItemsCart = useCartStore((state) => state.cart.length);
+
+  //states
   const [session, setSession] = useState<boolean | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [categories, setCategories] = useState<ICategorieData[]>([]);
@@ -112,9 +117,11 @@ export function MobileNav() {
           >
             <div>
               <ShoppingCart className="w-8 h-8" />
-              <small className="rounded-full w-6 h-6 bg-red-500 absolute top-1 right-2 text-white flex items-center justify-center">
-                2
-              </small>
+              {quantityItemsCart > 0 && (
+                <small className="rounded-full w-6 h-6 bg-red-500 absolute top-1 right-2 text-white flex items-center justify-center">
+                  {quantityItemsCart}
+                </small>
+              )}
             </div>
           </div>
         </SheetTrigger>
