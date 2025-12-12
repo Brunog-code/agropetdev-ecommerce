@@ -11,6 +11,9 @@ import { useCartStore } from "@/app/store/cartStore";
 import { CardCartItem } from "./cardCartItem";
 import { Button } from "@/components/ui/button";
 import { FaTrash } from "react-icons/fa";
+import { useAuth } from "@/app/contexts/AuthCont";
+import { clearCartDb } from "./actions/clearCartDb";
+import toast from "react-hot-toast";
 
 export function CartDrawer({ children }: { children: React.ReactNode }) {
   //cart
@@ -18,6 +21,9 @@ export function CartDrawer({ children }: { children: React.ReactNode }) {
   const quantityItemsCart = useCartStore((state) => state.cart.length);
   const clearCart = useCartStore((state) => state.clearCart);
   const totalCart = useCartStore((state) => state.getTotalCart);
+
+  //context
+  const { session, user } = useAuth();
 
   //state
   const [isMobile, setIsmobile] = useState(false);
@@ -38,6 +44,20 @@ export function CartDrawer({ children }: { children: React.ReactNode }) {
 
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
+
+  async function clearCartLocalAndDb() {
+    //db
+    if (session) {
+      const reponse = await clearCartDb(user!.id);
+
+      if (!reponse.success) {
+        toast.error("Erro ao apagar os itens do carrinho");
+        return;
+      }
+    }
+
+    clearCart(); //zustand
+  }
 
   return (
     <Sheet>
@@ -66,7 +86,7 @@ export function CartDrawer({ children }: { children: React.ReactNode }) {
           {quantityItemsCart > 0 && (
             <div className="w-full flex justify-end">
               <button
-                onClick={clearCart}
+                onClick={() => clearCartLocalAndDb()}
                 className="flex gap-1 justify-center items-center bg-red-400 hover:opacity-85 text-white rounded-lg p-2 cursor-pointer"
               >
                 <FaTrash size={16} color="#fff" />

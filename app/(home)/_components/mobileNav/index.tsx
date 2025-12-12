@@ -11,6 +11,7 @@ import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/app/store/cartStore";
+import { useAuth } from "@/app/contexts/AuthCont";
 
 interface ICategorieData {
   id: string;
@@ -22,8 +23,11 @@ export function MobileNav() {
   //zustand
   const quantityItemsCart = useCartStore((state) => state.cart.length);
 
+  //authContext
+  const { session, logout } = useAuth();
+
   //states
-  const [session, setSession] = useState<boolean | null>(null);
+
   const [isOpen, setIsOpen] = useState(false);
   const [categories, setCategories] = useState<ICategorieData[]>([]);
   const [showDiv, setShowDiv] = useState(false);
@@ -45,32 +49,8 @@ export function MobileNav() {
     getCategories();
   }, []);
 
-  useEffect(() => {
-    async function getUserSession() {
-      try {
-        const { data } = await await authClient.getSession();
-        if (!data?.session) {
-          setSession(false);
-        } else {
-          setSession(true);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getUserSession();
-  }, []);
-
   async function logOut() {
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          setSession(false);
-          router.replace("/");
-          toast.success("Sessão encerrada. Volte sempre que quiser!");
-        },
-      },
-    });
+    logout();
     setShowDiv(false);
   }
 

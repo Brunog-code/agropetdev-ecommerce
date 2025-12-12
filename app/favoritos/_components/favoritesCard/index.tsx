@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Heart, ShoppingCart } from "lucide-react";
 
-import { removeFavorite } from "@/app/(home)/_components/productCard/actions/removeFavorite";
+import { removeFavorite } from "@/app/(home)/_components/productCard/actions/favorite/removeFavorite";
 import { useAuth } from "@/app/contexts/AuthCont";
 import toast from "react-hot-toast";
 
@@ -24,12 +24,11 @@ interface IFavoritesCardProps {
 }
 
 export const FavoritesCard = ({ product }: IFavoritesCardProps) => {
-
   //context
   const { user } = useAuth();
 
   //router
-  const router = useRouter()
+  const router = useRouter();
 
   async function handleDeleteFavorite() {
     const dataDelete = {
@@ -41,8 +40,7 @@ export const FavoritesCard = ({ product }: IFavoritesCardProps) => {
 
     if (responseRemove.success) {
       toast.success("Item removido dos favoritos");
-      router.refresh()
-
+      router.refresh();
     } else {
       toast.error("Falha ao remover o item");
     }

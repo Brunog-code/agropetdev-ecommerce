@@ -11,12 +11,13 @@ import { useAuth } from "@/app/contexts/AuthCont";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-import { addFavorite } from "./actions/addFavorite";
-import { removeFavorite } from "./actions/removeFavorite";
-import { getUserFavorites } from "./actions/getUserFavorites";
+import { addFavorite } from "./actions/favorite/addFavorite";
+import { removeFavorite } from "./actions/favorite/removeFavorite";
+import { getUserFavorites } from "./actions/favorite/getUserFavorites";
 import { useCartStore } from "@/app/store/cartStore";
 import { CartDrawer } from "../ui/cart/drawer-cart";
 import { SheetTrigger } from "@/components/ui/sheet";
+import { updateItemQuantity } from "./actions/cart/addItemCart";
 
 interface IProductCardProps {
   prod: IFullProduct;
@@ -98,20 +99,30 @@ export const ProductCard = ({ prod }: IProductCardProps) => {
     }
   }
 
-  function handleAddToCart() {
-    //salva sempre no Zustand (persist salva no localStorage)
+  async function handleAddToCart() {
+    //Usuário logado → alem de salvar no localStorage, chamar API para salvar no DB (sincronizar ambos)
+    if (session) {
+      //salvar no banco e sincronziar ambos
+      const dataCart = {
+        cartProduct: prod.product,
+        userId: user!.id,
+      };
+
+      const result = await updateItemQuantity(dataCart);
+
+      if(!result?.success){
+        toast.error('Erro ao adicionar ao carrinho')
+        return;
+      }
+    }
+
+    //salva no Zustand (persist salva no localStorage) se der certo o db
     const productCart = {
       ...prod.product,
       quantity: 1,
     };
     addToCart(productCart);
     toast.success("Adicionado ao carrinho!");
-
-    //abrir drawer
-
-    //Usuário logado → alem de salvar no localStorage, chamar API para salvar no DB (sincronizar ambos)
-    if (session) {
-    }
   }
 
   return (

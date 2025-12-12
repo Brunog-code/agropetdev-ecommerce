@@ -53,7 +53,8 @@ export function LoginForm() {
         },
         onSuccess: (ctx) => {
           //quando acabar
-          console.log("Logado");
+          //sincronizar carrinho localStorage/db
+          
           router.replace("/");
         },
         onError: (ctx) => {

@@ -26,6 +26,7 @@ model User {
   sessions  Session[]
   accounts  Account[]
   favorites Favorite[]
+  Carts     Cart[]
 
   @@unique([email])
   @@map("user")
@@ -146,6 +147,9 @@ model Favorite {
 
 model Cart {
   id String @id @default(uuid())
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
 
   itemsCart ItemCart[]
 }
