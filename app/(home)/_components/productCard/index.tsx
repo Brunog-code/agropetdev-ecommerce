@@ -100,29 +100,33 @@ export const ProductCard = ({ prod }: IProductCardProps) => {
   }
 
   async function handleAddToCart() {
-    //Usuário logado → alem de salvar no localStorage, chamar API para salvar no DB (sincronizar ambos)
-    if (session) {
-      //salvar no banco e sincronziar ambos
-      const dataCart = {
-        cartProduct: prod.product,
-        userId: user!.id,
-      };
+    try {
+      //Usuário logado → alem de salvar no localStorage, chamar API para salvar no DB (sincronizar ambos)
+      if (session) {
+        //salvar no banco
+        const dataCart = {
+          cartProduct: prod.product,
+          userId: user!.id,
+        };
 
-      const result = await updateItemQuantity(dataCart);
+        const result = await updateItemQuantity(dataCart);
 
-      if(!result?.success){
-        toast.error('Erro ao adicionar ao carrinho')
-        return;
+        if (!result?.success) {
+          toast.error("Erro ao adicionar ao carrinho");
+          return;
+        }
       }
-    }
 
-    //salva no Zustand (persist salva no localStorage) se der certo o db
-    const productCart = {
-      ...prod.product,
-      quantity: 1,
-    };
-    addToCart(productCart);
-    toast.success("Adicionado ao carrinho!");
+      //salva no Zustand (persist salva no localStorage) se der certo o db
+      const productCart = {
+        ...prod.product,
+        quantity: 1,
+      };
+      addToCart(productCart);
+      toast.success("Adicionado ao carrinho!");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (

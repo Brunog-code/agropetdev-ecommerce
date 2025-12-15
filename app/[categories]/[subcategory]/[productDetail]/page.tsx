@@ -10,10 +10,13 @@ export default async function Product({ params }: IProductProps) {
   const resolveParams = await params;
 
   return (
-    <>
-      <div>{resolveParams.categories}</div>
-      <div>{resolveParams.subcategory}</div>
-      <div>{resolveParams.productDetail}</div>
-    </>
+    <section className="w-full flex justify-around">
+        <article className="">
+      img
+        </article>
+        <article className="">
+          details
+        </article>
+    </section>
   );
 }

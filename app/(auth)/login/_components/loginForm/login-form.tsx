@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -18,6 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { authClient } from "@/lib/auth-client";
+import { useLoginCartSync } from "@/app/utils/cart/handleLogin";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Email inválido" }),
@@ -29,8 +29,8 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function LoginForm() {
+  const { handleLoginSyncLocalDb } = useLoginCartSync();
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -51,11 +51,10 @@ export function LoginForm() {
         onRequest: (ctx) => {
           //enquanto esta processando (pode ativar loading, qualquer coisa)
         },
-        onSuccess: (ctx) => {
+        onSuccess: async (ctx) => {
           //quando acabar
           //sincronizar carrinho localStorage/db
-          
-          router.replace("/");
+          await handleLoginSyncLocalDb(ctx.data.user.id);
         },
         onError: (ctx) => {
           //caso ocorra algum erro(falhe requsicao, nao conseguiu conectar com db)

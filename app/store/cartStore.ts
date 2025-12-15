@@ -20,6 +20,7 @@ interface ICartStore {
   updateQty: (type: "increment" | "decrement", id: string) => void;
   getTotalCart: () => number;
   clearCart: () => void;
+  mergeWithServer: (serveritens: CartItem[]) => void;
 }
 
 export const useCartStore = create(
@@ -44,6 +45,25 @@ export const useCartStore = create(
         } else {
           set({ cart: [...get().cart, { ...product }] });
         }
+      },
+      mergeWithServer: (serverItems) => {
+        set(() => {
+          const localItems = get().cart;
+          const merged: CartItem[] = [...serverItems]; //começa com os itens do server
+
+          localItems.forEach((localItem) => {
+            //procura se tem algum item igual em ambos (db e local)
+            const serverMatch = merged.find(
+              (serverItem) => serverItem.id === localItem.id
+            );
+            if (serverMatch) { //se tiver, esse item vai ser adicionado a qtde do local
+              serverMatch.quantity = Math.max(serverMatch.quantity, localItem.quantity)
+            } else {
+              merged.push(localItem); //se nao só add o item
+            }
+          });
+          return { cart: merged };
+        });
       },
       removeFromCart: (id) => {
         set({ cart: get().cart.filter((item) => item.id != id) });

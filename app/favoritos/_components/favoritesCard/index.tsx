@@ -9,6 +9,11 @@ import toast from "react-hot-toast";
 
 import { useRouter } from "next/navigation";
 
+import { updateItemQuantity } from "@/app/(home)/_components/productCard/actions/cart/addItemCart";
+import { useCartStore } from "@/app/store/cartStore";
+import { CartDrawer } from "@/app/(home)/_components/ui/cart/drawer-cart";
+import { SheetTrigger } from "@/components/ui/sheet";
+
 interface IProductData {
   id: string;
   description: string;
@@ -17,6 +22,7 @@ interface IProductData {
   name: string;
   slug: string;
   stock: number;
+  subcategoryId?: string;
 }
 
 interface IFavoritesCardProps {
@@ -26,6 +32,9 @@ interface IFavoritesCardProps {
 export const FavoritesCard = ({ product }: IFavoritesCardProps) => {
   //context
   const { user } = useAuth();
+
+  //store
+  const addToCart = useCartStore((state) => state.addToCart);
 
   //router
   const router = useRouter();
@@ -43,6 +52,33 @@ export const FavoritesCard = ({ product }: IFavoritesCardProps) => {
       router.refresh();
     } else {
       toast.error("Falha ao remover o item");
+    }
+  }
+
+  async function handleAddToCart() {
+    try {
+      //salvar no db
+      const dataCart = {
+        cartProduct: product,
+        userId: user!.id,
+      };
+
+      const result = await updateItemQuantity(dataCart);
+
+      if (!result?.success) {
+        toast.error("Erro ao adicionar ao carrinho");
+        return;
+      }
+
+      //salvar no zustand
+      const productCart = {
+        ...product,
+        quantity: 1,
+      };
+      addToCart(productCart);
+      toast.success("Adicionado ao carrinho!");
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -65,10 +101,17 @@ export const FavoritesCard = ({ product }: IFavoritesCardProps) => {
               currency: "BRL",
             })}
           </p>
-          <button className="bg-green-600 text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center">
+          <CartDrawer>
+            <SheetTrigger asChild>
+          <button
+            onClick={handleAddToCart}
+            className="bg-green-600 text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center"
+          >
             Comprar
             <ShoppingCart size={20} color="#fff" />
           </button>
+          </SheetTrigger>
+          </CartDrawer>
         </div>
       </div>
 
