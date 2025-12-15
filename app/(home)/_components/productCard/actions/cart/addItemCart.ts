@@ -26,9 +26,11 @@ export async function updateItemQuantity({
 }: IAddItemCartProps) {
   //adicionar no db
   try {
-    // 1️ - Buscar se o usuário já tem um carrinho
-    let cart = await prisma.cart.findUnique({
-      where: {
+    // 1️ - Buscar se o usuário já tem um carrinho, se não existir cria um
+    const cart = await prisma.cart.upsert({
+      where: { userId },
+      update: {},
+      create: {
         userId,
       },
       include: {
@@ -36,19 +38,7 @@ export async function updateItemQuantity({
       },
     });
 
-    // 2️ - Se não existir carrinho, criar um
-    if (!cart) {
-      cart = await prisma.cart.create({
-        data: {
-          userId,
-        },
-        include: {
-          itemsCart: true,
-        },
-      });
-    }
-
-    // 3️- Verificar se o produto já existe no carrinho
+    // 2- Verificar se o produto já existe no carrinho
     const existingItem = await prisma.itemCart.findFirst({
       where: {
         cartId: cart.id,
@@ -56,7 +46,7 @@ export async function updateItemQuantity({
       },
     });
 
-    // 4️ - Produto já existe → apenas aumenta a quantidade
+    // 3 - Produto já existe → apenas aumenta a quantidade
     if (existingItem) {
       if (type == "decrement") {
         await prisma.itemCart.update({
@@ -78,7 +68,7 @@ export async function updateItemQuantity({
         });
       }
     } else {
-      // 5️ - Produto não existe → cria item no carrinho
+      // 4 - Produto não existe → cria item no carrinho
       await prisma.itemCart.create({
         data: {
           cartId: cart.id,
