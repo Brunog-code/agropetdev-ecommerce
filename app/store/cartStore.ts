@@ -13,6 +13,8 @@ export type CartItem = {
   quantity: number;
 };
 
+type TShippingMethod = "PAC" | "SEDEX" | null;
+
 interface ICartStore {
   cart: CartItem[];
   addToCart: (product: CartItem) => void;
@@ -21,12 +23,22 @@ interface ICartStore {
   getTotalCart: () => number;
   clearCart: () => void;
   mergeWithServer: (serveritens: CartItem[]) => void;
+
+  shippingMethod: TShippingMethod;
+  shippingValue: number;
+  setShipping: (method: TShippingMethod, value: number) => void;
+  clearShipping: () => void;
+  getTotalCartWithShipping: () => number;
 }
 
-export const useCartStore = create(
-  persist<ICartStore>(
+export const useCartStore = create<ICartStore>()(
+  persist(
     (set, get) => ({
+      //states
       cart: [],
+      shippingMethod: null,
+      shippingValue: 0,
+      //actions
       addToCart: (product) => {
         //verificar se o produto existe
         const existingProduct = get().cart.find(
@@ -56,8 +68,12 @@ export const useCartStore = create(
             const serverMatch = merged.find(
               (serverItem) => serverItem.id === localItem.id
             );
-            if (serverMatch) { //se tiver, esse item vai ser adicionado a qtde do local
-              serverMatch.quantity = Math.max(serverMatch.quantity, localItem.quantity)
+            if (serverMatch) {
+              //se tiver, esse item vai ser adicionado a qtde do local
+              serverMatch.quantity = Math.max(
+                serverMatch.quantity,
+                localItem.quantity
+              );
             } else {
               merged.push(localItem); //se nao só add o item
             }
@@ -75,7 +91,11 @@ export const useCartStore = create(
         if (!item) return;
 
         if (item.quantity == 1 && type === "decrement") {
-          get().removeFromCart(id);
+          set({
+            cart: get().cart.filter((item) => item.id != id),
+            shippingMethod: null,
+            shippingValue: 0,
+          });
         } else {
           set({
             cart: get().cart.map((item) =>
@@ -95,11 +115,21 @@ export const useCartStore = create(
       getTotalCart: () =>
         get().cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
       clearCart: () => {
-        set({ cart: [] });
+        set({ cart: [], shippingMethod: null, shippingValue: 0 });
       },
+      setShipping: (method, value) =>
+        set({ shippingMethod: method, shippingValue: value }),
+      clearShipping: () =>
+        set({
+          shippingMethod: null,
+          shippingValue: 0,
+        }),
+      getTotalCartWithShipping: () =>
+        get().getTotalCart() + get().shippingValue,
     }),
     {
       name: "cart-storage",
+      partialize: (state) => ({ cart: state.cart }), // ← AQUI: só persiste o cart
     }
   )
 );

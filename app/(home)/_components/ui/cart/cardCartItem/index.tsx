@@ -1,3 +1,5 @@
+"use client";
+
 import { CartItem } from "@/app/store/cartStore";
 import Image from "next/image";
 import { useCartStore } from "@/app/store/cartStore";

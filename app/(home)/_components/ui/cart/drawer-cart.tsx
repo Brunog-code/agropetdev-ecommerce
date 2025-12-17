@@ -5,6 +5,7 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
+  SheetTrigger,
 } from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
 import { useCartStore } from "@/app/store/cartStore";
@@ -14,6 +15,7 @@ import { FaTrash } from "react-icons/fa";
 import { useAuth } from "@/app/contexts/AuthCont";
 import { clearCartDb } from "./actions/clearCartDb";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export function CartDrawer({ children }: { children: React.ReactNode }) {
   //cart
@@ -27,6 +29,7 @@ export function CartDrawer({ children }: { children: React.ReactNode }) {
 
   //state
   const [isMobile, setIsmobile] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   //verifica se é mobile
   useEffect(() => {
@@ -60,9 +63,9 @@ export function CartDrawer({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       {/* Trigger */}
-      {children}
+      <SheetTrigger asChild>{children}</SheetTrigger>
 
       <SheetContent
         side="right"
@@ -110,9 +113,14 @@ export function CartDrawer({ children }: { children: React.ReactNode }) {
                 </div>
               </div>
 
-              <Button className="bg-green-600 text-white rounded-lg transition-all duration-200 hover:opacity-85 hover:bg-green-600 cursor-pointer w-full flex gap-2 p-2 justify-center mx-auto">
-                FINALIZAR PEDIDO
-              </Button>
+              <Link href="/checkout/cart">
+                <Button
+                  onClick={() => setIsOpen(false)}
+                  className="bg-green-600 text-white rounded-lg transition-all duration-200 hover:opacity-85 hover:bg-green-600 cursor-pointer w-full flex gap-2 p-2 justify-center mx-auto"
+                >
+                  FINALIZAR PEDIDO
+                </Button>
+              </Link>
             </div>
           )}
         </div>

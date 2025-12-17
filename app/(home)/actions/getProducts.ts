@@ -11,17 +11,13 @@ export interface IFullProduct {
     price: number;
     stock: number;
     image: string;
-    subcategoryId?: string;
+    subcategoryId: string;
   };
-  subcategory?: {
-    id: string;
+  subcategory: {
     name: string;
     slug: string;
-    img: string | null;
   };
-  category?: {
-    id: string;
-    name: string;
+  category: {
     slug: string;
   };
 }
@@ -68,15 +64,11 @@ export async function getProducts() {
         for (const product of selectedProducts) {
           finalProducts.push({
             category: {
-              id: category.id,
-              name: category.name,
               slug: category.slug,
             },
             subcategory: {
-              id: sub.id,
               name: sub.name,
               slug: sub.slug,
-              img: sub.img,
             },
             product: {
               ...product,

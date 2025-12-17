@@ -140,11 +140,13 @@ export const ProductCard = ({ prod }: IProductCardProps) => {
             src={prod.product.image}
             width={70}
             height={70}
-            alt="foto racao"
+            alt={prod.product.name}
           />
         </Link>
 
-        <p className="font-medium text-lg mt-1">{prod.product.name}</p>
+        <p className="text-sm font-bold px-2 text-black text-ellipsis truncate whitespace-nowrap overflow-hidden">
+          {prod.product.name}
+        </p>
       </div>
 
       <div className="flex flex-col gap-4 items-center mt-4 w-full">

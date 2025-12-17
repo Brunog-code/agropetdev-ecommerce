@@ -9,10 +9,12 @@ import { SheetTrigger } from "@/components/ui/sheet";
 import { PromotionsCarousel } from "../lib/swiper/promoction";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useAuth } from "@/app/contexts/AuthCont";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/app/store/cartStore";
+import { BsSearch } from "react-icons/bs";
+import toast from "react-hot-toast";
 
 interface ICategorieData {
   id: string;
@@ -26,6 +28,7 @@ export function Header() {
 
   //state
   const [categories, setCategories] = useState<ICategorieData[]>([]);
+  const [inputSearch, setInputSearch] = useState("");
 
   //router
   const router = useRouter();
@@ -56,6 +59,16 @@ export function Header() {
     } else {
       router.push("/favoritos");
     }
+  }
+  function handleSearch(e: FormEvent) {
+    e.preventDefault();
+
+    if (inputSearch === "") {
+      toast("Digite algo para buscar");
+      return;
+    }
+
+    router.push(`/produto/procurar/${inputSearch}`);
   }
 
   return (
@@ -112,11 +125,22 @@ export function Header() {
         </div>
 
         <div className="flex gap-6 items-center w-full md:w-1/2 mt-4">
-          <input
-            type="text"
-            className="bg-gray-200 border border-gray-100 rounded-lg w-full p-2"
-            placeholder=" Digite sua busca. (ex: ração)"
-          />
+          <form
+            onSubmit={handleSearch}
+            className="w-full bg-gray-200 flex items-center justify-between p-2 rounded-lg"
+          >
+            <input
+              type="text"
+              className="bg-gray-200 border border-gray-100 rounded-lg w-full p-1"
+              placeholder=" Digite sua busca. (ex: ração)"
+              value={inputSearch}
+              onChange={(e) => setInputSearch(e.target.value)}
+            />
+            <button type="submit" className="cursor-pointer">
+              {" "}
+              <BsSearch size={18} color="#000" />
+            </button>
+          </form>
 
           <div className="hidden md:flex gap-6 text-white">
             <CartDrawer>
