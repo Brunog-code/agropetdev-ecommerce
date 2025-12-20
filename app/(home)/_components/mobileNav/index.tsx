@@ -5,15 +5,13 @@ import { Heart, Home, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 
 import { useAuth } from "@/app/contexts/AuthCont";
 import { useCartStore } from "@/app/store/cartStore";
 import { SheetTrigger } from "@/components/ui/sheet";
-import { authClient } from "@/lib/auth-client";
 
 import { CartDrawer } from "../ui/cart/drawer-cart";
-import { FilterDrawer } from "../ui/drawer-filters";
+import { FilterDrawer } from "../ui/menu/drawer-filters";
 
 interface ICategorieData {
   id: string;
@@ -29,7 +27,6 @@ export function MobileNav() {
   const { session, logout } = useAuth();
 
   //states
-
   const [isOpen, setIsOpen] = useState(false);
   const [categories, setCategories] = useState<ICategorieData[]>([]);
   const [showDiv, setShowDiv] = useState(false);

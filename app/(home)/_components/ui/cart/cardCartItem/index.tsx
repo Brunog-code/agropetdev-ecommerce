@@ -1,12 +1,15 @@
 "use client";
 
-import { CartItem } from "@/app/store/cartStore";
+import { MinusIcon, PlusIcon } from "lucide-react";
 import Image from "next/image";
-import { useCartStore } from "@/app/store/cartStore";
-import { updateItemQuantity } from "../../../productCard/actions/cart/addItemCart";
-import { useAuth } from "@/app/contexts/AuthCont";
-import { removeItemFromCart } from "./actions/removeItemFromCart";
 import toast from "react-hot-toast";
+
+import { useAuth } from "@/app/contexts/AuthCont";
+import { CartItem } from "@/app/store/cartStore";
+import { useCartStore } from "@/app/store/cartStore";
+
+import { updateItemQuantity } from "../../../productCard/actions/cart/addItemCart";
+import { removeItemFromCart } from "./actions/removeItemFromCart";
 
 interface ICardCartItemProps {
   itemCart: CartItem;
@@ -95,14 +98,14 @@ export const CardCartItem = ({ itemCart }: ICardCartItemProps) => {
               className="text-xl font-semibold text-gray-600 cursor-pointer"
               onClick={() => handleUpdateQuatityCart("decrement")}
             >
-              -
+              <MinusIcon />
             </button>
             <span className="text-gray-600">{itemCart.quantity}</span>
             <button
               className="text-xl font-semibold text-gray-600  cursor-pointer"
               onClick={() => handleUpdateQuatityCart("increment")}
             >
-              +
+              <PlusIcon />
             </button>
           </div>
 

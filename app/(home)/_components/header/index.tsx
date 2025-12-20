@@ -1,6 +1,6 @@
 "use client";
 
-import { Heart,ShoppingCart, User } from "lucide-react";
+import { Heart, ShoppingCart, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -36,7 +36,9 @@ export function Header() {
   const router = useRouter();
 
   //context
-  const { session, loading, logout } = useAuth();
+  const { session, loading, logout, user } = useAuth();
+
+  const firstname = user?.name?.split(" ")[0];
 
   //busca categorias para nav
   useEffect(() => {
@@ -62,7 +64,7 @@ export function Header() {
       router.push("/favoritos");
     }
   }
-  
+
   function handleSearch(e: FormEvent) {
     e.preventDefault();
 

@@ -1,12 +1,5 @@
 "use client";
 
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
-
 import { ChevronRight } from "lucide-react";
 import { Dog } from "lucide-react";
 import { Cat } from "lucide-react";
@@ -14,6 +7,13 @@ import { Bird } from "lucide-react";
 import { Waves } from "lucide-react";
 import { Leaf } from "lucide-react";
 import Link from "next/link";
+
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 
 interface Categories {
   id: string;

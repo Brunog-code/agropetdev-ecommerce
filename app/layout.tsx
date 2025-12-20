@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
-import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "react-hot-toast";
-import LayoutWrapper from "./(home)/_components/wrapLayout";
 import "./style/nprogress.css";
-import TopProgress from "./(home)/_components/lib/nprogress";
 
+import type { Metadata } from "next";
+import { Inter,Poppins } from "next/font/google";
+import { Toaster } from "react-hot-toast";
+
+import TopProgress from "./(home)/_components/lib/nprogress";
+import LayoutWrapper from "./(home)/_components/wrapLayout";
 import { AuthProvider } from "./contexts/AuthCont";
 
 //titulos

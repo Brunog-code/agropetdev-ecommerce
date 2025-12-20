@@ -1,10 +1,11 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import React from "react";
+
+import { Footer } from "../footer";
 import { Header } from "../header";
 import { MobileNav } from "../mobileNav";
-import React from "react";
-import { Footer } from "../footer";
 
 // Rotas onde o Header GLOBAL deve ser escondido
 const AUTH_ROUTES = ["/login", "/cadastro", "/login-obrigatorio"];
