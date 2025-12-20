@@ -1,13 +1,15 @@
+import { Metadata } from "next";
+import Image from "next/image";
+import { notFound } from "next/navigation";
+
+import birdBanner from "@/app/assets/bird-categorypage-banner.png";
+import catBanner from "@/app/assets/cat-categorypage-banner.png";
+import dogBanner from "@/app/assets/dog-categorypage-banner.webp";
+import gardenBanner from "@/app/assets/garden-categorypage-banner.png";
+import poolBanner from "@/app/assets/pool-categorypage-banner.webp";
+
 import { CardSubcategory } from "./_components/CardSubcategory";
 import { getCategoriesAndSubcategories } from "./actions/getCategoriesAndSubcategories";
-
-import dogBanner from "@/app/assets/dog-categorypage-banner.webp";
-import catBanner from "@/app/assets/cat-categorypage-banner.png";
-import birdBanner from "@/app/assets/bird-categorypage-banner.png";
-import poolBanner from "@/app/assets/pool-categorypage-banner.webp";
-import gardenBanner from "@/app/assets/garden-categorypage-banner.png";
-
-import Image from "next/image";
 
 interface ICategoriasProps {
   params: {
@@ -15,13 +17,34 @@ interface ICategoriasProps {
   };
 }
 
+//metada dinamica
+export async function generateMetadata({
+  params,
+}: ICategoriasProps): Promise<Metadata> {
+  const { categories } = await params;
+
+  const label = categories.charAt(0).toUpperCase() + categories.slice(1);
+
+  return {
+    title: `AgropetDev - ${label}`,
+    description: `Produtos da categoria ${label}`,
+  };
+}
+
 export default async function Categories({ params }: ICategoriasProps) {
   const resolveParams = await params;
 
   //buscar slug no banco
-  const categories = await getCategoriesAndSubcategories(resolveParams.categories);
-  const subcategories = categories[0].subcategories;
+  const categories = await getCategoriesAndSubcategories(
+    resolveParams.categories
+  );
 
+  //usuario digitou na url categoria que nao existe
+  if (categories.length < 1) {
+    return notFound();
+  }
+
+  const subcategories = categories[0].subcategories;
 
   return (
     <section className="w-full flex flex-col gap-5 items-center mt-4">

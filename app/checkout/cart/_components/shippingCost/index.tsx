@@ -1,14 +1,15 @@
 "use client";
 
-import { useCartStore } from "@/app/store/cartStore";
-import { formatBRL } from "@/app/utils/formatBRL";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaExternalLinkAlt } from "react-icons/fa";
-import { Loader2 } from "lucide-react";
+
+import { useCartStore } from "@/app/store/cartStore";
+import { formatBRL } from "@/app/utils/helpers/formatBRL";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 type ShippingMethod = {
   PAC: number;

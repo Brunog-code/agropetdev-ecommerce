@@ -1,20 +1,22 @@
 "use client";
 
+import { Heart,ShoppingCart, User } from "lucide-react";
 import Image from "next/image";
-import logoImg from "@/app/assets/logo.png";
 import Link from "next/link";
-import { User, ShoppingCart, Heart } from "lucide-react";
-import { CartDrawer } from "../ui/cart/drawer-cart";
-import { SheetTrigger } from "@/components/ui/sheet";
-import { PromotionsCarousel } from "../lib/swiper/promoction";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { FormEvent, useEffect, useState } from "react";
-import { useAuth } from "@/app/contexts/AuthCont";
 import { useRouter } from "next/navigation";
-import { useCartStore } from "@/app/store/cartStore";
-import { BsSearch } from "react-icons/bs";
+import { FormEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { BsSearch } from "react-icons/bs";
+
+import logoImg from "@/app/assets/logo.png";
+import { useAuth } from "@/app/contexts/AuthCont";
+import { useCartStore } from "@/app/store/cartStore";
+import { buttonVariants } from "@/components/ui/button";
+import { SheetTrigger } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+
+import { PromotionsCarousel } from "../lib/swiper/promoction";
+import { CartDrawer } from "../ui/cart/drawer-cart";
 
 interface ICategorieData {
   id: string;
@@ -60,6 +62,7 @@ export function Header() {
       router.push("/favoritos");
     }
   }
+  
   function handleSearch(e: FormEvent) {
     e.preventDefault();
 
@@ -131,7 +134,7 @@ export function Header() {
           >
             <input
               type="text"
-              className="bg-gray-200 border border-gray-100 rounded-lg w-full p-1"
+              className="bg-gray-200 border-gray-100 rounded-lg w-full p-1"
               placeholder=" Digite sua busca. (ex: ração)"
               value={inputSearch}
               onChange={(e) => setInputSearch(e.target.value)}
@@ -144,7 +147,7 @@ export function Header() {
 
           <div className="hidden md:flex gap-6 text-white">
             <CartDrawer>
-              <SheetTrigger>
+              <SheetTrigger asChild>
                 <div className="relative">
                   <ShoppingCart className="w-6 h-6 cursor-pointer hover:fill-white transition" />
                   {quantityItemsCart > 0 && (

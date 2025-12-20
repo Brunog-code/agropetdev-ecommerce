@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
+import { z } from "zod";
+
+import { useLoginCartSync } from "@/app/utils/cart/handleLogin";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
@@ -16,8 +18,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
-import { useLoginCartSync } from "@/app/utils/cart/handleLogin";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Email inválido" }),
@@ -58,7 +60,9 @@ export function LoginForm() {
         },
         onError: (ctx) => {
           //caso ocorra algum erro(falhe requsicao, nao conseguiu conectar com db)
+
           console.log("erro ao logar");
+          toast.error("Erro a logar, favor verificar credenciais");
           console.log(ctx.error.code);
         },
       }

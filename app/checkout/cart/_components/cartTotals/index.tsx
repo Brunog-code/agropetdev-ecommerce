@@ -1,7 +1,7 @@
 "use client";
 
 import { useCartStore } from "@/app/store/cartStore";
-import { formatBRL } from "@/app/utils/formatBRL";
+import { formatBRL } from "@/app/utils/helpers/formatBRL";
 import { Button } from "@/components/ui/button";
 
 export const CartTotals = () => {
@@ -18,7 +18,9 @@ export const CartTotals = () => {
 
   return (
     <aside className="bg-white p-4 rounded-lg flex-1 h-fit">
-      <h1 className="font-semibold border-b-2 p-2 text-center">RESUMO DA COMPRA</h1>
+      <h1 className="font-semibold border-b-2 p-2 text-center">
+        RESUMO DA COMPRA
+      </h1>
       <div className="mt-4 space-y-2">
         <div className="flex justify-between px-20">
           <span className="font-medium">Subtotal</span>

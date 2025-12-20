@@ -25,6 +25,7 @@ export const inter = Inter({
 export const metadata: Metadata = {
   title: "AgropetDev - agropecuária",
   description: "Agropecuária online",
+  keywords: ["agropecuaria", "pets", "agro", "piscina"],
 };
 
 export default function RootLayout({

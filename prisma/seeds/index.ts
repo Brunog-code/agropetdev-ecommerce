@@ -1,5 +1,8 @@
 //category, products
 import "dotenv/config";
+
+import { normalizeText } from "@/app/utils/helpers/normalizeText";
+
 import { prisma } from "../../lib/db";
 
 // Estrutura de um Produto (dentro do array 'products')
@@ -1071,6 +1074,7 @@ async function mainSeeds() {
             products: {
               create: sub.products.create.map((product) => ({
                 name: product.name,
+                nameNormalized: normalizeText(product.name),
                 slug: product.slug,
                 description: product.description,
                 price: product.price,

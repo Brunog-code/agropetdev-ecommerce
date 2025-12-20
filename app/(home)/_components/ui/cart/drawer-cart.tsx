@@ -1,5 +1,13 @@
 "use client";
 
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { FaTrash } from "react-icons/fa";
+
+import { useAuth } from "@/app/contexts/AuthCont";
+import { useCartStore } from "@/app/store/cartStore";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -7,15 +15,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useEffect, useState } from "react";
-import { useCartStore } from "@/app/store/cartStore";
-import { CardCartItem } from "./cardCartItem";
-import { Button } from "@/components/ui/button";
-import { FaTrash } from "react-icons/fa";
-import { useAuth } from "@/app/contexts/AuthCont";
+
 import { clearCartDb } from "./actions/clearCartDb";
-import toast from "react-hot-toast";
-import Link from "next/link";
+import { CardCartItem } from "./cardCartItem";
 
 export function CartDrawer({ children }: { children: React.ReactNode }) {
   //cart

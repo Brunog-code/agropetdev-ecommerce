@@ -1,5 +1,8 @@
-import { getProducts } from "./actions/getProducts";
+import { notFound } from "next/navigation";
+
 import { ProductCard } from "@/app/(home)/_components/productCard";
+
+import { getProducts } from "./actions/getProducts";
 
 interface ISubCategoriasProps {
   params: {
@@ -19,7 +22,11 @@ export default async function SubCategorias({ params }: ISubCategoriasProps) {
     slugSubcategory: subcategory,
   });
 
-  //procurar o name através do slug
+if(dataproducts.length < 1){
+  return notFound()
+}
+
+  //procurar o name através do slug e depois pega o nome
   const foundSubcategoryName = dataproducts.find(
     (p) => p.subcategory?.slug === subcategory
   );

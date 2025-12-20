@@ -1,7 +1,7 @@
-import { BannerSwiper } from "./_components/lib/swiper/banner";
 import { FiltersCategory } from "./_components/filtersCategory";
-import { ProductCard } from "./_components/productCard";
+import { BannerSwiper } from "./_components/lib/swiper/banner";
 import { PartnersSwiper } from "./_components/lib/swiper/partners";
+import { ProductCard } from "./_components/productCard";
 import { getProducts } from "./actions/getProducts";
 
 export default async function Home() {

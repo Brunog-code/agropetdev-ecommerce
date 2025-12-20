@@ -1,8 +1,9 @@
-import { notFound } from "next/navigation";
-import { getProductDetail } from "./actions/getProductDetail";
-import { HiOutlineHome } from "react-icons/hi";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { HiOutlineHome } from "react-icons/hi";
+
 import { CardProductDetail } from "./_components/cardProductDetail";
+import { getProductDetail } from "./actions/getProductDetail";
 
 
 interface IProductProps {
@@ -19,7 +20,6 @@ export default async function Product({ params }: IProductProps) {
   const slugSubCategory = resolveParams.subcategory;
   const slugProduct = resolveParams.productDetail;
 
- 
   //chamar action
   const productData = await getProductDetail(slugProduct);
 

@@ -2,31 +2,18 @@
 
 import Image from "next/image";
 import { Heart, ShoppingCart } from "lucide-react";
-
 import { removeFavorite } from "@/app/(home)/_components/productCard/actions/favorite/removeFavorite";
 import { useAuth } from "@/app/contexts/AuthCont";
 import toast from "react-hot-toast";
-
 import { useRouter } from "next/navigation";
-
 import { updateItemQuantity } from "@/app/(home)/_components/productCard/actions/cart/addItemCart";
 import { useCartStore } from "@/app/store/cartStore";
 import { CartDrawer } from "@/app/(home)/_components/ui/cart/drawer-cart";
 import { SheetTrigger } from "@/components/ui/sheet";
-
-interface IProductData {
-  id: string;
-  description: string;
-  image: string;
-  price: number;
-  name: string;
-  slug: string;
-  stock: number;
-  subcategoryId?: string;
-}
+import { IProduct } from "@/app/utils/types/product";
 
 interface IFavoritesCardProps {
-  product: IProductData;
+  product: IProduct;
 }
 
 export const FavoritesCard = ({ product }: IFavoritesCardProps) => {

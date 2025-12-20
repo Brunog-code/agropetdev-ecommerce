@@ -1,26 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/db";
-
-export interface IFullProduct {
-  product: {
-    id: string;
-    name: string;
-    slug: string;
-    description: string;
-    price: number;
-    stock: number;
-    image: string;
-    subcategoryId: string;
-  };
-  subcategory: {
-    name: string;
-    slug: string;
-  };
-  category: {
-    slug: string;
-  };
-}
+import { IFullProduct } from "@/app/utils/types/product";
 
 //embaralha
 function shuffle<T>(arr: T[]) {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import { RegisterForm } from "./_components/registerForm/register-form";
 
 export default function Login() {

@@ -1,6 +1,6 @@
 "use client";
 
-import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 import {
   createContext,
   ReactNode,
@@ -8,8 +8,9 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+
+import { authClient } from "@/lib/auth-client";
 
 type TUser = {
   id: string;

@@ -1,13 +1,15 @@
 import Image from "next/image";
-import gatoTitulo from "@/app/assets/gato-titulo.png";
-import cachorroTitulo from "@/app/assets/cachorro-titulo.png";
 import Link from "next/link";
+
+import cachorroTitulo from "@/app/assets/cachorro-titulo.png";
+import gatoTitulo from "@/app/assets/gato-titulo.png";
 
 import { getCategoriesAndSubResume } from "./actions/getCategoriesAndSubResume";
 
 export async function FiltersCategory() {
   //buscar no db (principais categorias e suas subscategorias)
   const categories = await getCategoriesAndSubResume();
+  console.log(categories)
 
   const categoryDog = categories.filter((cat) => cat.name === "Cachorros");
   const subcategoriesDog = categoryDog[0].subcategories;
@@ -15,14 +17,11 @@ export async function FiltersCategory() {
   const categoryCat = categories.filter((cat) => cat.name === "Gatos");
   const subcategoriesCat = categoryCat[0].subcategories;
 
-  if (!categories) {
-    return <p>FALLBACK ARRUMAR DEPOIS</p>;
-  }
-
   return (
     <section className="mt-6 w-full">
       {/* container cachorro e gato */}
       <div className="flex flex-col items-start gap-10 flex-wrap mt-6">
+
         {/* cachorro */}
         <div className="flex flex-col gap-1 w-full">
           {/* titulo cachorro */}
@@ -102,6 +101,7 @@ export async function FiltersCategory() {
             ))}
           </div>
         </div>
+
       </div>
     </section>
   );

@@ -1,17 +1,17 @@
 "use client";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, FreeMode } from "swiper/modules";
-
-import logoGolden from "@/app/assets/logo-partners/logo-golden.webp";
-import logoPremier from "@/app/assets/logo-partners/logo-premier.png";
-import logoMagnus from "@/app/assets/logo-partners/logo-magnus.png";
-import logoPedigree from "@/app/assets/logo-partners/logo-pedigree.webp";
-import logoGenco from "@/app/assets/logo-partners/logo-genco.png";
-import logoNexgard from "@/app/assets/logo-partners/logo-nexgard.png";
-
 import "swiper/css";
+
 import Image from "next/image";
+import { Autoplay, FreeMode } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import logoGenco from "@/app/assets/logo-partners/logo-genco.png";
+import logoGolden from "@/app/assets/logo-partners/logo-golden.webp";
+import logoMagnus from "@/app/assets/logo-partners/logo-magnus.png";
+import logoNexgard from "@/app/assets/logo-partners/logo-nexgard.png";
+import logoPedigree from "@/app/assets/logo-partners/logo-pedigree.webp";
+import logoPremier from "@/app/assets/logo-partners/logo-premier.png";
 
 export function PartnersSwiper() {
   const imgsPartnersBase = [

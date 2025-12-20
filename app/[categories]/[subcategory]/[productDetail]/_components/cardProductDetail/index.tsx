@@ -8,20 +8,9 @@ import { updateItemQuantity } from "@/app/(home)/_components/productCard/actions
 import toast from "react-hot-toast";
 import { CartDrawer } from "@/app/(home)/_components/ui/cart/drawer-cart";
 import { SheetTrigger } from "@/components/ui/sheet";
-
-interface IProductData {
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  slug: string;
-  stock: number;
-  subcategoryId: string;
-  price: number;
-}
-
+import { IProduct } from "@/app/utils/types/product";
 interface TProductDataProps {
-  productData: IProductData;
+  productData: IProduct;
 }
 
 export const CardProductDetail = ({ productData }: TProductDataProps) => {

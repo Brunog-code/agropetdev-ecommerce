@@ -22,7 +22,7 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  address   Address?
+  address   Address[]
   sessions  Session[]
   accounts  Account[]
   favorites Favorite[]
@@ -94,16 +94,19 @@ model Verification {
 }
 
 model Product {
-  id          String  @id @default(uuid())
-  name        String
-  description String
-  price       Decimal @db.Decimal(10, 2)
-  stock       Int
-  image       String
-  slug        String  @unique
+  id             String  @id @default(uuid())
+  name           String
+  nameNormalized String  @db.Text
+  description    String
+  price          Decimal @db.Decimal(10, 2)
+  stock          Int
+  image          String
+  slug           String  @unique
 
   subcategoryId String
   subcategory   Subcategory @relation(fields: [subcategoryId], references: [id])
+
+  @@index([nameNormalized])
 
   itemsCart  ItemCart[]
   itemsOrder ItemOrder[]

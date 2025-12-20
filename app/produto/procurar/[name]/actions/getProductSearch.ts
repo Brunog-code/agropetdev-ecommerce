@@ -1,12 +1,12 @@
+import { normalizeText } from "@/app/utils/helpers/normalizeText";
 import { prisma } from "@/lib/db";
 
 export const getProductSearch = async (name: string) => {
   try {
     const products = await prisma.product.findMany({
       where: {
-        name: {
-          contains: name,
-          mode: "insensitive",
+        nameNormalized: {
+          contains: normalizeText(name),
         },
       },
       include: {

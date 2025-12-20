@@ -2,36 +2,26 @@
 
 import { Heart, ShoppingCart } from "lucide-react";
 import Image from "next/image";
-
-import { IFullProduct } from "../../actions/getProducts";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-
-import { useAuth } from "@/app/contexts/AuthCont";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-import { addFavorite } from "./actions/favorite/addFavorite";
-import { removeFavorite } from "./actions/favorite/removeFavorite";
-import { getUserFavorites } from "./actions/favorite/getUserFavorites";
+import { useAuth } from "@/app/contexts/AuthCont";
 import { useCartStore } from "@/app/store/cartStore";
-import { CartDrawer } from "../ui/cart/drawer-cart";
+import { formatBRL } from "@/app/utils/helpers/formatBRL";
+import { IFullProduct } from "@/app/utils/types/product";
+import { IProduct } from "@/app/utils/types/product";
 import { SheetTrigger } from "@/components/ui/sheet";
+
+import { CartDrawer } from "../ui/cart/drawer-cart";
 import { updateItemQuantity } from "./actions/cart/addItemCart";
+import { addFavorite } from "./actions/favorite/addFavorite";
+import { getUserFavorites } from "./actions/favorite/getUserFavorites";
+import { removeFavorite } from "./actions/favorite/removeFavorite";
 
 interface IProductCardProps {
   prod: IFullProduct;
-}
-
-export interface IProductFavorite {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  price: number;
-  stock: number;
-  image: string;
-  subcategoryId?: string;
 }
 
 export const ProductCard = ({ prod }: IProductCardProps) => {
@@ -62,7 +52,7 @@ export const ProductCard = ({ prod }: IProductCardProps) => {
   }, [session, user, productId]);
 
   //add aos favoritos
-  async function handleAddFavorites(product: IProductFavorite) {
+  async function handleAddFavorites(product: IProduct) {
     if (!session) {
       //SE NÃO ESTIVER LOGADO
       //redireciona para uma page informando que precisa estar logado
@@ -131,7 +121,7 @@ export const ProductCard = ({ prod }: IProductCardProps) => {
 
   return (
     <div className="w-full shadow-md flex flex-col justify-between items-center bg-white rounded-lg p-2 border border-green-400">
-      <div className="flex flex-col justify-between flex-1">
+      <div className="flex flex-col justify-between flex-1 w-full">
         <Link
           href={`/${prod?.category?.slug}/${prod?.subcategory?.slug}/${prod.product.slug}`}
         >
@@ -144,7 +134,7 @@ export const ProductCard = ({ prod }: IProductCardProps) => {
           />
         </Link>
 
-        <p className="text-sm font-bold px-2 text-black text-ellipsis truncate whitespace-nowrap overflow-hidden">
+        <p className="text-sm font-bold px-2 text-black  truncate text-center">
           {prod.product.name}
         </p>
       </div>
@@ -157,12 +147,10 @@ export const ProductCard = ({ prod }: IProductCardProps) => {
         </small>
 
         <span className="font-bold text-2xl">
-          {prod.product.price.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-          })}
+          {formatBRL(prod.product.price)}
         </span>
 
+        {/* Botoes */}
         <div className="w-full flex flex-col gap-2">
           <CartDrawer>
             <SheetTrigger asChild>
@@ -175,6 +163,7 @@ export const ProductCard = ({ prod }: IProductCardProps) => {
               </button>
             </SheetTrigger>
           </CartDrawer>
+
           <button
             onClick={() => handleAddFavorites(prod.product)}
             className=" text-gray-500 rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-1 p-2 justify-center"
@@ -186,6 +175,7 @@ export const ProductCard = ({ prod }: IProductCardProps) => {
               }`}
             />
           </button>
+          
         </div>
       </div>
     </div>

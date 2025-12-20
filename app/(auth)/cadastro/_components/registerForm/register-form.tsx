@@ -1,14 +1,14 @@
 "use client";
 
-import toast from "react-hot-toast";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { z } from "zod";
+
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
@@ -17,7 +17,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
+
 import { saveAddress } from "../../actions";
 
 //schema zod
@@ -107,7 +109,7 @@ export function RegisterForm() {
 
   //cadastrar
   async function onSubmit(formData: RegisterFormValues) {
-    const { data, error } = await authClient.signUp.email(
+    await authClient.signUp.email(
       {
         name: formData.name,
         email: formData.email,
@@ -140,6 +142,9 @@ export function RegisterForm() {
         },
         onError: (ctx) => {
           //caso ocorra algum erro(falhe requsicao, nao conseguiu conectar com db)
+          if (ctx.error.code == "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL") {
+            toast.error("Email ja cadastrado");
+          }
           console.log("erro ao criar conta");
           console.log(ctx);
         },
