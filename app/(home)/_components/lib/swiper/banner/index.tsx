@@ -1,20 +1,22 @@
 "use client";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
-
-import banner2 from "@/public/banner2.jpeg";
-import banner3 from "@/public/banner3.png";
-import banner0 from "@/public/banner0.png";
-import banner1 from "@/public/banner1.png";
-
 import "swiper/css";
 import "swiper/css/pagination";
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Autoplay, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import banner0 from "@/public/banner0.webp";
+import banner1 from "@/public/banner1.webp";
+import banner2 from "@/public/banner2.webp";
+import banner3 from "@/public/banner3.webp";
+
+import { BannerSkeleton } from "./banner-skeleton";
 
 export function BannerSwiper() {
-  const [isMobile, setIsmobile] = useState(false);
+  const [isMobile, setIsmobile] = useState<boolean | null>(null);
 
   useEffect(() => {
     const checkScreen = () => {
@@ -31,6 +33,10 @@ export function BannerSwiper() {
 
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
+
+  if (isMobile == null) {
+    return <BannerSkeleton/>;
+  }
 
   return (
     <div className="w-full h-52 sm:h-72 md:h-96">
@@ -51,7 +57,9 @@ export function BannerSwiper() {
                 src={img}
                 alt={`banner ${idx + 1}`}
                 fill
-                className={`${isMobile ? 'object-contain' : 'object-cover'} rounded-xl`}
+                className={`${
+                  isMobile ? "object-contain" : "object-cover"
+                } rounded-xl`}
               />
             </div>
           </SwiperSlide>

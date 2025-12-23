@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { Heart, ShoppingCart } from "lucide-react";
-import { removeFavorite } from "@/app/(home)/_components/productCard/actions/favorite/removeFavorite";
+import { removeFavorite } from "@/app/(home)/_components/product-card/actions/favorite/removeFavorite";
 import { useAuth } from "@/app/contexts/AuthCont";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { updateItemQuantity } from "@/app/(home)/_components/productCard/actions/cart/addItemCart";
+import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/cart/addItemCart";
 import { useCartStore } from "@/app/store/cartStore";
 import { CartDrawer } from "@/app/(home)/_components/ui/cart/drawer-cart";
 import { SheetTrigger } from "@/components/ui/sheet";
@@ -90,14 +90,14 @@ export const FavoritesCard = ({ product }: IFavoritesCardProps) => {
           </p>
           <CartDrawer>
             <SheetTrigger asChild>
-          <button
-            onClick={handleAddToCart}
-            className="bg-green-600 text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center"
-          >
-            Comprar
-            <ShoppingCart size={20} color="#fff" />
-          </button>
-          </SheetTrigger>
+              <button
+                onClick={handleAddToCart}
+                className="bg-green-600 text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center"
+              >
+                Comprar
+                <ShoppingCart size={20} color="#fff" />
+              </button>
+            </SheetTrigger>
           </CartDrawer>
         </div>
       </div>

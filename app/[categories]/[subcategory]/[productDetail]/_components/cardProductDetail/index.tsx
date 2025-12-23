@@ -4,7 +4,7 @@ import { useAuth } from "@/app/contexts/AuthCont";
 import { useCartStore } from "@/app/store/cartStore";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { updateItemQuantity } from "@/app/(home)/_components/productCard/actions/cart/addItemCart";
+import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/cart/addItemCart";
 import toast from "react-hot-toast";
 import { CartDrawer } from "@/app/(home)/_components/ui/cart/drawer-cart";
 import { SheetTrigger } from "@/components/ui/sheet";

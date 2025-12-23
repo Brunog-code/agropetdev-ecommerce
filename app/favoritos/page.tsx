@@ -1,7 +1,7 @@
 import { FavoritesCard } from "./_components/favoritesCard";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getFavoritesUser } from "./actions/getFavoritesUser";
+import { getFavoritesUser } from "./actions/get-favorites/index.ts";
 
 export default async function Favorites() {
   //headersm passar manualmente do lado server(betherAuth precisa dos cookies de sessao)

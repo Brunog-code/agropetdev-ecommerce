@@ -1,13 +1,11 @@
-import { FiltersCategory } from "./_components/filtersCategory";
+import { FiltersCategory } from "./_components/filters-category";
 import { BannerSwiper } from "./_components/lib/swiper/banner";
 import { PartnersSwiper } from "./_components/lib/swiper/partners";
-import { ProductCard } from "./_components/productCard";
-import { getProducts } from "./actions/getProducts";
+import { ProductCard } from "./_components/product-card";
+import { getProducts } from "./actions/get-products";
 
 export default async function Home() {
   const products = await getProducts();
-
-  //tratr o skeleton
 
   return (
     <main className="w-full flex flex-col gap-10">

@@ -69,6 +69,12 @@ export function LoginForm() {
     );
   }
 
+  async function handleSignInWithGoogle() {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  }
+
   return (
     <Form {...form}>
       <form
@@ -162,7 +168,7 @@ export function LoginForm() {
         <Button
           type="button"
           className="w-full border-2 border-gray-200 text-gray-500 bg-white cursor-pointer hover:bg-gray-100 "
-          onClick={async () => {}}
+          onClick={handleSignInWithGoogle}
         >
           <FcGoogle style={{ width: "20px", height: "20px" }} />
           Entrar com Google

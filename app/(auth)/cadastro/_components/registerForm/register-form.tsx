@@ -20,7 +20,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 
-import { saveAddress } from "../../actions";
+import { saveAddress } from "../../actions/save-address";
+
+interface IAddressData {
+  cep: string;
+  city: string;
+  neighborhood: string;
+  service: string;
+  state: string;
+  street: string;
+}
 
 //schema zod
 const registerSchema = z
@@ -86,24 +95,27 @@ export function RegisterForm() {
   //api cep
   async function handleCepBlur(cep: string) {
     try {
-      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-      const data = await response.json();
+      const response = await fetch(
+        `https://brasilapi.com.br/api/cep/v1/${cep}`
+      );
 
       if (!response.ok) {
-        throw new Error("Erro ao consultar o cep");
+        toast.error("CEP não encontrado");
+        return;
       }
 
-      if (data.erro) {
-        toast.error("Cep não localizado");
-      }
+      const data: IAddressData = await response.json();
 
       // Atualiza os campos do RHF
-      form.setValue("street", data.logradouro || "");
-      form.setValue("district", data.bairro || "");
-      form.setValue("city", data.localidade || "");
-      form.setValue("state", data.uf || "");
+      form.setValue("street", data.street || "");
+      form.setValue("district", data.neighborhood || "");
+      form.setValue("city", data.city || "");
+      form.setValue("state", data.state || "");
+
+      form.setFocus("number");
     } catch (error) {
-      console.error(error);
+      console.error("Erro na requisição:", error);
+      toast.error("Erro ao consultar o CEP");
     }
   }
 
@@ -135,10 +147,31 @@ export function RegisterForm() {
           };
 
           //cadastrar endereço
-          await saveAddress(dataAddAddress);
+          let addressSaved = false;
+          try {
+            const responseAddress = await saveAddress(dataAddAddress);
+
+            if (responseAddress.success) addressSaved = true;
+          } catch (error) {
+            console.error("Erro ao salvar endereço:", error);
+          }
+
+          //encerra a sessão criada automaticamente
+          await authClient.signOut();
 
           router.replace("/login");
-          toast.success("Cadastro realizado");
+
+          //se der erro avisar o usuario
+          if (addressSaved) {
+            toast.success("Cadastro realizado");
+          } else {
+            toast(
+              "Cadastro realizado, mas não foi possível salvar o endereço.",
+              {
+                icon: "⚠️",
+              }
+            );
+          }
         },
         onError: (ctx) => {
           //caso ocorra algum erro(falhe requsicao, nao conseguiu conectar com db)

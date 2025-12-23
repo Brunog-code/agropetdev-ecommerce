@@ -77,7 +77,7 @@ export function CartDrawer({ children }: { children: React.ReactNode }) {
           <SheetTitle>MEU CARRINHO</SheetTitle>
 
           <span className="text-sm">
-            Quantidade de itens:{" "}
+            Quantidade de produtos:{" "}
             <span className="text-center w-full">{quantityItemsCart}</span>
           </span>
         </SheetHeader>

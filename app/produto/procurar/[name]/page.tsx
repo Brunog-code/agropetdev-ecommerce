@@ -1,7 +1,7 @@
-import { ProductCard } from "@/app/(home)/_components/productCard";
+import { ProductCard } from "@/app/(home)/_components/product-card";
 import { IFullProduct } from "@/app/utils/types/product";
 
-import { getProductSearch } from "./actions/getProductSearch";
+import { getProductSearch } from "./actions/get-product-search";
 
 interface ISearchProps {
   params: {

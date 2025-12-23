@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { HiOutlineHome } from "react-icons/hi";
 
 import { CardProductDetail } from "./_components/cardProductDetail";
-import { getProductDetail } from "./actions/getProductDetail";
+import { getProductDetail } from "./actions/get-product-detail/index.ts";
 
 
 interface IProductProps {

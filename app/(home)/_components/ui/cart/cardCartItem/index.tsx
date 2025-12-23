@@ -8,7 +8,7 @@ import { useAuth } from "@/app/contexts/AuthCont";
 import { CartItem } from "@/app/store/cartStore";
 import { useCartStore } from "@/app/store/cartStore";
 
-import { updateItemQuantity } from "../../../productCard/actions/cart/addItemCart";
+import { updateItemQuantity } from "../../../product-card/actions/cart/addItemCart";
 import { removeItemFromCart } from "./actions/removeItemFromCart";
 
 interface ICardCartItemProps {

@@ -1,12 +1,13 @@
 "use client";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
-
 import "swiper/css";
 import "swiper/css/navigation";
 
+import { Autoplay,Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
 export function PromotionsCarousel() {
+
   return (
     <section className="w-full">
       <style>
@@ -32,7 +33,7 @@ export function PromotionsCarousel() {
       >
         <SwiperSlide>
           <div className="flex justify-center items-center w-full h-full">
-            <span className="text-lg font-semibold">
+            <span className="text-md font-semibold">
               🥇 Ração Premium 15kg - 20% OFF
             </span>
           </div>
@@ -40,7 +41,7 @@ export function PromotionsCarousel() {
 
         <SwiperSlide>
           <div className="flex justify-center items-center w-full h-full">
-            <span className="text-lg font-semibold ">
+            <span className="text-md font-semibold ">
               🐱 Areia Sanitária 12kg - Leve 2 Pague 1
             </span>
           </div>
@@ -48,7 +49,7 @@ export function PromotionsCarousel() {
 
         <SwiperSlide>
           <div className="flex justify-center items-center w-full h-full">
-            <span className="text-lg font-semibold ">
+            <span className="text-md font-semibold ">
               🐶 Shampoo Pet - 30% de desconto
             </span>
           </div>

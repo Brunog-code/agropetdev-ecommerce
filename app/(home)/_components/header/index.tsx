@@ -36,9 +36,8 @@ export function Header() {
   const router = useRouter();
 
   //context
-  const { session, loading, logout, user } = useAuth();
+  const { session, loading, logout } = useAuth();
 
-  const firstname = user?.name?.split(" ")[0];
 
   //busca categorias para nav
   useEffect(() => {
@@ -80,6 +79,7 @@ export function Header() {
     <header className="w-full bg-[#3A7D44]">
       {/* parte superior */}
       <div className="w-full bg-orange-400/90 h-11 flex justify-center md:justify-around items-center text-white">
+      
         <div className="w-full md:max-w-1/2 flex justify-center">
           <PromotionsCarousel />
         </div>

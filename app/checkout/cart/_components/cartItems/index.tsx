@@ -3,7 +3,7 @@
 import { useCartStore } from "@/app/store/cartStore";
 import { useAuth } from "@/app/contexts/AuthCont";
 import { removeItemFromCart } from "@/app/(home)/_components/ui/cart/cardCartItem/actions/removeItemFromCart";
-import { updateItemQuantity } from "@/app/(home)/_components/productCard/actions/cart/addItemCart";
+import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/cart/addItemCart";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { CartItem } from "@/app/store/cartStore";

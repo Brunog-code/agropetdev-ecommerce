@@ -6,7 +6,7 @@ import { Inter,Poppins } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
 import TopProgress from "./(home)/_components/lib/nprogress";
-import LayoutWrapper from "./(home)/_components/wrapLayout";
+import LayoutWrapper from "./(home)/_components/wrap-layout";
 import { AuthProvider } from "./contexts/AuthCont";
 
 //titulos

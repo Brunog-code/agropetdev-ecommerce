@@ -9,7 +9,7 @@ import gardenBanner from "@/app/assets/garden-categorypage-banner.png";
 import poolBanner from "@/app/assets/pool-categorypage-banner.webp";
 
 import { CardSubcategory } from "./_components/CardSubcategory";
-import { getCategoriesAndSubcategories } from "./actions/getCategoriesAndSubcategories";
+import { getCategoriesAndSubcategories } from "./actions/get-categories-and-subcategories";
 
 interface ICategoriasProps {
   params: {

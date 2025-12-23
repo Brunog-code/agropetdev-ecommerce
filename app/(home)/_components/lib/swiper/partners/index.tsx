@@ -25,7 +25,7 @@ export function PartnersSwiper() {
   const imgsPartners = [...imgsPartnersBase, ...imgsPartnersBase];
 
   return (
-    <div className="w-full overflow-hidden z-0">
+    <div className="w-full  overflow-hidden z-0">
       {" "}
       {/* garante que nada vaze */}
       <Swiper
