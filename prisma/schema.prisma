@@ -13,6 +13,13 @@ datasource db {
   provider = "postgresql"
 }
 
+enum ShippingMethod {
+  PAC
+  SEDEX
+}
+
+
+
 model User {
   id            String   @id
   name          String
@@ -26,7 +33,8 @@ model User {
   sessions  Session[]
   accounts  Account[]
   favorites Favorite[]
-  Carts     Cart[]
+  Cart     Cart?
+  Orders    Order[]
 
   @@unique([email])
   @@map("user")
@@ -175,9 +183,12 @@ model Order {
   status       String   @default("pending")
   subtotal     Decimal //soma dos itens
   shippingCost Decimal //FRETE
-  shippingType String? //Correios, retirada, transportadora
+  shippingType ShippingMethod? 
   shippingEta  String? //prazo estimado
   total        Decimal //subtotal + frete - descontos
+
+  userId String
+  user User @relation(fields: [userId], references: [id])
 
   itemsOrder ItemOrder[]
 }

@@ -6,8 +6,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { z } from "zod";
 
+import { fetchAddressByCep } from "@/app/utils/address/fetchAddressByCep";
+import { TDataCep } from "@/app/utils/types/zip-address";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -21,54 +22,8 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 
 import { saveAddress } from "../../actions/save-address";
+import { registerSchema, TregisterSchema } from "./schema";
 
-interface IAddressData {
-  cep: string;
-  city: string;
-  neighborhood: string;
-  service: string;
-  state: string;
-  street: string;
-}
-
-//schema zod
-const registerSchema = z
-  .object({
-    email: z
-      .string()
-      .nonempty({ message: "Favor preencher o email" })
-      .email({ message: "Email inválido" }),
-    name: z.string().nonempty({ message: "Favor preencher o nome" }),
-    street: z.string().nonempty({ message: "Favor preencher a rua" }),
-    number: z.string().nonempty({ message: "Favor preencher o número" }),
-    district: z.string().nonempty({ message: "Favor preencher o bairro" }),
-    city: z.string().nonempty({ message: "Favor preencher a cidade" }),
-    state: z
-      .string()
-      .nonempty({ message: "Favor selecionar o estado" })
-      .length(2, { message: "O estado deve ter 2 caracteres (sigla)" }),
-    zip: z
-      .string()
-      .nonempty({ message: "Favor preencher o CEP" })
-      .regex(/^\d{5}-?\d{3}$/, { message: "Formato de CEP inválido" }),
-    password: z
-      .string()
-      .nonempty({ message: "Favor preencher a senha" })
-      .min(6, { message: "A senha deve ter pelo menos 8 caracteres" }),
-    confirmPassword: z
-      .string()
-      .nonempty({ message: "Favor confirmar a senha" })
-      .min(6, {
-        message: "A confirmação da senha deve ter pelo menos 6 caracteres",
-      }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "As senhas não coincidem",
-    path: ["confirmPassword"],
-  });
-
-//type zod
-type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -76,7 +31,7 @@ export function RegisterForm() {
   const router = useRouter();
 
   //RHF
-  const form = useForm<RegisterFormValues>({
+  const form = useForm<TregisterSchema>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
       email: "",
@@ -95,32 +50,22 @@ export function RegisterForm() {
   //api cep
   async function handleCepBlur(cep: string) {
     try {
-      const response = await fetch(
-        `https://brasilapi.com.br/api/cep/v1/${cep}`
-      );
+      const dataCep: TDataCep = await fetchAddressByCep(cep);
 
-      if (!response.ok) {
-        toast.error("CEP não encontrado");
-        return;
-      }
-
-      const data: IAddressData = await response.json();
-
-      // Atualiza os campos do RHF
-      form.setValue("street", data.street || "");
-      form.setValue("district", data.neighborhood || "");
-      form.setValue("city", data.city || "");
-      form.setValue("state", data.state || "");
+      form.setValue("street", dataCep.street);
+      form.setValue("district", dataCep.district);
+      form.setValue("city", dataCep.city);
+      form.setValue("state", dataCep.state);
 
       form.setFocus("number");
     } catch (error) {
-      console.error("Erro na requisição:", error);
+      console.error(error);
       toast.error("Erro ao consultar o CEP");
     }
   }
 
   //cadastrar
-  async function onSubmit(formData: RegisterFormValues) {
+  async function onSubmit(formData: TregisterSchema) {
     await authClient.signUp.email(
       {
         name: formData.name,

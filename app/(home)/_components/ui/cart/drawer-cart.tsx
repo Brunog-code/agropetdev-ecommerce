@@ -115,7 +115,7 @@ export function CartDrawer({ children }: { children: React.ReactNode }) {
                 </div>
               </div>
 
-              <Link href="/checkout/cart">
+              <Link href="/pedido/carrinho">
                 <Button
                   onClick={() => setIsOpen(false)}
                   className="bg-green-600 text-white rounded-lg transition-all duration-200 hover:opacity-85 hover:bg-green-600 cursor-pointer w-full flex gap-2 p-2 justify-center mx-auto"

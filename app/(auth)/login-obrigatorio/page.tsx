@@ -1,10 +1,9 @@
 import { CardLoginRequired } from "./_components/cardLoginRequired";
 
-export default function LoguinRequired (){
+export default function LoguinRequired() {
   return (
     <section>
-        <CardLoginRequired />
+      <CardLoginRequired />
     </section>
-  )
+  );
 }
-

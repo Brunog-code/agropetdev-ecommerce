@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
-import { z } from "zod";
 
 import { useLoginCartSync } from "@/app/utils/cart/handleLogin";
 import { Button } from "@/components/ui/button";
@@ -21,20 +20,20 @@ import {
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 
-const loginSchema = z.object({
-  email: z.string().email({ message: "Email inválido" }),
-  password: z
-    .string()
-    .min(8, { message: "A senha deve ter pelo menos 6 caracteres" }),
-});
+import { loginSchema, TloginSchema } from "./schema";
 
-type LoginFormValues = z.infer<typeof loginSchema>;
+interface ILoginForm {
+  returnTo?: string;
+}
 
-export function LoginForm() {
+export function LoginForm({ returnTo }: ILoginForm) {
   const { handleLoginSyncLocalDb } = useLoginCartSync();
   const [showPassword, setShowPassword] = useState(false);
 
-  const form = useForm<LoginFormValues>({
+  //params redirect (evita open redirect)
+  const safeReturnTo = returnTo?.startsWith("/") ? returnTo : "/";
+
+  const form = useForm<TloginSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
@@ -42,12 +41,12 @@ export function LoginForm() {
     },
   });
 
-  async function onSubmit(formData: LoginFormValues) {
+  async function onSubmit(formData: TloginSchema) {
     await authClient.signIn.email(
       {
         email: formData.email,
         password: formData.password,
-        callbackURL: "/",
+        callbackURL: safeReturnTo,
       },
       {
         onRequest: (ctx) => {

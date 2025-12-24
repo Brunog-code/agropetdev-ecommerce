@@ -1,13 +1,15 @@
 "use client";
 
-import { useCartStore } from "@/app/store/cartStore";
-import { useAuth } from "@/app/contexts/AuthCont";
-import { removeItemFromCart } from "@/app/(home)/_components/ui/cart/cardCartItem/actions/removeItemFromCart";
-import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/cart/addItemCart";
+import { MinusIcon, PlusIcon } from "lucide-react";
 import Image from "next/image";
 import toast from "react-hot-toast";
-import { CartItem } from "@/app/store/cartStore";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+
+import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/cart/addItemCart";
+import { removeItemFromCart } from "@/app/(home)/_components/ui/cart/cardCartItem/actions/removeItemFromCart";
+import { useAuth } from "@/app/contexts/AuthCont";
+import { useCartStore } from "@/app/store/cartStore";
+import { CartItem } from "@/app/store/cartStore";
 
 type ThandleUpdateQuatityCart = "increment" | "decrement";
 
@@ -56,10 +58,9 @@ export const CartItems = () => {
           return;
         }
       }
-
-      //zustand
-      updateQty(type, cartProduct.id);
     }
+    //zustand
+    updateQty(type, cartProduct.id);
   }
 
   async function handleDeleteItemCart(id: string) {
@@ -80,7 +81,7 @@ export const CartItems = () => {
   }
 
   return (
-    <div className="bg-white p-4 rounded-lg w-full space-y-4  ">
+    <div className="bg-white p-4 rounded-lg w-full space-y-4">
       {itemsCart.length > 0 ? (
         <>
           {/* card */}
@@ -128,7 +129,7 @@ export const CartItems = () => {
                       })
                     }
                   >
-                    -
+                    <MinusIcon />
                   </button>
                   <span className="text-gray-600">{item.quantity}</span>
                   <button
@@ -140,7 +141,7 @@ export const CartItems = () => {
                       })
                     }
                   >
-                    +
+                    <PlusIcon />
                   </button>
                 </div>
                 <p className="font-semibold">

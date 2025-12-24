@@ -98,7 +98,7 @@ export const ShippingCost = () => {
       <h1 className="font-semibold border-b-2 p-2">Entrega</h1>
 
       <div className="mt-4 flex flex-col gap-2">
-        <span className="text-sm">Calcule seu frete</span>
+        <span className="text-sm">Simule seu frete</span>
         <div className="flex gap-1">
           <Input
             value={inputCep}

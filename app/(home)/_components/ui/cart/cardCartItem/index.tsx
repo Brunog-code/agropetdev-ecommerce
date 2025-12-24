@@ -116,6 +116,7 @@ export const CardCartItem = ({ itemCart }: ICardCartItemProps) => {
             })}
           </span>
         </div>
+        
       </div>
 
       <button

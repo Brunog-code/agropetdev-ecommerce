@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { useCartStore } from "@/app/store/cartStore";
 import { formatBRL } from "@/app/utils/helpers/formatBRL";
 import { Button } from "@/components/ui/button";
@@ -17,7 +19,7 @@ export const CartTotals = () => {
   }
 
   return (
-    <aside className="bg-white p-4 rounded-lg flex-1 h-fit">
+    <aside className="bg-white p-4 rounded-lg h-fit">
       <h1 className="font-semibold border-b-2 p-2 text-center">
         RESUMO DA COMPRA
       </h1>
@@ -36,8 +38,11 @@ export const CartTotals = () => {
           <span className="mt-2">{formatBRL(totalCartWithShipping)}</span>{" "}
         </div>
       </div>
-      <Button className="bg-green-600 hover:bg-green-600 mt-6 text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center">
-        Finalizar pedido
+      <Button
+        asChild
+        className="bg-green-600 hover:bg-green-600 mt-6 text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center"
+      >
+        <Link href="/pedido/identificacao">Continuar</Link>
       </Button>
     </aside>
   );
