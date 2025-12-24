@@ -49,7 +49,7 @@ model Address {
   state    String
   zip      String
 
-  userId String @unique
+  userId String
   user   User   @relation(fields: [userId], references: [id])
 }
 

@@ -1,11 +1,15 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
+import { saveAddress } from "@/app/(auth)/cadastro/actions/save-address";
+import { useAuth } from "@/app/contexts/AuthCont";
 import { fetchAddressByCep } from "@/app/utils/address/fetchAddressByCep";
+import { INewAddress } from "@/app/utils/types/new-address";
 import { TDataCep } from "@/app/utils/types/zip-address";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -26,8 +30,24 @@ import {
   TAddressIdentificationSchema,
 } from "./schema";
 
-export const CardAddress = () => {
-  const [selectedAddress, setSelectedAdress] = useState<string | null>(null);
+interface ICardAddressProps {
+  userAddresses: INewAddress[];
+}
+
+interface InewAddressData {
+  newAddress: INewAddress;
+  success: boolean;
+}
+
+export const CardAddress = ({ userAddresses }: ICardAddressProps) => {
+  const [selectedAddress, setSelectedAdress] = useState<string | null>(() => {
+    return userAddresses.length > 0 ? userAddresses[0].id : null;
+  });
+
+  const router = useRouter();
+
+  //context
+  const { user } = useAuth();
 
   //RHF
   const form = useForm<TAddressIdentificationSchema>({
@@ -42,11 +62,43 @@ export const CardAddress = () => {
     },
   });
 
-  function onSubmit(formData: TAddressIdentificationSchema) {}
+  async function onSubmit(formData: TAddressIdentificationSchema) {
+    const saveAddressData = {
+      id: user!.id,
+      street: formData.street,
+      number: formData.number,
+      district: formData.district,
+      city: formData.city,
+      state: formData.state,
+      zip: formData.zip,
+    };
+
+    //chamar server action para salvar endereço
+    try {
+      const address: InewAddressData = await saveAddress(saveAddressData);
+
+      form.reset();
+      router.refresh();
+
+      setSelectedAdress(address.newAddress.id);
+
+      toast.success("Endereço adicionado");
+    } catch (error) {
+      console.error(error);
+
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("Erro inesperado ao salvar endereço");
+      }
+    }
+  }
 
   //api cep
   async function handleCepBlur(cep: string) {
     try {
+      if (cep.length < 8) return;
+
       const dataCep: TDataCep = await fetchAddressByCep(cep);
 
       form.setValue("street", dataCep.street);
@@ -68,7 +120,25 @@ export const CardAddress = () => {
       </CardHeader>
 
       <CardContent>
+        <small>Selecione ao menos um endereço para entrega</small>
         <RadioGroup value={selectedAddress} onValueChange={setSelectedAdress}>
+          {/* endereços cadastrados */}
+          {userAddresses.length > 0 &&
+            userAddresses.map((item) => (
+              <Label htmlFor={`address-${item.id}`} key={item.id}>
+                <Card className="w-full">
+                  <CardContent className="flex items-center gap-3">
+                    <RadioGroupItem value={item.id} id={`address-${item.id}`} />
+                    <span>
+                      {item.street}, {item.number} - {item.district} -{" "}
+                      {item.zip} - {item.city}/{item.state}
+                    </span>
+                  </CardContent>
+                </Card>
+              </Label>
+            ))}
+
+          {/* novo endereço */}
           <Label htmlFor="add_new">
             <Card className="w-full">
               <CardContent className="flex items-center gap-3">
@@ -79,6 +149,7 @@ export const CardAddress = () => {
           </Label>
         </RadioGroup>
 
+        {/* form cadastro novo */}
         {selectedAddress === "add_new" && (
           <div className=" border-t-2 mt-6">
             <h2 className=" font-semibold text-gray-700 mt-6">
@@ -211,8 +282,11 @@ export const CardAddress = () => {
                     />
                   </div>
                 </div>
-                <Button className="bg-green-600 hover:bg-green-600 mt-6 text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center">
-                  Continuar pagamento
+                <Button
+                  type="submit"
+                  className="bg-green-600 hover:bg-green-600 mt-6 text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center"
+                >
+                  Cadastrar novo endereço
                 </Button>
               </form>
             </Form>

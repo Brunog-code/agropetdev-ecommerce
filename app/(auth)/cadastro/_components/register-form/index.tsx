@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 import { fetchAddressByCep } from "@/app/utils/address/fetchAddressByCep";
+import { INewAddress } from "@/app/utils/types/new-address";
 import { TDataCep } from "@/app/utils/types/zip-address";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,6 +25,10 @@ import { authClient } from "@/lib/auth-client";
 import { saveAddress } from "../../actions/save-address";
 import { registerSchema, TregisterSchema } from "./schema";
 
+interface InewAddressData {
+  newAddress: INewAddress;
+  success: boolean;
+}
 
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -49,6 +54,7 @@ export function RegisterForm() {
 
   //api cep
   async function handleCepBlur(cep: string) {
+    if (cep.length < 8) return;
     try {
       const dataCep: TDataCep = await fetchAddressByCep(cep);
 
@@ -94,11 +100,17 @@ export function RegisterForm() {
           //cadastrar endereço
           let addressSaved = false;
           try {
-            const responseAddress = await saveAddress(dataAddAddress);
+            const responseAddress: InewAddressData = await saveAddress(
+              dataAddAddress
+            );
 
-            if (responseAddress.success) addressSaved = true;
+            if (!responseAddress.success) {
+              throw new Error("Erro ao salvar o endereço");
+            }
+
+            addressSaved = true;
           } catch (error) {
-            console.error("Erro ao salvar endereço:", error);
+            console.error(error);
           }
 
           //encerra a sessão criada automaticamente
