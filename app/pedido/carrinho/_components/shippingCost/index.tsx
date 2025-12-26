@@ -8,6 +8,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 
 import { useCartStore } from "@/app/store/cartStore";
 import { formatBRL } from "@/app/utils/helpers/formatBRL";
+import { calcShipping } from "@/app/utils/shipping/calc-shipping";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -15,6 +16,14 @@ type ShippingMethod = {
   PAC: number;
   SEDEX: number;
 };
+
+interface IResponseCalcShipping {
+  shippingMethod: string;
+  shippingEta: number;
+  shippingValue: number;
+  shippingOrigin: string;
+  shippingDestiy: string;
+}
 
 export const ShippingCost = () => {
   const itemsCart = useCartStore((state) => state.cart);
@@ -24,6 +33,10 @@ export const ShippingCost = () => {
   const [showResultCep, setShowResultCep] = useState(false);
   const [andress, setAndress] = useState("");
   const [shippingValues, setShippingValues] = useState<ShippingMethod>({
+    PAC: 0,
+    SEDEX: 0,
+  });
+  const [shippingEta, setShippingEta] = useState<ShippingMethod>({
     PAC: 0,
     SEDEX: 0,
   });
@@ -44,7 +57,7 @@ export const ShippingCost = () => {
       if (cep.length == 0) {
         toast.error("Favor digitar o cep");
         setShowResultCep(false);
-        setShipping(null, 0);
+        setShipping(null, 0, null);
         return;
       }
 
@@ -52,7 +65,7 @@ export const ShippingCost = () => {
       if (!cepRegex.test(cep)) {
         toast.error("Cep inválido");
         setShowResultCep(false);
-        setShipping(null, 0);
+        setShipping(null, 0, null);
         return;
       }
       const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
@@ -60,7 +73,7 @@ export const ShippingCost = () => {
       if (!response.ok) {
         toast.error("Cep não encontrado");
         setShowResultCep(false);
-        setShipping(null, 0);
+        setShipping(null, 0, null);
         return;
       }
 
@@ -69,7 +82,7 @@ export const ShippingCost = () => {
       if (data.erro) {
         toast.error("CEP não encontrado");
         setShowResultCep(false);
-        setShipping(null, 0);
+        setShipping(null, 0, null);
         return;
       }
 
@@ -78,12 +91,31 @@ export const ShippingCost = () => {
       setShowResultCep(true);
 
       //simula o valor do frete
-      const valuePac = Math.floor(Math.random() * 7) + 5;
-      const valueSedex = Math.floor(Math.random() * 20) + 12;
+      const dataShipping: IResponseCalcShipping[] = await calcShipping(cep);
 
+      let pacValue = 0;
+      let pacEta = 0;
+      let sedexValue = 0;
+      let sedexEta = 0;
+      dataShipping.forEach((item) => {
+        if (item.shippingMethod === "PAC") {
+          pacValue = item.shippingValue;
+          pacEta = item.shippingEta;
+        } else if (item.shippingMethod === "SEDEX") {
+          sedexValue = item.shippingValue;
+          sedexEta = item.shippingEta;
+        }
+      });
+
+      //states front
       setShippingValues({
-        PAC: valuePac,
-        SEDEX: valueSedex,
+        PAC: pacValue,
+        SEDEX: sedexValue,
+      });
+
+      setShippingEta({
+        PAC: pacEta,
+        SEDEX: sedexEta,
       });
     } catch (error) {
       console.error(error);
@@ -157,7 +189,11 @@ export const ShippingCost = () => {
                 value={shippingMethod ?? ""}
                 onChange={(e) => {
                   const method = e.target.value as "PAC" | "SEDEX";
-                  setShipping(method, shippingValues[method]);
+                  setShipping(
+                    method,
+                    shippingValues[method],
+                    shippingEta[method]
+                  );
                 }}
                 className="mt-2 w-full rounded-lg border px-3 py-2 text-sm
       focus:outline-none focus:ring-1 focus:ring-[#f28c28]"
@@ -167,11 +203,11 @@ export const ShippingCost = () => {
                 </option>
 
                 <option value="PAC">
-                  PAC • 5 a 7 dias úteis — {formatBRL(shippingValues.PAC)}
+                  PAC • {shippingEta.PAC} dias úteis — {formatBRL(shippingValues.PAC)}
                 </option>
 
                 <option value="SEDEX">
-                  SEDEX • 1 a 2 dias úteis — {formatBRL(shippingValues.SEDEX)}
+                  SEDEX • {shippingEta.SEDEX} úteis — {formatBRL(shippingValues.SEDEX)}
                 </option>
               </select>
             </div>

@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
@@ -43,6 +43,7 @@ export const CardAddress = ({ userAddresses }: ICardAddressProps) => {
   const [selectedAddress, setSelectedAdress] = useState<string | null>(() => {
     return userAddresses.length > 0 ? userAddresses[0].id : null;
   });
+  const [selectedZip, setSelectedZip] = useState<string | null>(null);
 
   const router = useRouter();
 
@@ -113,15 +114,34 @@ export const CardAddress = ({ userAddresses }: ICardAddressProps) => {
     }
   }
 
+  //setar o id, e zip selecionado
+  function handleChangeSelect(addressId: string) {
+    //setar o endereço
+    setSelectedAdress(addressId);
+
+    //procurar atraves do id, o zip desse endereço
+    const address = userAddresses.find((item) => item.id === addressId);
+
+    if (address) {
+      setSelectedZip(address.zip);
+    }
+
+    //chamar calc do frete
+
+    //setar store(zustand)
+  }
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-bold text-lg border-b">Meus Endereços</CardTitle>
+        <CardTitle className="font-bold text-lg border-b">
+          Meus Endereços
+        </CardTitle>
       </CardHeader>
 
       <CardContent>
         <small>Selecione ao menos um endereço para entrega</small>
-        <RadioGroup value={selectedAddress} onValueChange={setSelectedAdress}>
+        <RadioGroup value={selectedAddress} onValueChange={handleChangeSelect}>
           {/* endereços cadastrados */}
           {userAddresses.length > 0 &&
             userAddresses.map((item) => (

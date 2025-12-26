@@ -14,6 +14,7 @@ export type CartItem = {
 };
 
 type TShippingMethod = "PAC" | "SEDEX" | null;
+type TShippingEta = number | null
 
 interface ICartStore {
   cart: CartItem[];
@@ -26,7 +27,8 @@ interface ICartStore {
 
   shippingMethod: TShippingMethod;
   shippingValue: number;
-  setShipping: (method: TShippingMethod, value: number) => void;
+  shippingEta: TShippingEta;
+  setShipping: (method: TShippingMethod, value: number, eta: TShippingEta) => void;
   clearShipping: () => void;
   getTotalCartWithShipping: () => number;
 }
@@ -38,6 +40,7 @@ export const useCartStore = create<ICartStore>()(
       cart: [],
       shippingMethod: null,
       shippingValue: 0,
+      shippingEta: null,
       //actions
       addToCart: (product) => {
         //verificar se o produto existe
@@ -117,12 +120,13 @@ export const useCartStore = create<ICartStore>()(
       clearCart: () => {
         set({ cart: [], shippingMethod: null, shippingValue: 0 });
       },
-      setShipping: (method, value) =>
-        set({ shippingMethod: method, shippingValue: value }),
+      setShipping: (method, value, eta) =>
+        set({ shippingMethod: method, shippingValue: value, shippingEta: eta }),
       clearShipping: () =>
         set({
           shippingMethod: null,
           shippingValue: 0,
+          shippingEta: null
         }),
       getTotalCartWithShipping: () =>
         get().getTotalCart() + get().shippingValue,
