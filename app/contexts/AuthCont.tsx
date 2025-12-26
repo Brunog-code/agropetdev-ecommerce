@@ -27,6 +27,7 @@ interface IAuthContextProps {
   loading: boolean;
   user: TUser | null;
   logout: () => void;
+  setUser: (userid: TUser) => void;
 }
 
 const AuthContext = createContext<IAuthContextProps>({
@@ -34,6 +35,7 @@ const AuthContext = createContext<IAuthContextProps>({
   user: null,
   loading: true,
   logout: () => {},
+  setUser: (userid: TUser) => {},
 });
 
 //provider
@@ -78,7 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ session, loading, user, logout }}>
+    <AuthContext.Provider value={{ session, loading, user, setUser, logout }}>
       {children}
     </AuthContext.Provider>
   );

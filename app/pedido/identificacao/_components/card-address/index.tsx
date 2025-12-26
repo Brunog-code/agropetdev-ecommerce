@@ -116,7 +116,7 @@ export const CardAddress = ({ userAddresses }: ICardAddressProps) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-bold text-lg">Endereços</CardTitle>
+        <CardTitle className="font-bold text-lg border-b">Meus Endereços</CardTitle>
       </CardHeader>
 
       <CardContent>
