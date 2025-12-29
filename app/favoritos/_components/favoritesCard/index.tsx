@@ -1,16 +1,17 @@
 "use client";
 
-import Image from "next/image";
 import { Heart, ShoppingCart } from "lucide-react";
-import { removeFavorite } from "@/app/(home)/_components/product-card/actions/favorite/removeFavorite";
-import { useAuth } from "@/app/contexts/AuthCont";
-import toast from "react-hot-toast";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+
 import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/cart/addItemCart";
-import { useCartStore } from "@/app/store/cartStore";
+import { removeFavorite } from "@/app/(home)/_components/product-card/actions/favorite/removeFavorite";
 import { CartDrawer } from "@/app/(home)/_components/ui/cart/drawer-cart";
-import { SheetTrigger } from "@/components/ui/sheet";
+import { useAuth } from "@/app/contexts/AuthCont";
+import { useCartStore } from "@/app/store/cartStore";
 import { IProduct } from "@/app/utils/types/product";
+import { SheetTrigger } from "@/components/ui/sheet";
 
 interface IFavoritesCardProps {
   product: IProduct;

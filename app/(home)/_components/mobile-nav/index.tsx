@@ -4,6 +4,7 @@ import { Divide as Hamburger } from "hamburger-react";
 import { Heart, Home, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { useAuth } from "@/app/contexts/AuthCont";
@@ -25,6 +26,8 @@ export function MobileNav() {
 
   //authContext
   const { session, logout } = useAuth();
+
+  const pathname = usePathname();
 
   //states
   const [isOpen, setIsOpen] = useState(false);
@@ -87,24 +90,25 @@ export function MobileNav() {
       <div className="opacity-0">
         <ShoppingCart className="w-6 h-6" />
       </div>
-
-      <CartDrawer>
-        <SheetTrigger>
-          <div
-            className="absolute left-1/2 -translate-x-1/3 -top-2 bg-orange-500 rounded-full p-4 cursor-pointer z-2 hover:opacity-93 hover:scale-102
+      {pathname !== "/pedido/identificacao" && (
+        <CartDrawer>
+          <SheetTrigger>
+            <div
+              className="absolute left-1/2 -translate-x-1/3 -top-2 bg-orange-500 rounded-full p-4 cursor-pointer z-2 hover:opacity-93 hover:scale-102
          transition-all duration-200"
-          >
-            <div>
-              <ShoppingCart className="w-8 h-8" />
-              {quantityItemsCart > 0 && (
-                <small className="rounded-full w-6 h-6 bg-red-500 absolute top-1 right-2 text-white flex items-center justify-center">
-                  {quantityItemsCart}
-                </small>
-              )}
+            >
+              <div>
+                <ShoppingCart className="w-8 h-8" />
+                {quantityItemsCart > 0 && (
+                  <small className="rounded-full w-6 h-6 bg-red-500 absolute top-1 right-2 text-white flex items-center justify-center">
+                    {quantityItemsCart}
+                  </small>
+                )}
+              </div>
             </div>
-          </div>
-        </SheetTrigger>
-      </CartDrawer>
+          </SheetTrigger>
+        </CartDrawer>
+      )}
 
       <button onClick={checkFavoritesAccess}>
         <Heart className="w-6 h-6 hover:text-red-500 hover:fill-red-500 transition cursor-pointer" />

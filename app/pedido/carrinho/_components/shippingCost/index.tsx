@@ -2,28 +2,15 @@
 
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
+import { SelectedShipping } from "@/app/pedido/_components/selected-shipping";
 import { useCartStore } from "@/app/store/cartStore";
-import { formatBRL } from "@/app/utils/helpers/formatBRL";
-import { calcShipping } from "@/app/utils/shipping/calc-shipping";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-
-type ShippingMethod = {
-  PAC: number;
-  SEDEX: number;
-};
-
-interface IResponseCalcShipping {
-  shippingMethod: string;
-  shippingEta: number;
-  shippingValue: number;
-  shippingOrigin: string;
-  shippingDestiy: string;
-}
 
 export const ShippingCost = () => {
   const itemsCart = useCartStore((state) => state.cart);
@@ -32,18 +19,14 @@ export const ShippingCost = () => {
   const [inputCep, setInputCep] = useState("");
   const [showResultCep, setShowResultCep] = useState(false);
   const [andress, setAndress] = useState("");
-  const [shippingValues, setShippingValues] = useState<ShippingMethod>({
-    PAC: 0,
-    SEDEX: 0,
-  });
-  const [shippingEta, setShippingEta] = useState<ShippingMethod>({
-    PAC: 0,
-    SEDEX: 0,
-  });
   const [loadingShipping, setLoadingShipping] = useState(false);
 
   const setShipping = useCartStore((state) => state.setShipping);
-  const shippingMethod = useCartStore((state) => state.shippingMethod);
+  const clearShipping = useCartStore((state) => state.clearShipping);
+
+  useEffect(() => {
+    clearShipping();
+  }, [clearShipping]);
 
   if (itemsCart.length < 1) {
     return <></>;
@@ -89,34 +72,6 @@ export const ShippingCost = () => {
       const formatedAndress = `${data.logradouro}, ${data.complemento}, ${data.localidade} - ${data.uf}, ${data.cep}`;
       setAndress(formatedAndress);
       setShowResultCep(true);
-
-      //simula o valor do frete
-      const dataShipping: IResponseCalcShipping[] = await calcShipping(cep);
-
-      let pacValue = 0;
-      let pacEta = 0;
-      let sedexValue = 0;
-      let sedexEta = 0;
-      dataShipping.forEach((item) => {
-        if (item.shippingMethod === "PAC") {
-          pacValue = item.shippingValue;
-          pacEta = item.shippingEta;
-        } else if (item.shippingMethod === "SEDEX") {
-          sedexValue = item.shippingValue;
-          sedexEta = item.shippingEta;
-        }
-      });
-
-      //states front
-      setShippingValues({
-        PAC: pacValue,
-        SEDEX: sedexValue,
-      });
-
-      setShippingEta({
-        PAC: pacEta,
-        SEDEX: sedexEta,
-      });
     } catch (error) {
       console.error(error);
       toast.error("Erro ao buscar o cep");
@@ -126,94 +81,75 @@ export const ShippingCost = () => {
   }
 
   return (
-    <aside className="bg-white p-4 rounded-lg w-full md:w-1/2">
-      <h1 className="font-semibold border-b-2 p-2">Entrega</h1>
+    <aside className=" w-full md:w-1/2">
+      <Card>
+        <CardHeader>
+          <CardTitle className="border-b-2 p-2">ENTREGA</CardTitle>
+        </CardHeader>
 
-      <div className="mt-4 flex flex-col gap-2">
-        <span className="text-sm">Simule seu frete</span>
-        <div className="flex gap-1">
-          <Input
-            value={inputCep}
-            inputMode="numeric"
-            placeholder="00000-000"
-            className=" focus-visible:ring-1 focus-visible:ring-[#f28c28]"
-            onChange={(e) => {
-              let value = e.target.value.replace(/\D/g, "").slice(0, 8);
-
-              if (value.length > 5) {
-                value = value.replace(/^(\d{5})(\d)/, "$1-$2");
-              }
-
-              setInputCep(value);
-            }}
-          />
-          <Button
-            onClick={handleShippingCost}
-            disabled={loadingShipping}
-            className="cursor-pointer bg-[#f28c28] hover:bg-[#f28c28] hover:opacity-85"
-          >
-            {!loadingShipping ? (
-              "Calcular"
-            ) : (
-              <div className="flex items-center justify-center">
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Calculando...
-              </div>
-            )}
-          </Button>
-        </div>
-        <Link
-          href="https://buscacepinter.correios.com.br/app/endereco/index.php?t"
-          target="_blank"
-          className="flex gap-1 items-start text-[#2563EB] text-sm"
-        >
-          Não sei meu cep <FaExternalLinkAlt size={13} color="#2563EB" />
-        </Link>
-
-        {showResultCep && (
-          <>
-            <div className="bg-green-100 p-2 rounded-lg mt-2 shadow-sm">
-              <small>
-                <span>CEP: </span>13426-563
-              </small>
-              <h2 className="font-semibold mt-2">
-                Enviar para:
-                <span className="font-normal"> {andress}</span>
-              </h2>
-            </div>
-
-            <div className="mt-2">
-              <span className="font-semibold">Opções de envio:</span>
-
-              <select
-                value={shippingMethod ?? ""}
+        <CardContent>
+          <div className=" flex flex-col gap-2">
+            <span className="text-sm">Simule seu frete</span>
+            <div className="flex gap-1">
+              <Input
+                value={inputCep}
+                inputMode="numeric"
+                placeholder="00000-000"
+                className=" focus-visible:ring-1 focus-visible:ring-[#f28c28]"
                 onChange={(e) => {
-                  const method = e.target.value as "PAC" | "SEDEX";
-                  setShipping(
-                    method,
-                    shippingValues[method],
-                    shippingEta[method]
-                  );
+                  let value = e.target.value.replace(/\D/g, "").slice(0, 8);
+
+                  if (value.length > 5) {
+                    value = value.replace(/^(\d{5})(\d)/, "$1-$2");
+                  }
+
+                  setInputCep(value);
                 }}
-                className="mt-2 w-full rounded-lg border px-3 py-2 text-sm
-      focus:outline-none focus:ring-1 focus:ring-[#f28c28]"
+              />
+              <Button
+                onClick={handleShippingCost}
+                disabled={loadingShipping}
+                className="cursor-pointer bg-[#f28c28] hover:bg-[#f28c28] hover:opacity-85"
               >
-                <option value="" disabled>
-                  Selecione uma opção
-                </option>
-
-                <option value="PAC">
-                  PAC • {shippingEta.PAC} dias úteis — {formatBRL(shippingValues.PAC)}
-                </option>
-
-                <option value="SEDEX">
-                  SEDEX • {shippingEta.SEDEX} úteis — {formatBRL(shippingValues.SEDEX)}
-                </option>
-              </select>
+                {!loadingShipping ? (
+                  <span>Calcular</span>
+                ) : (
+                  <div className="flex items-center justify-center">
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Calculando...
+                  </div>
+                )}
+              </Button>
             </div>
-          </>
-        )}
-      </div>
+            <Link
+              href="https://buscacepinter.correios.com.br/app/endereco/index.php?t"
+              target="_blank"
+              className="flex gap-1 items-start text-[#2563EB] text-sm"
+            >
+              Não sei meu cep <FaExternalLinkAlt size={13} color="#2563EB" />
+            </Link>
+
+            {showResultCep && (
+              <>
+                <div className="bg-green-100 p-2 rounded-lg mt-2 shadow-sm">
+                  <small>
+                    <span>CEP: </span>13426-563
+                  </small>
+                  <h2 className="font-semibold mt-2">
+                    Enviar para:
+                    <span className="font-normal"> {andress}</span>
+                  </h2>
+                </div>
+
+                <div className="mt-2">
+                  <span className="font-semibold">Opções de envio:</span>
+                  <SelectedShipping cep={inputCep} />
+                </div>
+              </>
+            )}
+          </div>
+        </CardContent>
+      </Card>
     </aside>
   );
 };

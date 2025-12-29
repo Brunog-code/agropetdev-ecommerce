@@ -32,6 +32,7 @@ interface InewAddressData {
 
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -55,6 +56,7 @@ export function RegisterForm() {
   //api cep
   async function handleCepBlur(cep: string) {
     if (cep.length < 8) return;
+    setIsLoading(true);
     try {
       const dataCep: TDataCep = await fetchAddressByCep(cep);
 
@@ -67,6 +69,8 @@ export function RegisterForm() {
     } catch (error) {
       console.error(error);
       toast.error("Erro ao consultar o CEP");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -229,7 +233,7 @@ export function RegisterForm() {
                     placeholder="Rua"
                     type="text"
                     {...field}
-                    disabled={form.formState.isSubmitting}
+                    disabled={isLoading || form.formState.isSubmitting}
                   />
                 </FormControl>
                 <FormMessage />
@@ -268,7 +272,7 @@ export function RegisterForm() {
                       placeholder="Bairro"
                       type="text"
                       {...field}
-                      disabled={form.formState.isSubmitting}
+                      disabled={isLoading || form.formState.isSubmitting}
                     />
                   </FormControl>
                   <FormMessage />
@@ -289,7 +293,7 @@ export function RegisterForm() {
                       placeholder="Cidade"
                       type="text"
                       {...field}
-                      disabled={form.formState.isSubmitting}
+                      disabled={isLoading || form.formState.isSubmitting}
                     />
                   </FormControl>
                   <FormMessage />
@@ -309,7 +313,7 @@ export function RegisterForm() {
                       type="text"
                       maxLength={2}
                       {...field}
-                      disabled={form.formState.isSubmitting}
+                      disabled={isLoading || form.formState.isSubmitting}
                     />
                   </FormControl>
                   <FormMessage />

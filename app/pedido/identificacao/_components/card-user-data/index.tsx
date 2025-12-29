@@ -115,9 +115,6 @@ export const CardUserData = () => {
             </p>
           </div>
         )}
-        <Button className="bg-green-600 hover:bg-green-600 mt-6 text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center">
-          Continuar para confirmação
-        </Button>
       </CardContent>
     </Card>
   );

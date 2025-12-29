@@ -4,6 +4,7 @@ import { Heart, ShoppingCart, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { BsSearch } from "react-icons/bs";
@@ -32,12 +33,13 @@ export function Header() {
   const [categories, setCategories] = useState<ICategorieData[]>([]);
   const [inputSearch, setInputSearch] = useState("");
 
+  const pathname = usePathname();
+
   //router
   const router = useRouter();
 
   //context
   const { session, loading, logout } = useAuth();
-
 
   //busca categorias para nav
   useEffect(() => {
@@ -79,7 +81,6 @@ export function Header() {
     <header className="w-full bg-[#3A7D44]">
       {/* parte superior */}
       <div className="w-full bg-orange-400/90 h-11 flex justify-center md:justify-around items-center text-white">
-      
         <div className="w-full md:max-w-1/2 flex justify-center">
           <PromotionsCarousel />
         </div>
@@ -148,18 +149,20 @@ export function Header() {
           </form>
 
           <div className="hidden md:flex gap-6 text-white">
-            <CartDrawer>
-              <SheetTrigger asChild>
-                <div className="relative">
-                  <ShoppingCart className="w-6 h-6 cursor-pointer hover:fill-white transition" />
-                  {quantityItemsCart > 0 && (
-                    <small className="rounded-full w-6 h-6 bg-red-500 absolute -top-4 -right-4 text-white flex items-center justify-center">
-                      {quantityItemsCart}
-                    </small>
-                  )}
-                </div>
-              </SheetTrigger>
-            </CartDrawer>
+            {pathname !== "/pedido/identificacao" && (
+              <CartDrawer>
+                <SheetTrigger asChild>
+                  <div className="relative">
+                    <ShoppingCart className="w-6 h-6 cursor-pointer hover:fill-white transition" />
+                    {quantityItemsCart > 0 && (
+                      <small className="rounded-full w-6 h-6 bg-red-500 absolute -top-4 -right-4 text-white flex items-center justify-center">
+                        {quantityItemsCart}
+                      </small>
+                    )}
+                  </div>
+                </SheetTrigger>
+              </CartDrawer>
+            )}
 
             <button
               onClick={checkFavoritesAccess}

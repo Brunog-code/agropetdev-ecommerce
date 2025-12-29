@@ -5,6 +5,7 @@ import { INewAddress } from "@/app/utils/types/new-address";
 import { auth } from "@/lib/auth";
 
 import { HeaderSecurity } from "../_components/header-security";
+import { CartTotals } from "../carrinho/_components/cartTotals";
 import { CardAddress } from "./_components/card-address";
 import { CardUserData } from "./_components/card-user-data";
 import { getAddressUser } from "./actions/get-address-user";
@@ -33,7 +34,9 @@ export default async function Identification() {
   return (
     <section className="w-full flex flex-col gap-6">
       <HeaderSecurity />
-      <h3>Confirme seus dados antes de prosseguir para o pagamento.</h3>
+      <h3>
+        Confirme seus dados e carrinho antes de prosseguir para o pagamento.
+      </h3>
       <article className="flex flex-col md:flex-row gap-6 justify-around w-full">
         <div className=" space-y-4 flex-1">
           <CardAddress userAddresses={userAddresses} />
@@ -41,6 +44,7 @@ export default async function Identification() {
 
         <div className=" space-y-4 flex-1">
           <CardUserData />
+          <CartTotals />
         </div>
       </article>
     </section>

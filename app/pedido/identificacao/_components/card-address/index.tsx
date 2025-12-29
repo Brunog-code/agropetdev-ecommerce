@@ -2,12 +2,14 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 import { saveAddress } from "@/app/(auth)/cadastro/actions/save-address";
 import { useAuth } from "@/app/contexts/AuthCont";
+import { SelectedShipping } from "@/app/pedido/_components/selected-shipping";
+import { useCartStore } from "@/app/store/cartStore";
 import { fetchAddressByCep } from "@/app/utils/address/fetchAddressByCep";
 import { INewAddress } from "@/app/utils/types/new-address";
 import { TDataCep } from "@/app/utils/types/zip-address";
@@ -40,11 +42,26 @@ interface InewAddressData {
 }
 
 export const CardAddress = ({ userAddresses }: ICardAddressProps) => {
+  //states
   const [selectedAddress, setSelectedAdress] = useState<string | null>(() => {
     return userAddresses.length > 0 ? userAddresses[0].id : null;
   });
-  const [selectedZip, setSelectedZip] = useState<string | null>(null);
+  const [selectedZip, setSelectedZip] = useState<string | null>(() => {
+    return userAddresses.length > 0 ? userAddresses[0].zip : null;
+  });
+  const [isLoading, setIsLoading] = useState(false);
 
+  //zustand
+  const setAddressCart = useCartStore((state) => state.addAddressCart);
+
+  //seta o endereço selecionado se estiver endereço no primeito rendersetAddressCart
+  useEffect(() => {
+    if (selectedAddress) {
+      setAddressCart(selectedAddress);
+    }
+  }, [selectedAddress, setAddressCart]);
+
+  //router
   const router = useRouter();
 
   //context
@@ -81,7 +98,10 @@ export const CardAddress = ({ userAddresses }: ICardAddressProps) => {
       form.reset();
       router.refresh();
 
-      setSelectedAdress(address.newAddress.id);
+      if (address) {
+        setSelectedAdress(address.newAddress.id);
+        setSelectedZip(address.newAddress.zip);
+      }
 
       toast.success("Endereço adicionado");
     } catch (error) {
@@ -97,6 +117,7 @@ export const CardAddress = ({ userAddresses }: ICardAddressProps) => {
 
   //api cep
   async function handleCepBlur(cep: string) {
+    setIsLoading(true);
     try {
       if (cep.length < 8) return;
 
@@ -111,6 +132,8 @@ export const CardAddress = ({ userAddresses }: ICardAddressProps) => {
     } catch (error) {
       console.error(error);
       toast.error("Erro ao consultar o CEP");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -126,9 +149,8 @@ export const CardAddress = ({ userAddresses }: ICardAddressProps) => {
       setSelectedZip(address.zip);
     }
 
-    //chamar calc do frete
-
-    //setar store(zustand)
+    //seta o endereço selecionado no zustand
+    setAddressCart(addressId);
   }
 
   return (
@@ -140,6 +162,13 @@ export const CardAddress = ({ userAddresses }: ICardAddressProps) => {
       </CardHeader>
 
       <CardContent>
+        {selectedAddress !== "add_new" && userAddresses.length !== 0 && (
+          <div className="mb-4">
+            <small>Selecione o método de envio</small>
+            <SelectedShipping cep={selectedZip!} />
+          </div>
+        )}
+
         <small>Selecione ao menos um endereço para entrega</small>
         <RadioGroup value={selectedAddress} onValueChange={handleChangeSelect}>
           {/* endereços cadastrados */}
@@ -213,7 +242,7 @@ export const CardAddress = ({ userAddresses }: ICardAddressProps) => {
                             placeholder="Rua"
                             type="text"
                             {...field}
-                            disabled={form.formState.isSubmitting}
+                            disabled={isLoading || form.formState.isSubmitting}
                           />
                         </FormControl>
                         <FormMessage />
@@ -252,7 +281,9 @@ export const CardAddress = ({ userAddresses }: ICardAddressProps) => {
                               placeholder="Bairro"
                               type="text"
                               {...field}
-                              disabled={form.formState.isSubmitting}
+                              disabled={
+                                isLoading || form.formState.isSubmitting
+                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -273,7 +304,9 @@ export const CardAddress = ({ userAddresses }: ICardAddressProps) => {
                               placeholder="Cidade"
                               type="text"
                               {...field}
-                              disabled={form.formState.isSubmitting}
+                              disabled={
+                                isLoading || form.formState.isSubmitting
+                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -293,7 +326,9 @@ export const CardAddress = ({ userAddresses }: ICardAddressProps) => {
                               type="text"
                               maxLength={2}
                               {...field}
-                              disabled={form.formState.isSubmitting}
+                              disabled={
+                                isLoading || form.formState.isSubmitting
+                              }
                             />
                           </FormControl>
                           <FormMessage />

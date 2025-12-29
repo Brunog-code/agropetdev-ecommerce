@@ -9,14 +9,14 @@ export const getCartLength = async (userId: TgetCartLengthSchema) => {
   if (!validation.success) {
     throw new Error("Dados inválidos");
   }
-  
+
   //verificar se existe o usuario
   const user = await prisma.user.findUnique({
     where: {
       id: userId,
     },
     include: {
-      Cart: {
+      cart: {
         include: {
           itemsCart: true,
         },
@@ -26,5 +26,5 @@ export const getCartLength = async (userId: TgetCartLengthSchema) => {
 
   if (!user) throw new Error("Usuario inválido");
 
-  return user.Cart?.itemsCart.length ?? 0;
+  return user.cart?.itemsCart.length ?? 0;
 };

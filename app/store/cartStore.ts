@@ -14,11 +14,12 @@ export type CartItem = {
 };
 
 type TShippingMethod = "PAC" | "SEDEX" | null;
-type TShippingEta = number | null
+type TShippingEta = number | null;
 
 interface ICartStore {
   cart: CartItem[];
   addToCart: (product: CartItem) => void;
+  addAddressCart: (address: string) => void;
   removeFromCart: (id: string) => void;
   updateQty: (type: "increment" | "decrement", id: string) => void;
   getTotalCart: () => number;
@@ -28,7 +29,12 @@ interface ICartStore {
   shippingMethod: TShippingMethod;
   shippingValue: number;
   shippingEta: TShippingEta;
-  setShipping: (method: TShippingMethod, value: number, eta: TShippingEta) => void;
+  addressId: string | null;
+  setShipping: (
+    method: TShippingMethod,
+    value: number,
+    eta: TShippingEta
+  ) => void;
   clearShipping: () => void;
   getTotalCartWithShipping: () => number;
 }
@@ -41,6 +47,7 @@ export const useCartStore = create<ICartStore>()(
       shippingMethod: null,
       shippingValue: 0,
       shippingEta: null,
+      addressId: null,
       //actions
       addToCart: (product) => {
         //verificar se o produto existe
@@ -60,6 +67,9 @@ export const useCartStore = create<ICartStore>()(
         } else {
           set({ cart: [...get().cart, { ...product }] });
         }
+      },
+     addAddressCart: (addressId) => {
+        set({ addressId });
       },
       mergeWithServer: (serverItems) => {
         set(() => {
@@ -126,14 +136,16 @@ export const useCartStore = create<ICartStore>()(
         set({
           shippingMethod: null,
           shippingValue: 0,
-          shippingEta: null
+          shippingEta: null,
         }),
       getTotalCartWithShipping: () =>
         get().getTotalCart() + get().shippingValue,
     }),
     {
       name: "cart-storage",
-      partialize: (state) => ({ cart: state.cart }), // ← AQUI: só persiste o cart
+      partialize: (state) => ({
+        cart: state.cart,
+      }),
     }
   )
 );
