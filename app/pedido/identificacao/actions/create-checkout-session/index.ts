@@ -12,7 +12,7 @@ import {
 } from "./schema";
 
 export type ICheckouSessionResponse =
-  | { success: true; url: string }
+  | { success: true; url: string; id: string }
   | { success: false; message: string };
 
 export const createCheckoutSession = async (
@@ -60,6 +60,14 @@ export const createCheckoutSession = async (
     return { success: false, message: "Pedido não pertence ao usuário logado" };
   }
 
+  //BLOQUEIA múltiplas sessões para o mesmo pedido
+  if (order.stripeSessionId) {
+    return {
+      success: false,
+      message: "Este pedido já possui uma sessão de pagamento",
+    };
+  }
+
   //instancia stripe
   const stripe = await new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -68,8 +76,8 @@ export const createCheckoutSession = async (
     payment_method_types: ["card"],
     mode: "payment",
     //precisa ser dinamica(em dev localhost, em prod outra)
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/success`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/cancel`,
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/pagamento/sucesso?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/pagamento/cancelado?session_id={CHECKOUT_SESSION_ID}`,
     metadata: {
       orderId,
     },
@@ -104,5 +112,15 @@ export const createCheckoutSession = async (
     return { success: false, message: "URL do Stripe não foi gerada" };
   }
 
-  return { success: true, url: checkouSession.url };
+  //atualiza o banco, incluindo o stripeSessionId
+  await prisma.order.update({
+    where: {
+      id: orderId,
+    },
+    data: {
+      stripeSessionId: checkouSession.id,
+    },
+  });
+
+  return { success: true, url: checkouSession.url, id: checkouSession.id };
 };

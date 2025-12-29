@@ -195,6 +195,8 @@ model Order {
   shippingEta  Int //prazo estimado
   total        Decimal //subtotal + frete - descontos
 
+  stripeSessionId String? @unique
+
   street   String
   number   String
   district String

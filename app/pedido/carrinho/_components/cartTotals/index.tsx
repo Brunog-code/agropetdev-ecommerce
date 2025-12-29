@@ -79,7 +79,7 @@ export const CartTotals = () => {
           throw new Error("Stripe public key não está definida");
         }
 
-        //cham a action
+        //chama a action
         const checkoutSession: ICheckouSessionResponse =
           await createCheckoutSession(order.order.id);
         if (!checkoutSession?.success || !checkoutSession.url) {
