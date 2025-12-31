@@ -1,5 +1,13 @@
 //itens do pedido
 export type TShippingType = "PAC" | "SEDEX";
+export type TStatusOrder =
+  | "pending"
+  | "paid"
+  | "shipped"
+  | "delivered"
+  | "failed"
+  | "refunded"
+  | "canceled";
 
 export interface IItemOrder {
   id: string;
@@ -7,6 +15,29 @@ export interface IItemOrder {
   productId: string;
   quantity: number;
   price: number; // Decimal já convertido
+  product?: {
+    id: string;
+    name: string;
+    slug: string;
+    description: string;
+    price: number;
+    stock: number;
+    image: string;
+    subcategoryId?: string;
+    nameNormalized: string;
+    subcategory: {
+      categoryId: string;
+      id: string;
+      img: string | null;
+      name: string;
+      slug: string;
+      category: {
+        id: string;
+        name: string;
+        slug: string;
+      };
+    };
+  };
 }
 
 //pedido
@@ -29,6 +60,13 @@ export interface IFormattedOrder {
   zip: string;
 
   itemsOrder: IItemOrder[];
+}
+
+//extendendo para o getOrders
+export interface IGetOrders extends IFormattedOrder {
+  createdAt: Date;
+  status: TStatusOrder;
+  stripeSessionId: string | null;
 }
 
 //retorno do backend

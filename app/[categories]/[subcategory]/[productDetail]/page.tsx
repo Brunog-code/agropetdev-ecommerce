@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { HiOutlineHome } from "react-icons/hi";
@@ -5,12 +6,33 @@ import { HiOutlineHome } from "react-icons/hi";
 import { CardProductDetail } from "./_components/cardProductDetail";
 import { getProductDetail } from "./actions/get-product-detail/index.ts";
 
-
 interface IProductProps {
   params: {
     categories: string;
     subcategory: string;
     productDetail: string;
+  };
+}
+
+//metadata
+export async function generateMetadata({
+  params,
+}: IProductProps): Promise<Metadata> {
+  const resolveParams = await params;
+  const slugProduct = resolveParams.productDetail;
+  const productData = await getProductDetail(slugProduct);
+
+  if (!productData) {
+    return {
+      title: "Produto não encontrado",
+      description: "O produto que você procura não está disponível",
+    };
+  }
+
+  return {
+    title: `${productData.name} -  | AgropetDev`,
+    description: productData.description,
+    keywords: [productData.name, "agropecuaria", "pets"],
   };
 }
 
@@ -61,8 +83,7 @@ export default async function Product({ params }: IProductProps) {
         </nav>
       </div>
 
-     <CardProductDetail productData={productData}/>
-      
+      <CardProductDetail productData={productData} />
     </section>
   );
 }

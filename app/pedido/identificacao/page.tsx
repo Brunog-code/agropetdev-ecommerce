@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { INewAddress } from "@/app/utils/types/new-address";
 import { auth } from "@/lib/auth";
 
+import { CheckouSteps } from "../_components/checkout-steps";
 import { HeaderSecurity } from "../_components/header-security";
 import { CartTotals } from "../carrinho/_components/cartTotals";
 import { CardAddress } from "./_components/card-address";
@@ -34,6 +35,7 @@ export default async function Identification() {
   return (
     <section className="w-full flex flex-col gap-6">
       <HeaderSecurity />
+      <CheckouSteps />
       <h3>
         Confirme seus dados e carrinho antes de prosseguir para o pagamento.
       </h3>

@@ -124,7 +124,7 @@ export function MobileNav() {
             ) : (
               <div className="absolute bg-white rounded-lg -top-17 -left-14 p-4 flex flex-col gap-2 w-[150px]">
                 <span className=" bg-orange-500 p-2 rounded-lg text-white shadow-lg">
-                  <Link href="#">Area cliente</Link>
+                  <Link href="/area-cliente">Area cliente</Link>
                 </span>
                 <span
                   className=" bg-orange-500 p-2 rounded-lg text-white shadow-lg cursor-pointer"

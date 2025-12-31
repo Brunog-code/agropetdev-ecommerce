@@ -84,9 +84,26 @@ export const POST = async (req: Request) => {
         break;
       }
 
-      case "charge.refunded": {
-        const charge = event.data.object as Stripe.Charge;
-        const orderId = charge.metadata?.orderId;
+      case "charge.refund.updated": {
+        console.log("chegou o webook no refund inicio");
+        const refund = event.data.object as Stripe.Refund;
+        if (!refund.payment_intent) break;
+
+        // pega o PaymentIntent
+        const paymentIntent = await stripe.paymentIntents.retrieve(
+          refund.payment_intent as string
+        );
+
+        // pega a checkout session vinculada
+        const sessions = await stripe.checkout.sessions.list({
+          payment_intent: paymentIntent.id,
+          limit: 1,
+        });
+
+        const session = sessions.data[0];
+        const orderId = session?.metadata?.orderId;
+
+        console.log("orderId teste", orderId);
         if (!orderId) break;
         //atualiza db, muda para estornado
         await prisma.order.update({
@@ -97,6 +114,24 @@ export const POST = async (req: Request) => {
             status: "refunded",
           },
         });
+        break;
+      }
+      case "checkout.session.expired": {
+        const session = event.data.object as Stripe.Checkout.Session;
+        const orderId = session.metadata?.orderId;
+        if (!orderId) break;
+
+        //pedido expirado = pedido cancelado (somente se ainda estiver pending)
+        await prisma.order.updateMany({
+          where: {
+            id: orderId,
+            status: "pending",
+          },
+          data: {
+            status: "canceled",
+          },
+        });
+
         break;
       }
 

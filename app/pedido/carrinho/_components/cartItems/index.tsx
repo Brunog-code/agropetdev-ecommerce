@@ -98,13 +98,13 @@ export const CartItems = () => {
                   } `}
                 >
                   <div className="flex gap-2">
-                    <div className="relative min-w-[72px] min-h-[72px] w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0">
+                    <div className="relative min-w-[72px] min-h-[72px] w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 border-2 rounded-lg">
                       <Image
                         src={item.image}
                         alt={item.name}
                         fill
                         sizes="(max-width: 640px) 80px, 96px"
-                        className="object-contain rounded-md"
+                        className="object-contain rounded-lg  p-2"
                       />
                     </div>
                     <div className="flex flex-col">

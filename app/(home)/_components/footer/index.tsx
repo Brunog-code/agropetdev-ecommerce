@@ -1,14 +1,14 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import { FaInstagram, FaFacebook, FaYoutube, FaLinkedin } from "react-icons/fa";
-import { LiaCcAmex } from "react-icons/lia";
-import { SiVisa, SiMastercard, SiDinersclub } from "react-icons/si";
+import Link from "next/link";
 import { BiBarcode } from "react-icons/bi";
+import { FaFacebook, FaInstagram, FaLinkedin,FaYoutube } from "react-icons/fa";
 import { FaPix } from "react-icons/fa6";
+import { LiaCcAmex } from "react-icons/lia";
+import { SiDinersclub,SiMastercard, SiVisa } from "react-icons/si";
 
 import logoAgropet from "@/app/assets/logo-version2.png";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export const Footer = () => {
   return (
@@ -33,7 +33,11 @@ export const Footer = () => {
 
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 p-2">
           <div className="flex flex-col items-center justify-center gap-4">
-            <Image src={logoAgropet} alt="Logo agropetdev" />
+            <Image 
+            src={logoAgropet} 
+            alt="Logo agropetdev"
+            loading="eager" 
+            />
             <div className="flex gap-4">
               <FaInstagram
                 size={30}

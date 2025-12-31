@@ -1,7 +1,9 @@
-import { FavoritesCard } from "./_components/favoritesCard";
-import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { getFavoritesUser } from "./actions/get-favorites/index.ts";
+
+import { auth } from "@/lib/auth";
+
+import { FavoritesCard } from "./_components/favoritesCard";
+import { getFavoritesUser } from "./actions/get-favorites";
 
 export default async function Favorites() {
   //headersm passar manualmente do lado server(betherAuth precisa dos cookies de sessao)
@@ -12,8 +14,9 @@ export default async function Favorites() {
   const userId = sessionData!.user.id;
 
   //verifica os favoritos do user logado
-  const favorites = await getFavoritesUser(userId);
-  console.log(favorites);
+  const response = await getFavoritesUser(userId);
+
+  const favorites = response.favorites;
 
   return (
     <section className="flex flex-col gap-4 w-full">

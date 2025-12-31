@@ -57,6 +57,8 @@ export function BannerSwiper() {
                 src={img}
                 alt={`banner ${idx + 1}`}
                 fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                loading="eager" // <- aqui
                 className={`${
                   isMobile ? "object-contain" : "object-cover"
                 } rounded-xl`}

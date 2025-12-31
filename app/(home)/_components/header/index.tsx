@@ -106,7 +106,7 @@ export function Header() {
               )}
             >
               <User className="w-6 h-6 hover:fill-white transition cursor-pointer" />
-              <span>Area cliente</span>
+              <Link href="/area-cliente">Area cliente</Link>
             </button>
             <button
               onClick={logout}
@@ -126,7 +126,7 @@ export function Header() {
       <div className="flex flex-col md:flex-row  max-w-7xl mx-auto justify-around items-center p-2">
         <div>
           <Link href="/">
-            <Image src={logoImg} alt="Logo" />
+            <Image src={logoImg} alt="Logo" loading="eager" />
           </Link>
         </div>
 

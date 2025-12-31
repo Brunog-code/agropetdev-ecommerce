@@ -67,6 +67,7 @@ export const CartTotals = () => {
 
         if (!order.success) {
           toast.error(order.message);
+          setIsLoading(false); //só desativa se houver erro
           return;
         }
 
@@ -76,6 +77,7 @@ export const CartTotals = () => {
         //pagamento
         //chama a function que cria o checkouSession do stripe
         if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
+          setIsLoading(false); //Para aqui se houver erro de config
           throw new Error("Stripe public key não está definida");
         }
 
@@ -83,14 +85,13 @@ export const CartTotals = () => {
         const checkoutSession: ICheckouSessionResponse =
           await createCheckoutSession(order.order.id);
         if (!checkoutSession?.success || !checkoutSession.url) {
+          setIsLoading(false); //Para aqui se não houver URL
           throw new Error("Nenhuma sessão stripe definida");
         }
 
         router.push(checkoutSession.url);
       } catch (error) {
         console.error(error);
-      } finally {
-        setIsLoading(false);
       }
     } else {
       router.push("/pedido/identificacao");

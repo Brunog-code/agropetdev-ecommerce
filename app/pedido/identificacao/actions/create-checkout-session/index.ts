@@ -23,10 +23,10 @@ export const createCheckoutSession = async (
     return { success: false, message: "Key não definida" };
   }
 
-  const session = await auth.api.getSession({
+  const sessionAuth = await auth.api.getSession({
     headers: await headers(),
   });
-  if (!session) {
+  if (!sessionAuth) {
     return { success: false, message: "Usuário inválido" };
   }
 
@@ -56,23 +56,52 @@ export const createCheckoutSession = async (
   }
 
   //se id pedido !== user logado
-  if (order.userId !== session.user.id) {
+  if (order.userId !== sessionAuth.user.id) {
     return { success: false, message: "Pedido não pertence ao usuário logado" };
-  }
-
-  //BLOQUEIA múltiplas sessões para o mesmo pedido
-  if (order.stripeSessionId) {
-    return {
-      success: false,
-      message: "Este pedido já possui uma sessão de pagamento",
-    };
   }
 
   //instancia stripe
   const stripe = await new Stripe(process.env.STRIPE_SECRET_KEY);
 
+  //Verifica se o usuario ja tentou fazer o pagamento
+  //SE JÁ EXISTE UMA SESSION, VERIFICA NO STRIPE
+  if (order.stripeSessionId) {
+    const existingSession = await stripe.checkout.sessions.retrieve(
+      order.stripeSessionId
+    );
+
+    //pagamento já confirmado (mesmo se webhook falhou)
+    if (existingSession.payment_status === "paid") {
+      await prisma.order.update({
+        where: { id: order.id },
+        data: { status: "paid" },
+      });
+
+      return {
+        success: false,
+        message: "Pagamento já confirmado para este pedido",
+      };
+    }
+
+    //sessão ainda válida → reutiliza
+    if (existingSession.status === "open" && existingSession.url) {
+      return {
+        success: true,
+        url: existingSession.url,
+        id: existingSession.id,
+      };
+    }
+
+    //sessão expirada ou cancelada → limpa
+    await prisma.order.update({
+      where: { id: order.id },
+      data: { stripeSessionId: null },
+    });
+  }
+  //-------
+
   //criar a checkoutSession
-  const checkouSession = await stripe.checkout.sessions.create({
+  const checkoutSession = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     mode: "payment",
     //precisa ser dinamica(em dev localhost, em prod outra)
@@ -108,19 +137,19 @@ export const createCheckoutSession = async (
     ],
   });
 
-  if (!checkouSession.url) {
+  if (!checkoutSession.url) {
     return { success: false, message: "URL do Stripe não foi gerada" };
   }
 
-  //atualiza o banco, incluindo o stripeSessionId
+  //atualiza o banco, incluindo o stripeSessionId e url de pagamento
   await prisma.order.update({
     where: {
       id: orderId,
     },
     data: {
-      stripeSessionId: checkouSession.id,
+      stripeSessionId: checkoutSession.id,
     },
   });
 
-  return { success: true, url: checkouSession.url, id: checkouSession.id };
+  return { success: true, url: checkoutSession.url, id: checkoutSession.id };
 };

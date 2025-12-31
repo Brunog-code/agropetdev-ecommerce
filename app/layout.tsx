@@ -2,7 +2,7 @@ import "./globals.css";
 import "./style/nprogress.css";
 
 import type { Metadata } from "next";
-import { Inter,Poppins } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
 import TopProgress from "./(home)/_components/lib/nprogress";
@@ -27,6 +27,11 @@ export const metadata: Metadata = {
   title: "AgropetDev - agropecuária",
   description: "Agropecuária online",
   keywords: ["agropecuaria", "pets", "agro", "piscina"],
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+  },
 };
 
 export default function RootLayout({
