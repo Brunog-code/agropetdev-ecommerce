@@ -1,16 +1,23 @@
-import { CardMainClient } from "./_components/card-main-client";
-import { CardMenuClient } from "./_components/card-menu-client";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function ClientArea() {
+import { auth } from "@/lib/auth";
+
+import { ContentAreaClient } from "./_components/content-area-client";
+
+export default async function ClientArea() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (!session) {
+    redirect("/");
+  }
+
   return (
-    <section>
-      <div>
-        <CardMenuClient />
-      </div>
+    <section className="flex flex-col gap-4 mt-4">
+      <h1 className="font-bold text-green-800 text-2xl">Area do cliente</h1>
 
-      <div>
-        <CardMainClient />
-      </div>
+      <ContentAreaClient />
     </section>
   );
 }

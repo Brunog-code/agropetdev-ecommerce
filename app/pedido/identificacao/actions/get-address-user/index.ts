@@ -1,3 +1,5 @@
+'use server'
+
 import { prisma } from "@/lib/db";
 
 import { getAddressUserSchema, TgetAddressUserSchema } from "./schema";
@@ -6,7 +8,7 @@ export const getAddressUser = async (userId: TgetAddressUserSchema) => {
   //zod
   getAddressUserSchema.parse(userId);
 
-  const user = await prisma.user.findFirst({
+  const user = await prisma.user.findUnique({
     where: {
       id: userId,
     },

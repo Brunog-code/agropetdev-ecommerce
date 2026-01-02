@@ -72,6 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       fetchOptions: {
         onSuccess: () => {
           setSession(false);
+          setUser(null);
           router.replace("/");
           toast.success("Sessão encerrada. Volte sempre que quiser!");
         },

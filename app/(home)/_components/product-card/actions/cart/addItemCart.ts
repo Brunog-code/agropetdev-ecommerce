@@ -1,7 +1,7 @@
 "use server";
 
-import { prisma } from "@/lib/db";
 import {IProduct} from '@/app/utils/types/product'
+import { prisma } from "@/lib/db";
 interface IAddItemCartProps {
   cartProduct: IProduct;
   userId: string;
