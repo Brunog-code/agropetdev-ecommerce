@@ -14,7 +14,6 @@ export default async function Search({ params }: ISearchProps) {
 
   //chamar sercer action para pegar os titulos
   const products: IFullProduct[] = await getProductSearch(name);
-  console.log(products);
 
   return (
     <section>

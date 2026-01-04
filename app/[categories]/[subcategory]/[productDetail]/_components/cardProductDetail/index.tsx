@@ -1,19 +1,24 @@
 "use client";
 
+import { Loader2 } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
+import toast from "react-hot-toast";
+
+import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/cart/addItemCart";
+import { CartDrawer } from "@/app/(home)/_components/ui/cart/drawer-cart";
 import { useAuth } from "@/app/contexts/AuthCont";
 import { useCartStore } from "@/app/store/cartStore";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/cart/addItemCart";
-import toast from "react-hot-toast";
-import { CartDrawer } from "@/app/(home)/_components/ui/cart/drawer-cart";
-import { SheetTrigger } from "@/components/ui/sheet";
 import { IProduct } from "@/app/utils/types/product";
+import { Button } from "@/components/ui/button";
+import { SheetTrigger } from "@/components/ui/sheet";
 interface TProductDataProps {
   productData: IProduct;
 }
 
 export const CardProductDetail = ({ productData }: TProductDataProps) => {
+  const [loadingImage, setLoadingImage] = useState(true);
+
   //context
   const { session, user } = useAuth();
 
@@ -54,12 +59,18 @@ export const CardProductDetail = ({ productData }: TProductDataProps) => {
     <div className="flex flex-col items-center gap-4 md:flex-row md:justify-evenly md:items-start w-full">
       <article className="w-full max-w-[300px] md:max-w-[380px]">
         <div className="relative w-full aspect-square bg-gray-100 rounded-xl overflow-hidden shadow-sm">
+          {loadingImage && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Loader2 className="animate-spin text-green-600" />
+            </div>
+          )}
           <Image
             src={productData.image}
             alt={productData.name}
             fill
             className="object-contain p-4"
             priority
+            onLoad={() => setLoadingImage(false)}
           />
         </div>
       </article>
