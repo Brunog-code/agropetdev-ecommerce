@@ -5,7 +5,7 @@ import Image from "next/image";
 import toast from "react-hot-toast";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
-import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/cart/addItemCart";
+import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/add-item-cart";
 import { removeItemFromCart } from "@/app/(home)/_components/ui/cart/cardCartItem/actions/removeItemFromCart";
 import { useAuth } from "@/app/contexts/AuthCont";
 import { useCartStore } from "@/app/store/cartStore";

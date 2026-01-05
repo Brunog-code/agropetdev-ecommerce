@@ -65,14 +65,17 @@ export const CartTotals = () => {
         };
         const order: TCreateOrderResponse = await createOrder(dataOrder);
 
+        if (!order.success && order.productsEmpty) {
+          toast.error(order.message);
+          setIsLoading(false); 
+          return;
+        }
+
         if (!order.success) {
           toast.error(order.message);
           setIsLoading(false); //só desativa se houver erro
           return;
         }
-
-        //se der certo a criacao do pedido(limpar o zustand tbm)
-        clearCart();
 
         //pagamento
         //chama a function que cria o checkouSession do stripe
@@ -88,6 +91,9 @@ export const CartTotals = () => {
           setIsLoading(false); //Para aqui se não houver URL
           throw new Error("Nenhuma sessão stripe definida");
         }
+
+        //se der certo a criacao do pedido(limpar o zustand tbm)
+        clearCart();
 
         router.push(checkoutSession.url);
       } catch (error) {

@@ -8,7 +8,7 @@ import { useAuth } from "@/app/contexts/AuthCont";
 import { CartItem } from "@/app/store/cartStore";
 import { useCartStore } from "@/app/store/cartStore";
 
-import { updateItemQuantity } from "../../../product-card/actions/cart/addItemCart";
+import { updateItemQuantity } from "../../../product-card/actions/add-item-cart";
 import { removeItemFromCart } from "./actions/removeItemFromCart";
 
 interface ICardCartItemProps {
@@ -116,7 +116,6 @@ export const CardCartItem = ({ itemCart }: ICardCartItemProps) => {
             })}
           </span>
         </div>
-        
       </div>
 
       <button

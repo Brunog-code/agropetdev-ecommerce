@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
+import { restoreStockAndUpdateOrder } from "@/app/utils/stock/restoreStockAndUpdateOrder";
 import { prisma } from "@/lib/db";
 
 export const POST = async (req: Request) => {
@@ -56,15 +57,12 @@ export const POST = async (req: Request) => {
         const orderId = paymentIntent.metadata?.orderId;
         if (!orderId) break;
 
-        //atualiza db, muda para falhou
-        await prisma.order.update({
-          where: {
-            id: orderId,
-          },
-          data: {
-            status: "failed",
-          },
+        await restoreStockAndUpdateOrder({
+          orderId,
+          expectedStatus: "pending",
+          newStatus: "failed",
         });
+
         break;
       }
 
@@ -72,15 +70,13 @@ export const POST = async (req: Request) => {
         const paymentIntent = event.data.object as Stripe.PaymentIntent;
         const orderId = paymentIntent.metadata?.orderId;
         if (!orderId) break;
-        //atualiza db, muda para cancelado
-        await prisma.order.update({
-          where: {
-            id: orderId,
-          },
-          data: {
-            status: "canceled",
-          },
+
+        await restoreStockAndUpdateOrder({
+          orderId,
+          expectedStatus: "pending",
+          newStatus: "canceled",
         });
+
         break;
       }
 
@@ -103,16 +99,11 @@ export const POST = async (req: Request) => {
         const session = sessions.data[0];
         const orderId = session?.metadata?.orderId;
 
-        console.log("orderId teste", orderId);
         if (!orderId) break;
-        //atualiza db, muda para estornado
-        await prisma.order.update({
-          where: {
-            id: orderId,
-          },
-          data: {
-            status: "refunded",
-          },
+        await restoreStockAndUpdateOrder({
+          orderId,
+          expectedStatus: "paid",
+          newStatus: "refunded",
         });
         break;
       }
@@ -121,15 +112,10 @@ export const POST = async (req: Request) => {
         const orderId = session.metadata?.orderId;
         if (!orderId) break;
 
-        //pedido expirado = pedido cancelado (somente se ainda estiver pending)
-        await prisma.order.updateMany({
-          where: {
-            id: orderId,
-            status: "pending",
-          },
-          data: {
-            status: "canceled",
-          },
+        await restoreStockAndUpdateOrder({
+          orderId,
+          expectedStatus: "pending",
+          newStatus: "canceled",
         });
 
         break;

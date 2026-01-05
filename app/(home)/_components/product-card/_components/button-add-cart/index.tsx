@@ -1,18 +1,22 @@
-'use client'
-
+"use client";
 
 import { ShoppingCart } from "lucide-react";
 import toast from "react-hot-toast";
 
 import { useAuth } from "@/app/contexts/AuthCont";
 import { useCartStore } from "@/app/store/cartStore";
+import { IFullProduct } from "@/app/utils/types/product";
 import { SheetTrigger } from "@/components/ui/sheet";
 
 import { CartDrawer } from "../../../ui/cart/drawer-cart";
-import { IProductCardProps } from "../..";
-import { updateItemQuantity } from "../../actions/cart/addItemCart";
+import { updateItemQuantity } from "../../actions/add-item-cart";
 
-export const ButtonAddCart = ({ prod }: IProductCardProps) => {
+interface IButtonAddCartProps {
+  prod: IFullProduct;
+  disabled: boolean;
+}
+
+export const ButtonAddCart = ({ prod, disabled }: IButtonAddCartProps) => {
   //zustand
   const addToCart = useCartStore((state) => state.addToCart);
 
@@ -52,8 +56,11 @@ export const ButtonAddCart = ({ prod }: IProductCardProps) => {
     <CartDrawer>
       <SheetTrigger asChild>
         <button
+          disabled={disabled}
           onClick={handleAddToCart}
-          className="bg-green-600 text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center"
+          className={` text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center ${
+            disabled ? "bg-gray-400 cursor-not-allowed" : "bg-green-600"
+          }`}
         >
           Comprar
           <ShoppingCart size={20} color="#fff" />

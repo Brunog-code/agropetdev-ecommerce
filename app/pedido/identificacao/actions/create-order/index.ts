@@ -25,17 +25,44 @@ export const createOrder = async (
     return { success: false, message: "Usuário inválido" };
   }
 
-  //pegar carrinho do usuario
+  //pegar carrinho do usuario e produtos
   const cart = await prisma.cart.findUnique({
     where: {
       userId: validationData.userId,
     },
     include: {
-      itemsCart: true,
+      itemsCart: {
+        include: {
+          product: {
+            select: {
+              id: true,
+              nameNormalized: true,
+              stock: true,
+            },
+          },
+        },
+      },
     },
   });
   if (!cart || cart.itemsCart.length === 0) {
     return { success: false, message: "Carrinho vazio" };
+  }
+
+  //pegar produtos do carrinho para ver se tem estoque
+  const itemsStockDisponible = cart.itemsCart.filter(
+    (item) => item.product.stock - item.quantity < 0
+  );
+
+  const itemsStockEmptyNames = itemsStockDisponible.map(
+    (item) => item.product.nameNormalized
+  );
+  if (itemsStockEmptyNames.length > 0) {
+    return {
+      success: false,
+      message: `Estoque não disponivel para os seguintes produtos:\n ${itemsStockEmptyNames.join(
+        "\n"
+      )}`,
+    };
   }
 
   //pegar o endereço do usuario
@@ -79,12 +106,29 @@ export const createOrder = async (
         },
       });
 
+      //baixar estoque
+      await Promise.all(
+        cart.itemsCart.map((item) =>
+          tx.product.update({
+            where: {
+              id: item.productId,
+            },
+            data: {
+              stock: {
+                decrement: item.quantity,
+              },
+            },
+          })
+        )
+      );
+
       //deletar os items do carrinho
       await tx.itemCart.deleteMany({
         where: {
           cartId: cart.id,
         },
       });
+
       return orderCreated;
     });
 

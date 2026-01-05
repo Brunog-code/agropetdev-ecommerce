@@ -78,4 +78,5 @@ export type TCreateOrderResponse =
   | {
       success: false;
       message: string;
+      productsEmpty?: string[];
     };

@@ -3,6 +3,7 @@
 import { headers } from "next/headers";
 import Stripe from "stripe";
 
+import { restoreStockAndUpdateOrder } from "@/app/utils/stock/restoreStockAndUpdateOrder";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 
@@ -94,18 +95,20 @@ export const cancelOrderStripe = async (
           payment_intent: sessionStripe.payment_intent as string,
         });
         if (refunds.data.length > 0) {
-          await prisma.order.update({
-            where: { id: order.id },
-            data: { status: "refunded" },
+          await restoreStockAndUpdateOrder({
+            orderId: order.id,
+            expectedStatus: "paid",
+            newStatus: "refunded",
           });
           return { success: true };
         }
 
         // Status de cancelado ou falhado
         if (paymentIntent?.status === "canceled") {
-          await prisma.order.update({
-            where: { id: order.id },
-            data: { status: "canceled" },
+          await restoreStockAndUpdateOrder({
+            orderId: order.id,
+            expectedStatus: "pending",
+            newStatus: "canceled",
           });
           return { success: true };
         }
@@ -113,9 +116,10 @@ export const cancelOrderStripe = async (
           paymentIntent?.status === "requires_payment_method" ||
           charge?.status === "failed"
         ) {
-          await prisma.order.update({
-            where: { id: order.id },
-            data: { status: "failed" },
+          await restoreStockAndUpdateOrder({
+            orderId: order.id,
+            expectedStatus: "pending",
+            newStatus: "failed",
           });
           return { success: true };
         }
@@ -150,13 +154,27 @@ export const cancelOrderStripe = async (
      * CASO 2: PEDIDO AINDA NÃO PAGO
      * ============================
      */
-    if (order.status == "pending") {
-      //expira a checkout session
-      await stripe.checkout.sessions.expire(order.stripeSessionId);
+    if (order.status === "pending") {
+      if (sessionStripe.status === "open") {
+        await stripe.checkout.sessions.expire(order.stripeSessionId);
+        return { success: true };
+      }
 
-      //NÃO atualiza banco
-      //webhook checkout.session.expired → canceled
-      return { success: true };
+      // ⚠️ Sessão já foi concluída no Stripe
+      if (sessionStripe.status === "complete") {
+        // Corrige o banco
+        await prisma.order.update({
+          where: { id: order.id },
+          data: { status: "paid" },
+        });
+
+        // Agora segue fluxo de refund
+        await stripe.refunds.create({
+          payment_intent: sessionStripe.payment_intent as string,
+        });
+
+        return { success: true };
+      }
     }
 
     return { success: false, message: "Status inválido" };

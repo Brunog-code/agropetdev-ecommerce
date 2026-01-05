@@ -8,7 +8,6 @@ interface IAddFavoriteData {
 }
 
 export async function addFavorite(dataFavorite: IAddFavoriteData) {
-  console.log(dataFavorite);
 
   try {
     await prisma.favorite.upsert({

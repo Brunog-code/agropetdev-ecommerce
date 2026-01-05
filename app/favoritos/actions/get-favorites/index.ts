@@ -61,7 +61,6 @@ export async function getFavoritesUser(
         price: p.product.price.toNumber(),
       },
     }));
-    console.log(productsFavoritesFormated);
 
     return { success: true, favorites: productsFavoritesFormated };
   } catch (error) {

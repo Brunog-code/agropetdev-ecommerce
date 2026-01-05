@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/cart/addItemCart";
+import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/add-item-cart";
 import { CartDrawer } from "@/app/(home)/_components/ui/cart/drawer-cart";
 import { useAuth } from "@/app/contexts/AuthCont";
 import { useCartStore } from "@/app/store/cartStore";
