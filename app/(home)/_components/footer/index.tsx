@@ -72,7 +72,7 @@ export const Footer = () => {
           <div className="flex flex-col gap-2 w-full items-center justify-start">
             <h2 className="font-semibold">Informações</h2>
             <div className="flex flex-col gap-1 items-center justify-center">
-              <Link href="#">A empresa</Link>
+              <Link href="/empresa">A empresa</Link>
               <Link href="#">Trocas e devoluções</Link>
             </div>
           </div>

@@ -20,10 +20,10 @@ export default function LayoutWrapper({
   const isAuthRoute = AUTH_ROUTES.some((route) => pathname === route);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col ">
       {!isAuthRoute && <Header />}
 
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 ">{children}</main>
       <div className="fixed bottom-0 left-0 w-full">
         {!isAuthRoute && <MobileNav />}
       </div>

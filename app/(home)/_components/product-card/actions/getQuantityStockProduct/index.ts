@@ -19,7 +19,5 @@ export const getQuantityStockProduct = async (id: string) => {
     },
   });
 
-  console.log(stockProduct?.stock);
-
   return stockProduct?.stock ?? 0;
 };

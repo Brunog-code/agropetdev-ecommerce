@@ -78,10 +78,10 @@ export function Header() {
   }
 
   return (
-    <header className="w-full bg-[#3A7D44]">
+    <header className="w-full bg-[#3A7D44] ">
       {/* parte superior */}
-      <div className="w-full bg-orange-400/90 h-11 flex justify-center md:justify-around items-center text-white">
-        <div className="w-full md:max-w-1/2 flex justify-center">
+      <div className="w-full bg-orange-400/90 h-11 flex justify-center md:justify-around items-center text-white ">
+        <div className="w-full md:max-w-1/3 flex justify-center">
           <PromotionsCarousel />
         </div>
         {loading ? (
@@ -175,7 +175,7 @@ export function Header() {
         </div>
       </div>
       <div className="w-full p-2 text-white">
-        <ul className="hidden md:flex justify-evenly items-center">
+        <ul className="hidden md:flex justify-evenly items-center max-w-7xl mx-auto">
           {categories?.map((cat) => (
             <Link
               key={cat.id}
