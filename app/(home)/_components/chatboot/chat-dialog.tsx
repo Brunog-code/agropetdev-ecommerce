@@ -27,7 +27,7 @@ export function ChatDialog({ open, onOpenChange }: Props) {
 
   // Estado para armazenar o histórico
   const [chatLog, setChatLog] = useState<TMessage[]>([
-    { role: "nala", content: "Olá! Como posso ajudar você hoje? 😊" },
+    { role: "nala", content: "Como posso ajudar você hoje? 😊" },
   ]);
 
   const [loading, setLoading] = useState(false);
@@ -130,7 +130,7 @@ export function ChatDialog({ open, onOpenChange }: Props) {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
-          <button className="bg-green-600 text-white px-4 rounded cursor-pointer">
+          <button className="bg-green-600 hover:opacity-85 text-white px-4 rounded cursor-pointer">
             Enviar
           </button>
         </form>

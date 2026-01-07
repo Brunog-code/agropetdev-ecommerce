@@ -6,11 +6,31 @@ import { getProductSearchSchema, TgetProductSearchSchema } from "./schema";
 export const getProductSearch = async (name: TgetProductSearchSchema) => {
   try {
     getProductSearchSchema.parse(name);
+
+    const normalized = normalizeText(name);
+    const stopWords = ["para", "de", "com", "e", "a", "o"];
+
+    const terms = normalized
+      .split(" ")
+      .filter((t) => t.length > 2 && !stopWords.includes(t));
+
+    if (terms.length === 0) return [];
+
     const products = await prisma.product.findMany({
       where: {
-        nameNormalized: {
-          contains: normalizeText(name),
-        },
+        OR: terms.flatMap((term) => [
+          {
+            nameNormalized: {
+              contains: term,
+            },
+          },
+          {
+            description: {
+              contains: term,
+              mode: "insensitive",
+            },
+          },
+        ]),
       },
       include: {
         subcategory: {
