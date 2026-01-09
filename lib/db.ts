@@ -1,5 +1,3 @@
-import "dotenv/config";
-
 import { PrismaPg } from "@prisma/adapter-pg";
 
 import { PrismaClient } from "../generated/prisma/client";
@@ -9,7 +7,6 @@ const adapter = new PrismaPg({ connectionString });
 
 // Evita criar múltiplas instâncias no desenvolvimento
 declare global {
-   
   var prisma: PrismaClient | undefined;
 }
 
