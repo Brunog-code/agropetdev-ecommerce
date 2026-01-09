@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import nala from "@/app/assets/mascote.webp";
 import { useAuth } from "@/app/contexts/AuthCont";
@@ -33,6 +33,13 @@ export function ChatDialog({ open, onOpenChange }: Props) {
   const [loading, setLoading] = useState(false);
 
   const { session, user } = useAuth();
+
+  //scroll chat
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatLog, loading]);
 
   async function handleSubmitMessage(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -120,6 +127,7 @@ export function ChatDialog({ open, onOpenChange }: Props) {
               Nala está pensando...
             </div>
           )}
+          <div ref={messagesEndRef}></div>
         </div>
 
         {/* Input */}
