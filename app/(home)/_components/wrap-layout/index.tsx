@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import React from "react";
 
+import { ChatWidget } from "../chatboot/Chat-widget";
 import { Footer } from "../footer";
 import { Header } from "../header";
 import { MobileNav } from "../mobile-nav";
@@ -23,7 +24,10 @@ export default function LayoutWrapper({
     <div className="min-h-screen flex flex-col ">
       {!isAuthRoute && <Header />}
 
-      <main className="flex-1 ">{children}</main>
+      <main className="flex-1 ">
+        {children}
+        {!isAuthRoute && <ChatWidget />}
+      </main>
       <div className="fixed bottom-0 left-0 w-full">
         {!isAuthRoute && <MobileNav />}
       </div>

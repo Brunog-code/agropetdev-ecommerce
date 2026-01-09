@@ -25,7 +25,7 @@ export async function FiltersCategory() {
           {/* titulo cachorro */}
           <div className="bg-gradient-to-r  shadow-lg from-sky-400 via-sky-600 to-sky-400  rounded-lg flex items-center justify-evenly w-full md:w-1/2">
             <div className="w-1/2">
-              <Image src={cachorroTitulo} alt="imagem cachorro" className="" />
+              <Image src={cachorroTitulo} alt="imagem cachorro"  />
             </div>
 
             <div className="flex flex-col items-center gap-2">
@@ -48,12 +48,12 @@ export async function FiltersCategory() {
                       src={cat.img!}
                       alt={cat.name}
                       className="w-full h-full object-cover"
-                      width={96}
-                      height={96}
+                      width={90}
+                      height={90}
                     />
                   </div>
 
-                  <span className="font-semibold text-green-600">
+                  <span className="font-semibold text-green-600 text-center">
                     {cat.name}
                   </span>
                 </div>
@@ -67,7 +67,7 @@ export async function FiltersCategory() {
           {/* titulo gato */}
           <div className="bg-gradient-to-r  shadow-lg   from-fuchsia-400 via-fuchsia-600 to-fuchsia-400 rounded-lg flex items-center justify-evenly w-full md:w-1/2">
             <div className="w-1/2">
-              <Image src={gatoTitulo} alt="imagem gato" className="" />
+              <Image src={gatoTitulo} alt="imagem gato" />
             </div>
             <div className="flex flex-col items-center gap-2">
               <div className="text-4xl text-white font-bold">Gatos</div>
@@ -89,11 +89,11 @@ export async function FiltersCategory() {
                       src={cat.img!}
                       alt={cat.name}
                       className="w-full h-full object-cover"
-                      width={96}
-                      height={96}
+                      width={90}
+                      height={90}
                     />
                   </div>
-                  <span className="font-semibold text-green-600">
+                  <span className="font-semibold text-green-600 text-center">
                     {cat.name}
                   </span>
                 </div>

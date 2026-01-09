@@ -30,8 +30,8 @@ export function ChatButton({ onClick }: Props) {
       tabIndex={0}
       onClick={onClick}
       onKeyDown={(e) => e.key === "Enter" && onClick()}
-      className={`group fixed bg-white rounded-full shadow-lg ${
-        !isMobile ? "bottom-6 right-6" : "bottom-20 right-6"
+      className={`group fixed border border-green-400 bg-white rounded-full shadow-md ${
+        !isMobile ? "bottom-6 right-6" : "bottom-21 right-6"
       }`}
     >
       <Image

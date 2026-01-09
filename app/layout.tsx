@@ -5,7 +5,6 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
-import { ChatWidget } from "./(home)/_components/chatboot/Chat-widget";
 import TopProgress from "./(home)/_components/lib/nprogress";
 import LayoutWrapper from "./(home)/_components/wrap-layout";
 import { AuthProvider } from "./contexts/AuthCont";
@@ -51,7 +50,7 @@ export default function RootLayout({
             <main className="p-2 flex-1 max-w-7xl mx-auto w-full pb-30">
               <TopProgress />
               {children}
-              <ChatWidget />
+
               <Toaster position="top-right" reverseOrder={false} />
             </main>
           </LayoutWrapper>
