@@ -67,7 +67,7 @@ export const CartTotals = () => {
 
         if (!order.success && order.productsEmpty) {
           toast.error(order.message);
-          setIsLoading(false); 
+          setIsLoading(false);
           return;
         }
 
@@ -100,6 +100,7 @@ export const CartTotals = () => {
         console.error(error);
       }
     } else {
+      setIsLoading(true);
       router.push("/pedido/identificacao");
     }
   }
