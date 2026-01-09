@@ -117,27 +117,28 @@ export default async function Categories({ params }: ICategoriasProps) {
           className="object-contain p-4"
         />
         {resolveParams.categories === "cachorros" ? (
-          <span className="text-white text-3xl  mr-2 ">
+          <span className="text-white text-2xl ">
             Tudo o que seu <span className="font-bold">doguinho</span> precisa
           </span>
         ) : resolveParams.categories === "aves" ? (
-          <span className="text-white text-3xl  mr-2 ">
+          <span className="text-white text-2xl ">
             Tudo o que seu <span className="font-bold">passarinho</span> precisa
           </span>
         ) : resolveParams.categories === "piscina" ? (
-          <span className="text-white text-3xl  mr-2 ">
+          <span className="text-white text-2xl ">
             Tudo para <span className="font-bold">sua</span> piscina
           </span>
         ) : resolveParams.categories === "jardim" ? (
-          <span className="text-white text-3xl  mr-2 ">
+          <span className="text-white text-2xl ">
             Tudo para o <span className="font-bold">seu</span> jardim
           </span>
         ) : (
-          <span className="text-white text-3xl  mr-2 ">
+          <span className="text-white text-2xl ">
             Tudo o que seu <span className="font-bold">felino</span> precisa
           </span>
         )}
       </div>
+
       <div className="grid grid-cols-2 sm:grid-cols-3 mx-auto gap-10 bg-white rounded-lg shadow-lg p-4">
         {subcategories.map((sub) => (
           <div key={sub.id}>
