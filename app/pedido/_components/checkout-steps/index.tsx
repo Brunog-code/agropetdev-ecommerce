@@ -13,7 +13,7 @@ export const CheckouSteps = () => {
           <HiCheck size={25} color="#fff" />
         </div>
         <span className="text-gray-500 font-medium">Carrinho</span>
-        <div className="h-1 rounded-xl bg-green-600 w-50"></div>
+        <div className="h-1 rounded-xl bg-green-600 w-1 md:w-30"></div>
       </div>
 
       <div className="flex items-center gap-2">
@@ -32,7 +32,7 @@ export const CheckouSteps = () => {
         <div
           className={`h-1 rounded-xl ${
             pathname == "/pedido/carrinho" ? "bg-gray-400" : "bg-green-600"
-          } w-50`}
+          } w-1 md:w-30`}
         ></div>
       </div>
 
