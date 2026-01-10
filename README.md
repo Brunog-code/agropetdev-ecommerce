@@ -40,7 +40,7 @@ Este projeto foi construído utilizando uma stack moderna com **Next.js**, focan
 
 ## ✨ Funcionalidades em Destaque
 
-O projeto foi construído focando em oferecer uma experiência de compra completa, automatizada e inteligente para o setor agropecuário.
+O projeto foi construído focando em oferecer uma experiência de compra completa.
 
 ### 💳 Sistema de Pagamento e Webhooks
 
