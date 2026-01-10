@@ -3,11 +3,10 @@
 import "swiper/css";
 import "swiper/css/navigation";
 
-import { Autoplay,Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 export function PromotionsCarousel() {
-
   return (
     <section className="w-full">
       <style>
@@ -15,8 +14,8 @@ export function PromotionsCarousel() {
             .swiper-button-prev, .swiper-button-next {
             color: #fff; 
             border-radius: 50%; 
-            width: 38px; /* Tamanho das setas */
-            height: 38px;
+            width: 15px; /* Tamanho das setas */
+            height: 44px;
           }
 
           .swiper-button-prev:hover, .swiper-button-next:hover {
