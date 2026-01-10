@@ -19,8 +19,6 @@ Este projeto foi construído utilizando uma stack moderna com **Next.js**, focan
 | **Tailwind CSS** | ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-%2338B2AC.svg?style=flat-square&logo=tailwind-css&logoColor=white) |
 | **PostgreSQL** | ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-%23316192.svg?style=flat-square&logo=postgresql&logoColor=white) |
 | **Prisma ORM** | ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=flat-square&logo=Prisma&logoColor=white) |
-| **Zustand** | ![Zustand](https://img.shields.io/badge/Zustand-%2320232a.svg?style=flat-square&logo=react&logoColor=%2361DAFB) |
-| **Zod** | ![Zod](https://img.shields.io/badge/Zod-3E67B1?style=flat-square&logo=zod&logoColor=white) |
 
 ### 🤖 Automação & IA
 
