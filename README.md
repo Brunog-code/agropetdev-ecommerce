@@ -124,4 +124,22 @@ Projeto desenvolvido com foco em **qualidade de código**, **arquitetura escalá
 
 ---
 
-> 💡 **Dica:** Para testar o fluxo completo de pagamento, utilize os cartões de teste fornecidos pela documentação do Stripe.
+## 🧪 Testando o Projeto
+
+Para testar o fluxo completo de pagamento, utilize os seguintes **cartões de teste do Stripe**:
+
+### Cartão de Crédito - Pagamento Aprovado ✅
+```
+Número: 4242 4242 4242 4242
+Data de Validade: Qualquer data futura (ex: 12/34)
+CVV: Qualquer 3 dígitos (ex: 123)
+CEP: Qualquer CEP válido
+```
+
+### Cartão de Crédito - Pagamento Recusado ❌
+```
+Número: 4000 0000 0000 0002
+Data de Validade: Qualquer data futura
+CVV: Qualquer 3 dígitos
+CEP: Qualquer CEP válido
+```
