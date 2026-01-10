@@ -63,6 +63,7 @@ export const UserAddresses = () => {
   const [loadingNewForm, setLoadingNewForm] = useState(false);
   const [addresses, setAddresses] = useState<IAddressesUserResponse[]>([]);
   const [openDialog, setOpenDialog] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
 
   const form = useForm<TAddressIdentificationSchema>({
     resolver: zodResolver(AddressIdentificationSchema),
@@ -99,6 +100,17 @@ export const UserAddresses = () => {
     }
     fetchAddresses();
   }, [user]);
+
+  //verifica se é mobile
+  useEffect(() => {
+    const checkScreen = () => setIsMobile(window.innerWidth < 640);
+
+    checkScreen();
+
+    window.addEventListener("resize", checkScreen);
+
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
 
   async function handleDeleteAddress(addressId: string) {
     if (!addressId) return;
@@ -193,7 +205,7 @@ export const UserAddresses = () => {
                 {address.zip} - {address.city}/{address.state}
               </span>
               <Trash2
-                size={18}
+                size={!isMobile ? 25 : 32}
                 className="text-red-500 cursor-pointer hover:text-red-700"
                 onClick={() => handleDeleteAddress(address.id)}
               />
