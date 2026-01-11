@@ -9,7 +9,7 @@ import { Header } from "../header";
 import { MobileNav } from "../mobile-nav";
 
 // Rotas onde o Header GLOBAL deve ser escondido
-const AUTH_ROUTES = ["/login", "/cadastro", "/login-obrigatorio"];
+const AUTH_ROUTES = ["/login", "/cadastro", "/login-obrigatorio", "/esqueci-senha"];
 
 export default function LayoutWrapper({
   children,

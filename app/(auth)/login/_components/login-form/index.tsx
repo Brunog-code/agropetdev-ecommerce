@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -126,9 +127,9 @@ export function LoginForm({ returnTo }: ILoginForm) {
                     ) : (
                       <Eye className="h-4 w-4 text-muted-foreground" />
                     )}
-                    <span className="sr-only">
+                    {/* <span className="sr-only">
                       {showPassword ? "Esconder senha" : "Mostrar senha"}
-                    </span>
+                    </span> */}
                   </Button>
                 </div>
               </FormControl>
@@ -136,7 +137,11 @@ export function LoginForm({ returnTo }: ILoginForm) {
             </FormItem>
           )}
         />
-
+        <div className="w-full flex justify-end -mt-4">
+          <Link href="#" className="text-sm text-green-600 font-semibold">
+            Esqueci minha senha
+          </Link>
+        </div>
         <Button
           type="submit"
           className="w-full cursor-pointer bg-[#3a7d44] hover:bg-green-600"

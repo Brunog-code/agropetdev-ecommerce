@@ -37,12 +37,13 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  address   Address[]
-  sessions  Session[]
-  accounts  Account[]
-  favorites Favorite[]
-  cart      Cart?
-  orders    Order[]
+  address             Address[]
+  sessions            Session[]
+  accounts            Account[]
+  favorites           Favorite[]
+  cart                Cart?
+  orders              Order[]
+  passwordResetTokens PasswordResetToken?
 
   @@unique([email])
   @@map("user")
@@ -107,6 +108,18 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model PasswordResetToken {
+  id           String   @id @default(uuid())
+  token        String   @unique
+  tokenExpires DateTime
+  createdAt    DateTime @default(now())
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model Product {
@@ -186,9 +199,9 @@ model ItemCart {
 }
 
 model Order {
-  id           String          @id @default(uuid())
-  createdAt    DateTime        @default(now())
-  status       OrderStatus     @default(pending)
+  id           String         @id @default(uuid())
+  createdAt    DateTime       @default(now())
+  status       OrderStatus    @default(pending)
   subtotal     Decimal //soma dos itens
   shippingCost Decimal //FRETE
   shippingType ShippingMethod
