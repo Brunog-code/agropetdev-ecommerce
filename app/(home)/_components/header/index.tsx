@@ -12,6 +12,7 @@ import { BsSearch } from "react-icons/bs";
 import logoImg from "@/app/assets/logo.png";
 import { useAuth } from "@/app/contexts/AuthCont";
 import { useCartStore } from "@/app/store/cartStore";
+import { normalizeText } from "@/app/utils/helpers/normalizeText";
 import { buttonVariants } from "@/components/ui/button";
 import { SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
@@ -74,7 +75,8 @@ export function Header() {
       return;
     }
 
-    router.push(`/produto/procurar/${inputSearch}`);
+    const normalizedSearch = normalizeText(inputSearch);
+    router.push(`/produto/procurar/${normalizedSearch}`);
   }
 
   return (

@@ -3,11 +3,12 @@ import { prisma } from "@/lib/db";
 
 import { getProductSearchSchema, TgetProductSearchSchema } from "./schema";
 
-export const getProductSearch = async (name: TgetProductSearchSchema) => {
+export const getProductSearch = async (data: TgetProductSearchSchema) => {
   try {
-    getProductSearchSchema.parse(name);
+    const name = getProductSearchSchema.parse(data);
 
     const normalized = normalizeText(name);
+
     const stopWords = ["para", "de", "com", "e", "a", "o"];
 
     const terms = normalized
@@ -22,6 +23,12 @@ export const getProductSearch = async (name: TgetProductSearchSchema) => {
           {
             nameNormalized: {
               contains: term,
+            },
+          },
+          {
+            name: {
+              contains: term,
+              mode: "insensitive",
             },
           },
           {
@@ -47,30 +54,27 @@ export const getProductSearch = async (name: TgetProductSearchSchema) => {
       },
     });
 
-    const finalProducts = products.map((p) => {
-      return {
-        category: {
-          slug: p.subcategory.category.slug,
-        },
-        subcategory: {
-          name: p.subcategory.name,
-          slug: p.subcategory.slug,
-        },
-        product: {
-          id: p.id,
-          name: p.name,
-          slug: p.slug,
-          description: p.description,
-          price: p.price.toNumber(),
-          stock: p.stock,
-          image: p.image,
-          subcategoryId: p.subcategoryId,
-        },
-      };
-    });
-    return finalProducts;
+    return products.map((p) => ({
+      category: {
+        slug: p.subcategory.category.slug,
+      },
+      subcategory: {
+        name: p.subcategory.name,
+        slug: p.subcategory.slug,
+      },
+      product: {
+        id: p.id,
+        name: p.name,
+        slug: p.slug,
+        description: p.description,
+        price: p.price.toNumber(),
+        stock: p.stock,
+        image: p.image,
+        subcategoryId: p.subcategoryId,
+      },
+    }));
   } catch (error) {
-    console.error(error);
+    console.error("getProductSearch error:", error);
     return [];
   }
 };
