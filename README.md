@@ -111,13 +111,14 @@ Sistema completo de autenticação gerenciado pela biblioteca **Better Auth**, g
 ## 📸 Visualização
 
 ### Página Inicial
-*[Adicione aqui uma screenshot da página inicial]*
 
-### Catálogo de Produtos
-*[Adicione aqui uma screenshot do catálogo]*
+![Pagina inicial](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/hero.png)
 
-### Carrinho de Compras
-*[Adicione aqui uma screenshot do carrinho]*
+### Principais Categorias
+![Principais categorias](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/principais-categorias.png)
+
+### Pagina subcategorias
+![Principais categorias](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/categorias.png)
 
 ### Chat com IA
 *[Adicione aqui uma screenshot do chat]*
