@@ -22,7 +22,7 @@ export const registerSchema = z
     password: z
       .string()
       .nonempty({ message: "Favor preencher a senha" })
-      .min(6, { message: "A senha deve ter pelo menos 8 caracteres" }),
+      .min(6, { message: "A senha deve ter pelo menos 6 caracteres" }),
     confirmPassword: z
       .string()
       .nonempty({ message: "Favor confirmar a senha" })

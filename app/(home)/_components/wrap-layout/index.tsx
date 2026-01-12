@@ -9,7 +9,13 @@ import { Header } from "../header";
 import { MobileNav } from "../mobile-nav";
 
 // Rotas onde o Header GLOBAL deve ser escondido
-const AUTH_ROUTES = ["/login", "/cadastro", "/login-obrigatorio", "/esqueci-senha"];
+const AUTH_ROUTES = [
+  "/login",
+  "/cadastro",
+  "/login-obrigatorio",
+  "/esqueci-senha",
+  "/resetar-senha",
+];
 
 export default function LayoutWrapper({
   children,
@@ -18,7 +24,9 @@ export default function LayoutWrapper({
 }) {
   const pathname = usePathname();
 
-  const isAuthRoute = AUTH_ROUTES.some((route) => pathname === route);
+  const isAuthRoute = AUTH_ROUTES.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`)
+  );
 
   return (
     <div className="min-h-screen flex flex-col ">

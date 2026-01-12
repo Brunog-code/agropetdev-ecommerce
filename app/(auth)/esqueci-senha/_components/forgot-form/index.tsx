@@ -2,7 +2,9 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -26,14 +28,25 @@ export const ForgotForm = () => {
     },
   });
 
+  const router = useRouter();
+
   async function onSubmit(FormData: TForgotForm) {
     if (!FormData) return;
 
     try {
       //chama action
       const response = await forgotPassword(FormData.email);
+
+      if (!response.success) {
+        toast.error(response.message);
+        return;
+      }
+
+      toast.success(response.message);
+      router.push("/");
     } catch (error) {
       console.error(error);
+      toast.error("Erro ao solicitar redefinição");
     }
   }
 

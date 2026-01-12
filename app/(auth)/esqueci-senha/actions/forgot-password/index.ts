@@ -1,75 +1,41 @@
 "use server";
-import crypto from "crypto";
 
-import { prisma } from "@/lib/db";
+import { auth } from "@/lib/auth"; // auth do servidor
 
 import { forgotPasswordSchema, TforgotPasswordSchema } from "./schema";
 
-// interface IResponseForgotPassword {
+type TforgotPasswordResponse = {
+  success: boolean;
+  message: string;
+};
 
-// }
+export const forgotPassword = async (
+  emailData: TforgotPasswordSchema
+): Promise<TforgotPasswordResponse> => {
+  const validation = forgotPasswordSchema.safeParse(emailData);
+  if (!validation.success)
+    return { success: false, message: "Dados inválidos" };
 
-export const forgotPassword = async (email: TforgotPasswordSchema) => {
   try {
-    const validation = forgotPasswordSchema.safeParse(email);
-    if (!validation.success) {
-      return { success: false, message: "Dados inválidos" };
-    }
-
-    const validationEmail = validation.data;
-
-    //procura usuario
-    const user = await prisma.user.findUnique({
-      where: {
-        email: validationEmail,
+    // Isso gera o token e chama a função 'sendResetPassword' que você
+    // deve configurar no seu lib/auth.ts
+    await auth.api.requestPasswordReset({
+      body: {
+        email: validation.data,
+        redirectTo: "/resetar-senha",
       },
     });
 
-    if (!user) {
-      return {
-        success: false,
-        message: "Se o email existir você receberá instruções",
-      };
-    }
-
-    //gera um token de redefinição
-    const resetToken = crypto.randomBytes(32).toString("hex");
-
-    //salva hash do token
-    const resetTokenHash = crypto
-      .createHash("sha256")
-      .update(resetToken)
-      .digest("hex");
-
-    //atribuir o token de expiração ao usuário
-    await prisma.passwordResetToken.upsert({
-      where: {
-        userId: user.id,
-      },
-      update: {
-        token: resetTokenHash,
-        tokenExpires: new Date(Date.now() + 60 * 60 * 1000),
-      },
-      create: {
-        userId: user.id,
-        token: resetTokenHash,
-        tokenExpires: new Date(Date.now() + 60 * 60 * 1000),
-      },
-    });
-
-    //montar link de redefinição de senha
-
-    //usar o emailService para enviar o email
-
-    //resposta de sucesso
-
-
-    
+    return {
+      success: true,
+      message: "Se o email existir, você receberá instruções",
+    };
   } catch (error) {
-    console.error(error);
+    console.error("Erro requestPasswordReset:", error);
+
     return {
       success: false,
-      message: "Erro interno ao solicitar recuperação",
+      message: "Erro ao enviar email de recuperação",
     };
   }
 };

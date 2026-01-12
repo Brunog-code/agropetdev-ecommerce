@@ -138,7 +138,7 @@ export function LoginForm({ returnTo }: ILoginForm) {
           )}
         />
         <div className="w-full flex justify-end -mt-4">
-          <Link href="#" className="text-sm text-green-600 font-semibold">
+          <Link href="/esqueci-senha" className="text-sm text-green-600 font-semibold">
             Esqueci minha senha
           </Link>
         </div>
