@@ -74,14 +74,14 @@ export default async function Categories({ params }: ICategoriasProps) {
       <div
         className={`h-48 mb-5 md:mb-7 rounded-lg flex items-center justify-between w-full md:w-[80%] lg:w-[65%] ${
           resolveParams.categories === "cachorros"
-            ? "bg-gradient-to-r  from-sky-400 via-sky-600 to-sky-400"
+            ? "bg-gradient-to-r  from-sky-400 via-sky-600 to-sky-400  p-2"
             : resolveParams.categories === "aves"
-            ? "bg-gradient-to-r  from-yellow-400 via-yellow-600 to-yellow-400"
+            ? "bg-gradient-to-r  from-yellow-400 via-yellow-600 to-yellow-400  p-2"
             : resolveParams.categories === "piscina"
-            ? "bg-gradient-to-r  from-cyan-400 via-cyan-600 to-cyan-400"
+            ? "bg-gradient-to-r  from-cyan-400 via-cyan-600 to-cyan-400  p-2"
             : resolveParams.categories === "jardim"
-            ? "bg-gradient-to-r  from-rose-600 via-rose-800 to-rose-600"
-            : "bg-gradient-to-r  from-fuchsia-400 via-fuchsia-600 to-fuchsia-400"
+            ? "bg-gradient-to-r  from-rose-600 via-rose-800 to-rose-600  p-2"
+            : "bg-gradient-to-r  from-fuchsia-400 via-fuchsia-600 to-fuchsia-400  p-2"
         }`}
       >
         <Image
@@ -122,7 +122,8 @@ export default async function Categories({ params }: ICategoriasProps) {
           </span>
         ) : resolveParams.categories === "aves" ? (
           <span className="text-white text-2xl ">
-            Tudo o que seu <span className="font-bold">passarinho</span> precisa
+            Tudo o que seu <span className="font-bold ">passarinho</span>{" "}
+            precisa
           </span>
         ) : resolveParams.categories === "piscina" ? (
           <span className="text-white text-2xl ">
