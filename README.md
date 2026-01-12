@@ -2,7 +2,7 @@
 
 👉 **[Acesse o projeto aqui](https://agropetdev-ecommerce.vercel.app/)**
 
-Sistema completo de e-commerce voltado para o setor agropecuário, desenvolvido com **Next.js**, **TypeScript** e **PostgreSQL**. O projeto oferece autenticação social, gerenciamento de carrinho, chat com IA e um fluxo de pagamento totalmente integrado e automatizado via API do **Stripe**, utilizando **webhooks** para garantir transações seguras, confiáveis e em tempo real, com confirmação instantânea de pedidos após o pagamento.
+Sistema completo de e-commerce de uma agropecuaria ficticia, desenvolvido com **Next.js**. O projeto oferece autenticação social, gerenciamento de carrinho, chat com agente IA e um fluxo de pagamento totalmente integrado e automatizado via API do **Stripe**, utilizando **webhooks** para garantir transações seguras, confiáveis e em tempo real, com confirmação instantânea de pedidos após o pagamento.
 
 ---
 
@@ -26,6 +26,12 @@ Este projeto foi construído utilizando uma stack moderna com **Next.js**, focan
 | :--------------- | :--------------------------------------------------------------------------------------------------------------------------- |
 | **n8n** | ![n8n](https://img.shields.io/badge/n8n-EA4B71?style=flat-square&logo=n8n&logoColor=white) |
 
+### 📧 Comunicação
+
+| Tecnologia | Badge |
+| :--------------- | :--------------------------------------------------------------------------------------------------------------------------- |
+| **Nodemailer** | ![Nodemailer](https://img.shields.io/badge/Nodemailer-0F9DCE?style=flat-square&logo=nodemailer&logoColor=white) |
+
 ---
 
 ### 🛠️ Ferramentas e Infraestrutura
@@ -35,6 +41,7 @@ Este projeto foi construído utilizando uma stack moderna com **Next.js**, focan
 - **Hospedagem Frontend/Backend:** Vercel
 - **Hospedagem n8n:** VPS Oracle Cloud
 - **Processamento de Pagamentos:** Stripe API
+- **Envio de E-mails:** Nodemailer
 
 ---
 

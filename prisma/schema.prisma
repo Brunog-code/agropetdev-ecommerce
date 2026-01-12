@@ -43,7 +43,6 @@ model User {
   favorites           Favorite[]
   cart                Cart?
   orders              Order[]
-  passwordResetTokens PasswordResetToken?
 
   @@unique([email])
   @@map("user")
@@ -108,18 +107,6 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
-}
-
-model PasswordResetToken {
-  id           String   @id @default(uuid())
-  token        String   @unique
-  tokenExpires DateTime
-  createdAt    DateTime @default(now())
-
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
 }
 
 model Product {
