@@ -138,6 +138,9 @@ Sistema completo de autenticação gerenciado pela biblioteca **Better Auth**, g
 ### Confirmação de Pedido   
 ![confirmação](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/page%20sucesso%20pagamento.png)
 
+# Area cliente
+![Area cliente](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/page-area-cliente.png)
+
 # Workflow n8n   
 ![worflow n8n](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/workflow.png)
 ---
