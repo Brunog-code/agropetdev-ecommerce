@@ -111,24 +111,35 @@ Sistema completo de autenticação gerenciado pela biblioteca **Better Auth**, g
 ## 📸 Visualização
 
 ### Página Inicial
-
 ![Pagina inicial](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/hero.png)
+
+### Página Inicial - Mobile
+![Pagina inicial - mobile](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/mobile-hero.png)
+
 
 ### Principais Categorias
 ![Principais categorias](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/principais-categorias.png)
 
 ### Pagina subcategorias
-![Principais categorias](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/categorias.png)
+![Principais subcategorias](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/categorias.png)
+
+### Carrinho
+![Carrinho](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/carrinho-drawer.png)
 
 ### Chat com IA
-*[Adicione aqui uma screenshot do chat]*
+![Chat IA](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/agente%20de%20ia%20chat.png)
 
-### Processo de Pagamento
-*[Adicione aqui uma screenshot do checkout com Stripe]*
+### Pagina carrinho
+![Pagina carrinho](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/page-carrinho.png)
 
-### Confirmação de Pedido
-*[Adicione aqui uma screenshot da confirmação]*
+### Processo de Pagamento STRIPE 
+![Pagina carrinho](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/cehckout%20stripe.png)
 
+### Confirmação de Pedido   
+![confirmação](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/page%20sucesso%20pagamento.png)
+
+# Workflow n8n   
+![worflow n8n](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/workflow.png)
 ---
 
 ## 🏗️ Arquitetura do Projeto
