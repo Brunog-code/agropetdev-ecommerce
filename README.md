@@ -161,12 +161,6 @@ Este projeto foi desenvolvido para demonstrar a implementação de um **e-commer
 
 ---
 
-## 👨‍💻 Desenvolvedor
-
-Projeto desenvolvido com foco em **qualidade de código**, **arquitetura escalável** e **experiência do usuário**.
-
----
-
 ## 🧪 Testando o Projeto
 
 Para testar o fluxo completo de pagamento, utilize os seguintes **cartões de teste do Stripe**:
