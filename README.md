@@ -20,11 +20,20 @@ Este projeto foi construído utilizando uma stack moderna com **Next.js**, focan
 | **PostgreSQL** | ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-%23316192.svg?style=flat-square&logo=postgresql&logoColor=white) |
 | **Prisma ORM** | ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=flat-square&logo=Prisma&logoColor=white) |
 
+
+### 🔐 Autenticação
+
+| Tecnologia | Badge |
+| :--------------- | :--------------------------------------------------------------------------------------------------------------------------- |
+| **Better Auth** | ![Better Auth](https://img.shields.io/badge/Better_Auth-5B21B6?style=flat-square&logo=auth0&logoColor=white) |
+
+
 ### 🤖 Automação & IA
 
 | Tecnologia | Badge |
 | :--------------- | :--------------------------------------------------------------------------------------------------------------------------- |
 | **n8n** | ![n8n](https://img.shields.io/badge/n8n-EA4B71?style=flat-square&logo=n8n&logoColor=white) |
+
 
 ### 📧 Comunicação
 
@@ -75,6 +84,21 @@ O sistema de pagamento utiliza a **API do Stripe** para segurança e confiabilid
 
 ---
 
+### 🔐 Autenticação e Segurança
+
+Sistema completo de autenticação gerenciado pela biblioteca **Better Auth**, garantindo segurança e flexibilidade:
+
+- **Login Social com Google:** Autenticação simplificada e segura através de OAuth 2.0 com Google, facilitando o acesso dos usuários.
+- **Autenticação com Email e Senha:** Sistema tradicional de login com credenciais, utilizando hash seguro de senhas.
+- **Recuperação de Senha via E-mail:** Fluxo completo de recuperação de senha integrado com **Better Auth** e **Nodemailer**:
+  - Geração automática de token único e seguro
+  - Envio de e-mail com link de recuperação (válido por 1 hora)
+  - E-mails transacionais estilizados e profissionais
+  - Validação de token antes da redefinição
+  - Hash automático de senhas com algoritmos seguros
+
+---
+
 ### 🔐 Segurança e Usabilidade
 
 - **Login Social com Google:** Autenticação simplificada e segura através de OAuth com Google, facilitando o acesso dos usuários.
@@ -110,7 +134,7 @@ O sistema de pagamento utiliza a **API do Stripe** para segurança e confiabilid
 
 O projeto utiliza uma arquitetura full-stack moderna:
 
-- **Frontend:** Next.js 15+ com App Router, TypeScript e Tailwind CSS
+- **Frontend:** Next.js com App Router, TypeScript e Tailwind CSS
 - **Backend:** API Routes do Next.js com validação Zod
 - **Banco de Dados:** PostgreSQL gerenciado via Prisma ORM
 - **Automação:** n8n rodando em VPS Oracle para workflows de IA e notificações
