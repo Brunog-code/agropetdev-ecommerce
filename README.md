@@ -43,6 +43,16 @@ Este projeto foi construído utilizando uma stack moderna com **Next.js**, focan
 
 ---
 
+### 🎨 UI & Design System
+
+A interface do projeto foi construída utilizando Tailwind CSS em conjunto com o shadcn/ui, garantindo consistência visual, acessibilidade e produtividade no desenvolvimento.
+
+- Componentes reutilizáveis: Botões, modais, dialogs, inputs e cards padronizados.
+- Customização total: Estilos adaptados ao tema do projeto sem dependência de CSS pronto.
+- Integração nativa com Tailwind: Facilita manutenção e escalabilidade do design system.
+
+--- 
+
 ### 🛠️ Ferramentas e Infraestrutura
 
 - **Editor de Código:** Visual Studio Code
