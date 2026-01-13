@@ -37,6 +37,11 @@ interface ICartStore {
   ) => void;
   clearShipping: () => void;
   getTotalCartWithShipping: () => number;
+
+  isDrawerOpen: boolean;
+  setDrawerOpen: (open: boolean) => void;
+  openDrawer: () => void;
+  closeDrawer: () => void;
 }
 
 export const useCartStore = create<ICartStore>()(
@@ -48,7 +53,11 @@ export const useCartStore = create<ICartStore>()(
       shippingValue: 0,
       shippingEta: null,
       addressId: null,
+      isDrawerOpen: false,
       //actions
+      setDrawerOpen: (open: boolean) => set({ isDrawerOpen: open }),
+      openDrawer: () => set({ isDrawerOpen: true }),
+      closeDrawer: () => set({ isDrawerOpen: false }),
       addToCart: (product) => {
         //verificar se o produto existe
         const existingProduct = get().cart.find(
@@ -68,7 +77,7 @@ export const useCartStore = create<ICartStore>()(
           set({ cart: [...get().cart, { ...product }] });
         }
       },
-     addAddressCart: (addressId) => {
+      addAddressCart: (addressId) => {
         set({ addressId });
       },
       mergeWithServer: (serverItems) => {

@@ -14,11 +14,9 @@ import { useAuth } from "@/app/contexts/AuthCont";
 import { useCartStore } from "@/app/store/cartStore";
 import { normalizeText } from "@/app/utils/helpers/normalizeText";
 import { buttonVariants } from "@/components/ui/button";
-import { SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
 import { PromotionsCarousel } from "../lib/swiper/promoction";
-import { CartDrawer } from "../ui/cart/drawer-cart";
 
 interface ICategorieData {
   id: string;
@@ -29,6 +27,7 @@ interface ICategorieData {
 export function Header() {
   //zustand
   const quantityItemsCart = useCartStore((state) => state.cart.length);
+  const openDrawer = useCartStore((state) => state.openDrawer);
 
   //state
   const [categories, setCategories] = useState<ICategorieData[]>([]);
@@ -152,18 +151,14 @@ export function Header() {
 
           <div className="hidden md:flex gap-6 text-white">
             {pathname !== "/pedido/identificacao" && (
-              <CartDrawer>
-                <SheetTrigger asChild>
-                  <div className="relative">
-                    <ShoppingCart className="w-6 h-6 cursor-pointer hover:fill-white transition" />
-                    {quantityItemsCart > 0 && (
-                      <small className="rounded-full w-6 h-6 bg-red-500 absolute -top-4 -right-4 text-white flex items-center justify-center">
-                        {quantityItemsCart}
-                      </small>
-                    )}
-                  </div>
-                </SheetTrigger>
-              </CartDrawer>
+              <div className="relative" onClick={openDrawer}>
+                <ShoppingCart className="w-6 h-6 cursor-pointer hover:fill-white transition" />
+                {quantityItemsCart > 0 && (
+                  <small className="rounded-full w-6 h-6 bg-red-500 absolute -top-4 -right-4 text-white flex items-center justify-center">
+                    {quantityItemsCart}
+                  </small>
+                )}
+              </div>
             )}
 
             <button

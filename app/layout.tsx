@@ -6,6 +6,7 @@ import { Inter, Poppins } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
 import TopProgress from "./(home)/_components/lib/nprogress";
+import { CartDrawer } from "./(home)/_components/ui/cart/drawer-cart";
 import LayoutWrapper from "./(home)/_components/wrap-layout";
 import { AuthProvider } from "./contexts/AuthCont";
 
@@ -52,6 +53,7 @@ export default function RootLayout({
               {children}
 
               <Toaster position="top-right" reverseOrder={false} />
+              <CartDrawer />
             </main>
           </LayoutWrapper>
         </AuthProvider>
