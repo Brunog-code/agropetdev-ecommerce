@@ -22,6 +22,7 @@ export function CartDrawer() {
   //zustand
   const isOpen = useCartStore((s) => s.isDrawerOpen);
   const setDrawerOpen = useCartStore((s) => s.setDrawerOpen);
+  const closeDrawer = useCartStore((s) => s.closeDrawer);
   //cart
   const itemsCart = useCartStore((state) => state.cart);
   const quantityItemsCart = useCartStore((state) => state.cart.length);
@@ -128,7 +129,7 @@ export function CartDrawer() {
 
               <Link href="/pedido/carrinho">
                 <Button
-                  onClick={() => setDrawerOpen}
+                  onClick={closeDrawer}
                   className="bg-green-600 text-white rounded-lg transition-all duration-200 hover:opacity-85 hover:bg-green-600 cursor-pointer w-full flex gap-2 p-2 justify-center mx-auto"
                 >
                   FINALIZAR PEDIDO
