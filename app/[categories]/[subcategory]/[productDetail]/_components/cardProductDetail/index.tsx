@@ -3,12 +3,8 @@
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import toast from "react-hot-toast";
 
 import { ButtonAddCart } from "@/app/(home)/_components/product-card/_components/button-add-cart";
-import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/add-item-cart";
-import { useAuth } from "@/app/contexts/AuthCont";
-import { useCartStore } from "@/app/store/cartStore";
 import { IProduct } from "@/app/utils/types/product";
 
 interface TProductDataProps {
@@ -17,42 +13,6 @@ interface TProductDataProps {
 
 export const CardProductDetail = ({ productData }: TProductDataProps) => {
   const [loadingImage, setLoadingImage] = useState(true);
-
-  //context
-  const { session, user } = useAuth();
-
-  //zustand
-  const addToCart = useCartStore((state) => state.addToCart);
-
-  async function handleAddToCart() {
-    try {
-      //Usuário logado → alem de salvar no localStorage, chamar API para salvar no DB (sincronizar ambos)
-      if (session) {
-        const dataCart = {
-          cartProduct: productData,
-          userId: user!.id,
-        };
-
-        const result = await updateItemQuantity(dataCart);
-
-        if (!result.success) {
-          toast.error("Erro ao adicionar ao carrinho");
-          return;
-        }
-      }
-
-      //salva no Zustand (persist salva no localStorage) se der certo o db
-      const productCart = {
-        ...productData,
-        quantity: 1,
-      };
-
-      addToCart(productCart);
-      toast.success("Adicionado ao carrinho!");
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   return (
     <div className="flex flex-col items-center gap-4 md:flex-row md:justify-evenly md:items-start w-full">

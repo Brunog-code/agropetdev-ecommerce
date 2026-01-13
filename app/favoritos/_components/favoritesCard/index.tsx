@@ -1,17 +1,14 @@
 "use client";
 
-import { Heart, ShoppingCart } from "lucide-react";
+import { Heart } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/add-item-cart";
+import { ButtonAddCart } from "@/app/(home)/_components/product-card/_components/button-add-cart";
 import { removeFavorite } from "@/app/(home)/_components/product-card/actions/favorite/removeFavorite";
-import { CartDrawer } from "@/app/(home)/_components/ui/cart/drawer-cart";
 import { useAuth } from "@/app/contexts/AuthCont";
-import { useCartStore } from "@/app/store/cartStore";
 import { IProduct } from "@/app/utils/types/product";
-import { SheetTrigger } from "@/components/ui/sheet";
 
 interface IFavoritesCardProps {
   product: IProduct;
@@ -20,9 +17,6 @@ interface IFavoritesCardProps {
 export const FavoritesCard = ({ product }: IFavoritesCardProps) => {
   //context
   const { user } = useAuth();
-
-  //store
-  const addToCart = useCartStore((state) => state.addToCart);
 
   //router
   const router = useRouter();
@@ -40,33 +34,6 @@ export const FavoritesCard = ({ product }: IFavoritesCardProps) => {
       router.refresh();
     } else {
       toast.error("Falha ao remover o item");
-    }
-  }
-
-  async function handleAddToCart() {
-    try {
-      //salvar no db
-      const dataCart = {
-        cartProduct: product,
-        userId: user!.id,
-      };
-
-      const result = await updateItemQuantity(dataCart);
-
-      if (!result?.success) {
-        toast.error("Erro ao adicionar ao carrinho");
-        return;
-      }
-
-      //salvar no zustand
-      const productCart = {
-        ...product,
-        quantity: 1,
-      };
-      addToCart(productCart);
-      toast.success("Adicionado ao carrinho!");
-    } catch (error) {
-      console.error(error);
     }
   }
 
@@ -89,17 +56,10 @@ export const FavoritesCard = ({ product }: IFavoritesCardProps) => {
               currency: "BRL",
             })}
           </p>
-          <CartDrawer>
-            <SheetTrigger asChild>
-              <button
-                onClick={handleAddToCart}
-                className="bg-green-600 text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center"
-              >
-                Comprar
-                <ShoppingCart size={20} color="#fff" />
-              </button>
-            </SheetTrigger>
-          </CartDrawer>
+          <ButtonAddCart
+            product={product}
+            disabled={product.stock <= 0}
+          />
         </div>
       </div>
 
