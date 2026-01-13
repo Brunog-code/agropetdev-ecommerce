@@ -44,7 +44,6 @@ export default async function Product({ params }: IProductProps) {
 
   //chamar action
   const productData = await getProductDetail(slugProduct);
-
   if (!productData) {
     notFound();
   }

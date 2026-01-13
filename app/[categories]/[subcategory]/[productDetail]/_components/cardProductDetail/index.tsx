@@ -5,13 +5,12 @@ import Image from "next/image";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
+import { ButtonAddCart } from "@/app/(home)/_components/product-card/_components/button-add-cart";
 import { updateItemQuantity } from "@/app/(home)/_components/product-card/actions/add-item-cart";
-import { CartDrawer } from "@/app/(home)/_components/ui/cart/drawer-cart";
 import { useAuth } from "@/app/contexts/AuthCont";
 import { useCartStore } from "@/app/store/cartStore";
 import { IProduct } from "@/app/utils/types/product";
-import { Button } from "@/components/ui/button";
-import { SheetTrigger } from "@/components/ui/sheet";
+
 interface TProductDataProps {
   productData: IProduct;
 }
@@ -88,16 +87,11 @@ export const CardProductDetail = ({ productData }: TProductDataProps) => {
             })}
           </p>
         </div>
-        <CartDrawer>
-          <SheetTrigger asChild>
-            <Button
-              className="bg-green-600 hover:bg-green-600 text-white rounded-lg transition-all duration-200 hover:opacity-85 cursor-pointer w-full flex gap-2 p-2 justify-center"
-              onClick={handleAddToCart}
-            >
-              Comprar
-            </Button>
-          </SheetTrigger>
-        </CartDrawer>
+
+        <ButtonAddCart
+          product={productData}
+          disabled={productData.stock <= 0}
+        />
       </article>
     </div>
   );

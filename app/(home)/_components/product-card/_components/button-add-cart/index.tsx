@@ -6,16 +6,16 @@ import toast from "react-hot-toast";
 
 import { useAuth } from "@/app/contexts/AuthCont";
 import { useCartStore } from "@/app/store/cartStore";
-import { IFullProduct } from "@/app/utils/types/product";
+import { IProduct } from "@/app/utils/types/product";
 
 import { updateItemQuantity } from "../../actions/add-item-cart";
 
 interface IButtonAddCartProps {
-  prod: IFullProduct;
+  product: IProduct;
   disabled: boolean;
 }
 
-export const ButtonAddCart = ({ prod, disabled }: IButtonAddCartProps) => {
+export const ButtonAddCart = ({ product, disabled }: IButtonAddCartProps) => {
   //zustand
   const addToCart = useCartStore((state) => state.addToCart);
   const openDrawer = useCartStore((state) => state.openDrawer);
@@ -31,7 +31,7 @@ export const ButtonAddCart = ({ prod, disabled }: IButtonAddCartProps) => {
       if (session) {
         //salvar no banco
         const dataCart = {
-          cartProduct: prod.product,
+          cartProduct: product,
           userId: user!.id,
         };
 
@@ -46,7 +46,7 @@ export const ButtonAddCart = ({ prod, disabled }: IButtonAddCartProps) => {
 
       //salva no Zustand (persist salva no localStorage) se der certo o db
       const productCart = {
-        ...prod.product,
+        ...product,
         quantity: 1,
       };
       addToCart(productCart);

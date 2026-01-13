@@ -2,6 +2,7 @@ export interface IFullProduct {
   product: {
     id: string;
     name: string;
+    nameNormalized?: string;
     slug: string;
     description: string;
     price: number;
@@ -21,6 +22,7 @@ export interface IFullProduct {
 export interface IProduct {
   id: string;
   name: string;
+  nameNormalized?: string;
   slug: string;
   description: string;
   price: number;
