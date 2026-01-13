@@ -33,6 +33,7 @@ export function CartDrawer() {
 
   //state
   const [isMobile, setIsmobile] = useState(false);
+  const [isClean, setIsClean] = useState(false);
 
   //verifica se é mobile
   useEffect(() => {
@@ -52,6 +53,7 @@ export function CartDrawer() {
   }, []);
 
   async function clearCartLocalAndDb() {
+    setIsClean(true);
     //db
     if (session) {
       const reponse = await clearCartDb(user!.id);
@@ -63,6 +65,7 @@ export function CartDrawer() {
     }
 
     clearCart(); //zustand
+    setIsClean(false);
   }
 
   return (
@@ -90,10 +93,20 @@ export function CartDrawer() {
             <div className="w-full flex justify-end">
               <button
                 onClick={() => clearCartLocalAndDb()}
+                disabled={isClean}
                 className="flex gap-1 justify-center items-center bg-red-400 hover:opacity-85 text-white rounded-lg p-2 cursor-pointer"
               >
-                <FaTrash size={16} color="#fff" />
-                limpar
+                {isClean ? (
+                  <>
+                    <FaTrash size={16} color="#fff" />
+                    Limpando...
+                  </>
+                ) : (
+                  <>
+                    <FaTrash size={16} color="#fff" />
+                    limpar
+                  </>
+                )}
               </button>
             </div>
           )}
