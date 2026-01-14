@@ -153,6 +153,12 @@ Sistema completo de autenticação gerenciado pela biblioteca **Better Auth**, g
 
 # Workflow n8n   
 ![worflow n8n](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/workflow.png)
+
+# Redefinição senha email   
+![redefinição](https://wcpvdrfhvnarjagqwhho.supabase.co/storage/v1/object/public/images-agropet/imagens-agropet/prints-doc/redefinicao.png)
+
+
+
 ---
 
 ## 🏗️ Arquitetura do Projeto
