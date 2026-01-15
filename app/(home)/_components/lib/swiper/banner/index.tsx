@@ -57,6 +57,7 @@ export function BannerSwiper() {
                 src={img}
                 alt={`banner ${idx + 1}`}
                 priority={true}
+                quality={100}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 loading="eager" // <- aqui
