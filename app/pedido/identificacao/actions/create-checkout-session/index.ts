@@ -98,6 +98,7 @@ export const createCheckoutSession = async (
       data: { stripeSessionId: null },
     });
   }
+  
   //-------
 
   //criar a checkoutSession

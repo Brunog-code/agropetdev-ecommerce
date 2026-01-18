@@ -4,6 +4,8 @@ import { PartnersSwiper } from "./_components/lib/swiper/partners";
 import { ProductCard } from "./_components/product-card";
 import { getProducts } from "./actions/get-products";
 
+export const revalidate = 60;
+
 export default async function Home() {
   const products = await getProducts();
 

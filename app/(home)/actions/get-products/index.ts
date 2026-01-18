@@ -5,7 +5,7 @@ import { prisma } from "@/lib/db";
 
 //embaralha
 function shuffle<T>(arr: T[]) {
-  return arr.sort(() => Math.random() - 0.5);
+  return [...arr].sort(() => Math.random() - 0.5);
 }
 
 export async function getProducts() {
