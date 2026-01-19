@@ -1,3 +1,18 @@
+import * as React from 'react';
+
+// Correção para o erro de ESLint no explicit-any
+// Definimos uma interface para o que estamos injetando
+interface ReactWithAct {
+  act?: (cb: () => void | Promise<void>) => void | Promise<void>;
+}
+
+if (!(React as ReactWithAct).act) {
+  (React as unknown as Required<ReactWithAct>).act = (cb) => {
+    const result = cb();
+    return result;
+  };
+}
+
 jest.mock("@/app/contexts/AuthCont", () => ({
     useAuth: () => ({
       session: null,
