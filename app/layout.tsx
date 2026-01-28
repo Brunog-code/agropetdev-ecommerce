@@ -33,6 +33,9 @@ export const metadata: Metadata = {
     follow: true,
     nocache: false,
   },
+   icons: {
+    icon: "/favicon.ico", // seu favicon na pasta public
+  },
 };
 
 export default function RootLayout({
