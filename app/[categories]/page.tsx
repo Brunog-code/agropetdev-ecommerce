@@ -117,7 +117,7 @@ export default async function Categories({ params }: ICategoriasProps) {
           className="object-contain p-4"
         />
         {resolveParams.categories === "cachorros" ? (
-          <span className="text-white text-2xl ">
+          <span className="text-white text-xl ">
             Tudo o que seu <span className="font-bold">doguinho</span> precisa
           </span>
         ) : resolveParams.categories === "aves" ? (
